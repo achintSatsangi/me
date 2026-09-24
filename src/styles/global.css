@@ -23,7 +23,7 @@
   .prose-editorial { @apply max-w-prose; }
   .rule { @apply border-t border-rule dark:border-rule-dark; }
   .meta { @apply text-sm font-medium text-muted dark:text-muted-dark tracking-wide; }
-  .display { @apply font-serif text-5xl md:text-7xl leading-[1.05] font-500; letter-spacing: -0.025em; }
+  .display { @apply font-serif text-5xl md:text-7xl leading-[1.05] font-medium; letter-spacing: -0.025em; }
   .nav-link {
     @apply text-ink dark:text-ink-dark no-underline uppercase text-xs tracking-[0.15em] font-medium;
     @apply hover:text-rust dark:hover:text-rust-dark hover:no-underline transition-colors;

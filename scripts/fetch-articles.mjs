@@ -20,11 +20,16 @@ async function main() {
     if (html.includes('Just a moment') || html.length < 5000) {
       throw new Error('Cloudflare challenge or empty response');
     }
-    const articles = parseArticles(html);
-    if (articles.length === 0) throw new Error('No articles parsed');
+    const fetched = parseArticles(html);
+    if (fetched.length === 0) throw new Error('No articles parsed');
+    const existing = existsSync(OUT) ? JSON.parse(readFileSync(OUT, 'utf8')) : [];
+    const merged = fetched.map((f) => {
+      const prior = existing.find((e) => e.link === f.link);
+      return { ...f, excerpt: prior?.excerpt || f.excerpt || '' };
+    });
     mkdirSync(dirname(OUT), { recursive: true });
-    writeFileSync(OUT, JSON.stringify(articles, null, 2));
-    console.log(`✓ Wrote ${articles.length} theprint articles to ${OUT}`);
+    writeFileSync(OUT, JSON.stringify(merged, null, 2));
+    console.log(`✓ Wrote ${merged.length} theprint articles to ${OUT} (excerpts preserved from prior file)`);
   } catch (err) {
     if (existsSync(OUT)) {
       const existing = JSON.parse(readFileSync(OUT, 'utf8'));
