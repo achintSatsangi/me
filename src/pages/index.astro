@@ -9,39 +9,55 @@ const beliefs = [
 ];
 ---
 <Layout title="Achint Satsangi">
-  <section class="page grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-16 items-center min-h-[80vh]">
-    <div class="md:col-span-3 order-2 md:order-1" data-testid="hero-photo">
-      <div class="aspect-[4/5] w-full bg-rule dark:bg-rule-dark rounded-sm overflow-hidden flex items-center justify-center">
-        <div class="text-center text-muted dark:text-muted-dark p-8">
-          <div class="font-serif text-3xl mb-2 opacity-40">AS</div>
-          <div class="meta opacity-60">unposed candid — TBD</div>
+  <section class="page hero" data-testid="hero-content">
+    <p class="meta mb-6" data-testid="hero-eyebrow">Nordic Desi · Oslo, Norway</p>
+    <h1 class="display-xl" data-testid="hero-name">
+      Achint&nbsp;Satsangi.
+    </h1>
+    <p class="mt-10 body-lg max-w-4xl text-muted dark:text-muted-dark" data-testid="hero-masthead">
+      Born in Rajasthan, schooled in Agra, Mechanical Engineer by qualification. Nineteen years in code. Father of two. Delete-first.
+    </p>
+
+    <div class="mt-16 flex flex-wrap gap-4" data-testid="hero-doors">
+      <a href={`${base}/journey/`} class="pill">Journey</a>
+      <a href={`${base}/feed/`} class="pill">Feed</a>
+      <a href={`${base}/articles/`} class="pill">Articles</a>
+    </div>
+  </section>
+
+  <section class="page section" data-testid="hero-photo-section">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-center">
+      <div class="md:col-span-5" data-testid="hero-photo">
+        <div class="aspect-[4/5] w-full bg-rule dark:bg-rule-dark rounded-2xl overflow-hidden flex items-center justify-center">
+          <div class="text-center text-muted dark:text-muted-dark p-8">
+            <div class="font-display text-5xl mb-2 opacity-40 font-semibold">AS</div>
+            <div class="meta opacity-60">unposed candid — TBD</div>
+          </div>
         </div>
       </div>
-    </div>
-
-    <div class="md:col-span-2 order-1 md:order-2" data-testid="hero-content">
-      <h1 class="display" data-testid="hero-name">Achint<br />Satsangi</h1>
-      <p class="mt-6 font-serif text-lg md:text-xl italic text-muted dark:text-muted-dark leading-relaxed" data-testid="hero-masthead">
-        Nordic Desi. Engineer in Oslo, writer from Agra. Father of two, runner, sketcher, delete-first.
-      </p>
-
-      <p class="mt-8 text-base md:text-lg leading-relaxed max-w-prose" data-testid="hero-intro">
-        I grew up in Agra, learned to code in Mumbai, learned winters in Oslo. Nineteen years of building systems that
-        need to be quiet under load. I write about AI, India, and the shape of good engineering. Most days you'll find
-        me in a messaging codebase, on a trail behind the house, or halfway into a sketch.
-      </p>
-
-      <div class="mt-10 space-y-3" data-testid="hero-beliefs">
-        {beliefs.map((line) => (
-          <p class="font-serif text-base md:text-lg leading-snug">— {line}</p>
-        ))}
+      <div class="md:col-span-7" data-testid="hero-intro-block">
+        <h2 class="display-md mb-8">A short version.</h2>
+        <p class="body-lg text-muted dark:text-muted-dark max-w-prose" data-testid="hero-intro">
+          Mumbaikar at heart, Nordic desi by choice. Started in Mumbai on Java web apps, learned
+          winters in Oslo. Nineteen years of building systems that need to be quiet under load —
+          and a stubborn habit of mentoring the people around them; teacher before I was an
+          engineer, hasn't left. I write about AI, India, and the shape of good engineering. Most
+          days you'll find me in a messaging codebase, on a trail behind the house, or halfway
+          into a sketch.
+        </p>
       </div>
+    </div>
+  </section>
 
-      <nav class="mt-12 flex flex-wrap gap-x-8 gap-y-3 text-sm" data-testid="hero-doors">
-        <a href={`${base}/journey/`} class="nav-link">Journey&nbsp;→</a>
-        <a href={`${base}/feed/`} class="nav-link">Feed&nbsp;→</a>
-        <a href={`${base}/articles/`} class="nav-link">Articles&nbsp;→</a>
-      </nav>
+  <section class="page section" data-testid="hero-beliefs-section">
+    <p class="meta mb-10">What I believe about work.</p>
+    <div class="space-y-12 max-w-4xl" data-testid="hero-beliefs">
+      {beliefs.map((line, i) => (
+        <p class="text-2xl md:text-3xl leading-[1.35] text-ink dark:text-ink-dark font-display font-medium tracking-tight">
+          <span class="text-muted dark:text-muted-dark mr-4 opacity-60">0{i + 1}</span>
+          {line}
+        </p>
+      ))}
     </div>
   </section>
 </Layout>

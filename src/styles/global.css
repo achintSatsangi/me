@@ -2,31 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap');
-
 @layer base {
   html { scroll-behavior: smooth; }
   body {
     @apply bg-paper text-ink font-sans antialiased;
     @apply dark:bg-paper-dark dark:text-ink-dark;
-    font-feature-settings: 'ss01', 'cv11';
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
-  h1, h2, h3, h4 { @apply font-serif; letter-spacing: -0.015em; }
-  a { @apply text-rust dark:text-rust-dark; }
-  a:hover { @apply underline underline-offset-4 decoration-1; }
-  ::selection { @apply bg-rust text-paper; }
-  .dark ::selection { @apply bg-rust-dark text-paper-dark; }
+  h1, h2, h3, h4 { @apply font-display; letter-spacing: -0.02em; font-weight: 600; }
+  a { @apply text-accent dark:text-accent-dark; }
+  a { text-decoration: none; background-image: linear-gradient(currentColor, currentColor);
+      background-size: 0 1px; background-position: 0 100%; background-repeat: no-repeat;
+      transition: background-size 220ms ease; }
+  a:hover { background-size: 100% 1px; }
+  ::selection { @apply bg-accent text-paper; }
+  .dark ::selection { @apply bg-accent-dark text-paper-dark; }
 }
 
 @layer components {
-  .page { @apply max-w-editorial mx-auto px-6 md:px-10 py-16 md:py-24; }
-  .prose-editorial { @apply max-w-prose; }
-  .rule { @apply border-t border-rule dark:border-rule-dark; }
+  .page { @apply max-w-editorial mx-auto px-6 md:px-10; }
+  .hero { @apply min-h-[85vh] flex flex-col justify-center py-24 md:py-32; }
+  .section { @apply py-24 md:py-32; }
   .meta { @apply text-sm font-medium text-muted dark:text-muted-dark tracking-wide; }
-  .display { @apply font-serif text-5xl md:text-7xl leading-[1.05] font-medium; letter-spacing: -0.025em; }
+  .display { @apply font-display leading-[1.02] tracking-tightest; font-weight: 600; }
+  .display-xl { @apply display text-6xl md:text-8xl; }
+  .display-lg { @apply display text-5xl md:text-7xl; }
+  .display-md { @apply display text-4xl md:text-5xl tracking-tighter; }
+  .body-lg { @apply text-lg md:text-xl leading-[1.55]; font-weight: 400; }
+  .rule { @apply border-t border-rule dark:border-rule-dark; }
   .nav-link {
-    @apply text-ink dark:text-ink-dark no-underline uppercase text-xs tracking-[0.15em] font-medium;
-    @apply hover:text-rust dark:hover:text-rust-dark hover:no-underline transition-colors;
+    @apply text-ink dark:text-ink-dark text-base font-medium tracking-normal;
+    background-image: none !important;
+    @apply hover:text-accent dark:hover:text-accent-dark transition-colors;
   }
-  .nav-link.active { @apply text-rust dark:text-rust-dark; }
+  .nav-link:hover { background-image: none; }
+  .nav-link.active { @apply text-accent dark:text-accent-dark; }
+  .pill {
+    @apply inline-flex items-center px-6 py-3 rounded-full border border-accent text-accent
+           text-sm font-medium transition-all;
+    background-image: none !important;
+  }
+  .pill:hover { @apply bg-accent text-paper; background-image: none !important; }
+  .dark .pill { @apply border-accent-dark text-accent-dark; }
+  .dark .pill:hover { @apply bg-accent-dark text-paper-dark; }
 }

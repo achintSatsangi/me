@@ -6,6 +6,7 @@ export default defineConfig({
   reporter: [['html', { open: 'never' }], ['list']],
   retries: 0,
   workers: 1,
+  timeout: 180_000,
   use: {
     baseURL: 'http://localhost:4321',
     trace: 'on',
@@ -22,16 +23,21 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium-light',
-      use: {
-        ...devices['Desktop Chrome'],
-        colorScheme: 'light',
-      },
+      testIgnore: /walkthrough\.spec\.ts$/,
+      use: { ...devices['Desktop Chrome'], colorScheme: 'light' },
     },
     {
       name: 'chromium-dark',
+      testIgnore: /walkthrough\.spec\.ts$/,
+      use: { ...devices['Desktop Chrome'], colorScheme: 'dark' },
+    },
+    {
+      name: 'walkthrough',
+      testMatch: /walkthrough\.spec\.ts$/,
       use: {
         ...devices['Desktop Chrome'],
-        colorScheme: 'dark',
+        viewport: { width: 1440, height: 900 },
+        video: { mode: 'on', size: { width: 1440, height: 900 } },
       },
     },
   ],

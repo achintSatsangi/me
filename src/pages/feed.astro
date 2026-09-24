@@ -4,23 +4,23 @@ import LinkedInFeed from '../components/LinkedInFeed.jsx';
 import posts from '../data/linkedin-posts.json';
 ---
 <Layout title="Feed — Achint Satsangi">
-  <section class="page">
-    <p class="meta mb-4">The LinkedIn side</p>
-    <h1 class="font-serif text-4xl md:text-6xl leading-tight font-medium max-w-prose" data-testid="feed-hero">
-      What I've been writing, in the register the internet uses.
+  <section class="page hero">
+    <p class="meta mb-6">The LinkedIn side</p>
+    <h1 class="display-lg max-w-5xl" data-testid="feed-hero">
+      What I've been writing, in the shorter, sharper voice.
     </h1>
-    <p class="mt-6 text-lg leading-relaxed max-w-prose text-muted dark:text-muted-dark">
-      Two posts a week on AI, engineering, and career — sometimes sharp, sometimes silly, always short. This is
-      the mirror of my LinkedIn, snapshotted so you can browse without the platform's chrome.
+    <p class="mt-10 body-lg max-w-3xl text-muted dark:text-muted-dark">
+      Two posts a week on AI, engineering, and career — sometimes sharp, sometimes silly, always
+      short. This is the mirror of my LinkedIn, snapshotted so you can browse without the platform's
+      chrome.
     </p>
-    <p class="meta mt-6 opacity-70">
+    <p class="meta mt-8 opacity-70">
       {posts.length} posts · Cadence: 2 posts / week ·
       <a href="https://linkedin.com/in/achint-satsangi/recent-activity/all/">See on LinkedIn →</a>
     </p>
   </section>
 
-  <section class="page pt-0">
-    <div class="rule mb-12"></div>
+  <section class="page section">
     <LinkedInFeed posts={posts} client:load />
   </section>
 </Layout>

@@ -8,25 +8,27 @@ const links = [
   { href: `${base}/articles/`, label: 'Articles', match: (p: string) => p.startsWith(`${base}/articles`) },
 ];
 ---
-<nav class="max-w-editorial mx-auto px-6 md:px-10 py-6 flex items-center justify-between border-b border-rule dark:border-rule-dark">
-  <a href={`${base}/`} class="font-serif text-lg font-medium tracking-tight text-ink dark:text-ink-dark no-underline">
-    Achint&nbsp;Satsangi
-  </a>
-  <div class="flex items-center gap-6 md:gap-8">
-    {links.map((l) => (
-      <a href={l.href} class={`nav-link ${l.match(pathname) ? 'active' : ''}`} data-testid={`nav-${l.label.toLowerCase()}`}>
-        {l.label}
-      </a>
-    ))}
-    <button
-      id="theme-toggle"
-      class="text-xs uppercase tracking-[0.15em] font-medium text-muted hover:text-ink dark:text-muted-dark dark:hover:text-ink-dark transition-colors"
-      aria-label="Toggle theme"
-      data-testid="theme-toggle"
-    >
-      <span class="dark:hidden">Dark</span>
-      <span class="hidden dark:inline">Light</span>
-    </button>
+<nav class="sticky top-0 z-50 backdrop-blur-md bg-paper/80 dark:bg-paper-dark/80 border-b border-rule/60 dark:border-rule-dark/60">
+  <div class="max-w-editorial mx-auto px-6 md:px-10 py-4 flex items-center justify-between">
+    <a href={`${base}/`} class="font-display text-lg font-semibold tracking-tighter text-ink dark:text-ink-dark">
+      Achint&nbsp;Satsangi
+    </a>
+    <div class="flex items-center gap-8 md:gap-12">
+      {links.map((l) => (
+        <a href={l.href} class={`nav-link ${l.match(pathname) ? 'active' : ''}`} data-testid={`nav-${l.label.toLowerCase()}`}>
+          {l.label}
+        </a>
+      ))}
+      <button
+        id="theme-toggle"
+        class="nav-link text-muted dark:text-muted-dark"
+        aria-label="Toggle theme"
+        data-testid="theme-toggle"
+      >
+        <span class="dark:hidden">Dark</span>
+        <span class="hidden dark:inline">Light</span>
+      </button>
+    </div>
   </div>
 </nav>
 

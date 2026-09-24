@@ -12,7 +12,8 @@
     "data:articles": "node scripts/fetch-articles.mjs",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
-    "test:e2e:report": "playwright show-report"
+    "test:e2e:report": "playwright show-report",
+    "walkthrough": "playwright test --project=walkthrough"
   },
   "dependencies": {
     "astro": "^5.0.0",
