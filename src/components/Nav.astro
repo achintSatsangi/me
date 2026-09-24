@@ -1,0 +1,45 @@
+---
+const { pathname } = Astro.url;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const links = [
+  { href: `${base}/`, label: 'Home', match: (p: string) => p === `${base}/` || p === `${base}` },
+  { href: `${base}/journey/`, label: 'Journey', match: (p: string) => p.startsWith(`${base}/journey`) },
+  { href: `${base}/feed/`, label: 'Feed', match: (p: string) => p.startsWith(`${base}/feed`) },
+  { href: `${base}/articles/`, label: 'Articles', match: (p: string) => p.startsWith(`${base}/articles`) },
+];
+---
+<nav class="max-w-editorial mx-auto px-6 md:px-10 py-6 flex items-center justify-between border-b border-rule dark:border-rule-dark">
+  <a href={`${base}/`} class="font-serif text-lg font-500 tracking-tight text-ink dark:text-ink-dark no-underline">
+    Achint&nbsp;Satsangi
+  </a>
+  <div class="flex items-center gap-6 md:gap-8">
+    {links.map((l) => (
+      <a href={l.href} class={`nav-link ${l.match(pathname) ? 'active' : ''}`} data-testid={`nav-${l.label.toLowerCase()}`}>
+        {l.label}
+      </a>
+    ))}
+    <button
+      id="theme-toggle"
+      class="text-xs uppercase tracking-[0.15em] font-medium text-muted hover:text-ink dark:text-muted-dark dark:hover:text-ink-dark transition-colors"
+      aria-label="Toggle theme"
+      data-testid="theme-toggle"
+    >
+      <span class="dark:hidden">Dark</span>
+      <span class="hidden dark:inline">Light</span>
+    </button>
+  </div>
+</nav>
+
+<script is:inline>
+  const stored = localStorage.getItem('theme');
+  const prefers = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (stored === 'dark' || (!stored && prefers)) document.documentElement.classList.add('dark');
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.getElementById('theme-toggle');
+    btn?.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+  });
+</script>

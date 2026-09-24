@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Achint Satsangi — Senior Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Text:wght@400;500&family=Google+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FFFFFF;
+    --surface: #F8F9FA;
+    --surface-container: #F1F3F4;
+    --text: #1F1F1F;
+    --muted: #5F6368;
+    --accent: #0B57D0;
+    --accent-container: #D3E3FD;
+    --secondary: #B3261E;
+    --divider: #DADCE0;
+    --elev1: 0 1px 2px rgba(60,64,67,.08), 0 1px 3px rgba(60,64,67,.06);
+    --elev2: 0 1px 3px rgba(60,64,67,.12), 0 4px 8px rgba(60,64,67,.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #131314; --surface: #1E1F20; --surface-container: #282A2C; --text: #E3E3E3; --muted: #9AA0A6; --accent: #A8C7FA; --accent-container: #003780; --divider: #444746; }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Google Sans Text", "Google Sans", Roboto, system-ui, -apple-system, sans-serif;
+    background: var(--bg); color: var(--text); font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, .display { font-family: "Google Sans", Roboto, system-ui, sans-serif; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  header.hero {
+    background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);
+    padding: 96px 0 64px;
+    border-bottom: 1px solid var(--divider);
+  }
+  h1 { font-size: 57px; line-height: 64px; font-weight: 500; margin-bottom: 8px; }
+  .hero-role { font-size: 22px; line-height: 28px; font-weight: 500; color: var(--muted); margin-bottom: 24px; }
+  .hero-summary { font-size: 20px; line-height: 30px; max-width: 780px; margin-bottom: 32px; }
+  .hero-chips { display: flex; gap: 12px; flex-wrap: wrap; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px;
+          border: 1px solid var(--divider); border-radius: 8px; font-size: 14px; font-weight: 500;
+          background: var(--bg); color: var(--muted); }
+  .chip.filled { background: var(--accent-container); color: var(--accent); border-color: transparent; }
+  section { padding: 64px 0; }
+  h2 { font-size: 32px; line-height: 40px; font-weight: 500; margin-bottom: 32px; }
+  .grid-2 { display: grid; grid-template-columns: 8fr 4fr; gap: 32px; }
+  .grid-6-6 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .card {
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: var(--elev1);
+    transition: box-shadow 200ms ease, transform 200ms ease;
+  }
+  .card:hover { box-shadow: var(--elev2); }
+  .card h3 { font-size: 22px; line-height: 28px; font-weight: 500; margin-bottom: 4px; }
+  .card .card-meta { font-size: 14px; line-height: 20px; font-weight: 500; color: var(--muted); margin-bottom: 12px;
+                     display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .card p { font-size: 16px; line-height: 24px; color: var(--text); }
+  .date-chip { display: inline-block; padding: 2px 10px; background: var(--surface-container); border-radius: 999px;
+               font-size: 12px; font-weight: 500; color: var(--muted); }
+  .path {
+    display: flex; align-items: center; justify-content: flex-start; gap: 0; flex-wrap: wrap;
+    padding: 24px; background: var(--surface); border-radius: 12px; box-shadow: var(--elev1);
+  }
+  .path .node { display: flex; flex-direction: column; align-items: center; padding: 0 16px; position: relative; }
+  .path .node .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--divider); margin-bottom: 8px; }
+  .path .node.current .dot { background: var(--accent); box-shadow: 0 0 0 4px var(--accent-container); }
+  .path .node.secondary .dot { background: var(--secondary); }
+  .path .node span { font-size: 13px; font-weight: 500; color: var(--muted); }
+  .path .node.current span { color: var(--accent); }
+  .path .connector { flex: 1; height: 2px; background: var(--divider); align-self: flex-start; margin-top: 5px; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 24px;
+         font-size: 14px; font-weight: 500; text-decoration: none; transition: all 200ms ease; }
+  .btn-filled { background: var(--accent-container); color: var(--accent); }
+  .btn-filled:hover { background: var(--accent); color: var(--bg); text-decoration: none; }
+  .btn-text { color: var(--accent); padding: 12px 16px; }
+  .btn-text:hover { background: var(--accent-container); text-decoration: none; }
+  .cta-row { display: flex; gap: 8px; margin-top: 24px; flex-wrap: wrap; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 32px; }
+  .stat { padding: 16px; background: var(--bg); border-radius: 8px; border: 1px solid var(--divider); }
+  .stat .num { font-family: "Google Sans", sans-serif; font-size: 24px; font-weight: 500; color: var(--accent); }
+  .stat .lbl { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+  @media (max-width: 900px) {
+    h1 { font-size: 40px; line-height: 44px; }
+    h2 { font-size: 24px; line-height: 32px; }
+    .grid-2, .grid-6-6, .cards { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: 1fr 1fr; }
+    section, header.hero { padding: 48px 0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="container">
+    <h1>Achint Satsangi</h1>
+    <div class="hero-role">Senior Software Engineer · Oslo, Norway</div>
+    <p class="hero-summary">
+      19 years turning complex problems into scalable systems across financial services, education, logistics, and marketplaces. Technical depth, practical problem-solving, and mentoring that creates impact beyond my own code.
+    </p>
+    <div class="cta-row">
+      <a class="btn btn-filled" href="https://linkedin.com/in/achint-satsangi">Connect on LinkedIn</a>
+      <a class="btn btn-text" href="mailto:achint.satsangi@gmail.com">Email</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="num">19 yrs</div><div class="lbl">Experience</div></div>
+      <div class="stat"><div class="num">10 roles</div><div class="lbl">Career path</div></div>
+      <div class="stat"><div class="num">6 cities</div><div class="lbl">Cross-cultural</div></div>
+      <div class="stat"><div class="num">133M+</div><div class="lbl">Req/day at Vend</div></div>
+    </div>
+  </div>
+</header>
+
+<section class="container">
+  <div class="grid-2">
+    <div>
+      <h2>About</h2>
+      <p style="font-size: 17px; line-height: 28px; margin-bottom: 16px;">
+        I build backend and platform systems, and I lead teams through the parts that are hard to see from the outside — cross-service coordination, load-bearing decisions, the discipline of restraint. My default is delete-first: solve by removing, not by adding another layer.
+      </p>
+      <p style="font-size: 17px; line-height: 28px; margin-bottom: 16px;">
+        Three anchors people ask about:
+      </p>
+      <ul style="font-size: 17px; line-height: 28px; margin-left: 20px; margin-bottom: 16px;">
+        <li>Built India's first online mutual-fund trading platform from scratch.</li>
+        <li>Designed the rules engine for admissions and progression at one of South Africa's largest universities.</li>
+        <li>Currently owning distributed messaging for four Nordic marketplaces — the largest alone handles 133M+ req/day.</li>
+      </ul>
+      <p style="font-size: 17px; line-height: 28px;">
+        Ex-teacher (TCS ILP faculty, cohorts of 30–35 new joiners). Nordic Desi. AI Skeptic &amp; Enthusiast on the internet.
+      </p>
+    </div>
+    <div>
+      <h2 style="font-size: 22px;">Path</h2>
+      <div class="path">
+        <div class="node"><div class="dot"></div><span>Agra</span></div>
+        <div class="connector"></div>
+        <div class="node"><div class="dot"></div><span>Mumbai</span></div>
+        <div class="connector"></div>
+        <div class="node secondary"><div class="dot"></div><span>Joburg</span></div>
+        <div class="connector"></div>
+        <div class="node"><div class="dot"></div><span>Delhi</span></div>
+        <div class="connector"></div>
+        <div class="node"><div class="dot"></div><span>Hyderabad</span></div>
+        <div class="connector"></div>
+        <div class="node current"><div class="dot"></div><span>Oslo</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="container">
+  <h2>Currently at Vend</h2>
+  <div class="card" style="max-width: 780px;">
+    <h3>Distributed messaging platform lead</h3>
+    <div class="card-meta">
+      <span>Vend Marketplaces</span> · <span class="date-chip">Ongoing</span>
+    </div>
+    <p>
+      Backend + ops on FINN's distributed messaging platform. Around 30 microservices on Kubernetes, four Nordic brands, one consolidated codebase after a near-zero-downtime migration. Champion of GenAI adoption — from POC to production-shaped bets.
+    </p>
+    <p style="color: var(--muted); font-size: 14px; margin-top: 12px;">
+      Under NDA on specifics — see <a href="https://linkedin.com/in/achint-satsangi">LinkedIn</a> for what I can talk about publicly.
+    </p>
+  </div>
+</section>
+
+<section class="container">
+  <h2>Career</h2>
+  <div class="cards">
+
+    <div class="card">
+      <h3>Vend Marketplaces</h3>
+      <div class="card-meta"><span>Senior Software Engineer</span> · <span class="date-chip">Oct 2022 — Now</span></div>
+      <p>Messaging platform for four Nordic brands. 133M+ req/day on the largest. ~30 microservices. Codebase consolidation at near-zero downtime.</p>
+    </div>
+
+    <div class="card">
+      <h3>DNB</h3>
+      <div class="card-meta"><span>Senior Software Engineer</span> · <span class="date-chip">Jun 2021 — Sept 2022</span></div>
+      <p>Open banking APIs under PSD2. Data-sharing with Skatteetaten and Politi. End-to-end ownership.</p>
+    </div>
+
+    <div class="card">
+      <h3>CGI Norge</h3>
+      <div class="card-meta"><span>Senior Consultant</span> · <span class="date-chip">Dec 2019 — May 2021</span></div>
+      <p>Cards base product, millions of tx/day. Led team to ship a microservice in 2 months. GCP + Pub/Sub pilot (shelved by COVID).</p>
+    </div>
+
+    <div class="card">
+      <h3>Altran Norge</h3>
+      <div class="card-meta"><span>Senior Software Consultant</span> · <span class="date-chip">Jun — Nov 2019</span></div>
+      <p>IAM (STIM), internal React app, GDPR document-redactor POC on Google Cloud OCR.</p>
+    </div>
+
+    <div class="card">
+      <h3>Tata Consultancy Services</h3>
+      <div class="card-meta"><span>Senior Java Developer</span> · <span class="date-chip">Nov 2014 — May 2019</span></div>
+      <p>Oslo + Mumbai. 20–30 microservices, 15–20 deploys/day. FINN messaging heritage starts here.</p>
+    </div>
+
+    <div class="card">
+      <h3>TCS Initial Learning Program</h3>
+      <div class="card-meta"><span>Java/J2EE Faculty</span> · <span class="date-chip">Aug — Sept 2014</span></div>
+      <p>Hyderabad. Trained cohorts of 30–35 new joiners on core Java + J2EE.</p>
+    </div>
+
+    <div class="card">
+      <h3>TCS New Delhi</h3>
+      <div class="card-meta"><span>Scrum Master / Tech Lead</span> · <span class="date-chip">Dec 2012 — Jul 2014</span></div>
+      <p>Sprint ceremonies, code review, SIT/UAT deploys, functional analysis + tech docs.</p>
+    </div>
+
+    <div class="card">
+      <h3>TCS Johannesburg</h3>
+      <div class="card-meta"><span>Functional Consultant</span> · <span class="date-chip">Jan — Nov 2012</span></div>
+      <p>Peoplesoft ERP enrollments module, end-to-end.</p>
+    </div>
+
+    <div class="card">
+      <h3>TCS Johannesburg</h3>
+      <div class="card-meta"><span>Senior Developer</span> · <span class="date-chip">Nov 2010 — Dec 2011</span></div>
+      <p>Rules engine for student admissions and progression at a major South African university.</p>
+    </div>
+
+    <div class="card">
+      <h3>TCS Mumbai</h3>
+      <div class="card-meta"><span>Developer</span> · <span class="date-chip">Sept 2007 — Oct 2010</span></div>
+      <p>Java web solutions across mutual funds, fixed deposits, vendor management, and a CMS portal.</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="container">
+  <div class="grid-6-6">
+    <div>
+      <h2>Writing</h2>
+      <div class="card" style="margin-bottom: 16px;">
+        <h3>Taming the Machine</h3>
+        <div class="card-meta"><span>LinkedIn article</span> · <span class="date-chip">Aug 2025</span></div>
+        <p>What AI regulation can learn from Wall Street and GDPR. 4 min read.</p>
+      </div>
+      <div class="card" style="margin-bottom: 16px;">
+        <h3>Claude Code session sprawl</h3>
+        <div class="card-meta"><span>LinkedIn post</span> · <span class="date-chip">Sept 2026</span></div>
+        <p>Three things slowing me down inside CLI AI orchestrators — and what I built to fix them locally.</p>
+      </div>
+      <div class="card">
+        <h3>Playwright + BrowserMCP</h3>
+        <div class="card-meta"><span>LinkedIn post</span> · <span class="date-chip">Sept 2026</span></div>
+        <p>Two tools, same job description, opposite jobs. When each earns its place in the loop.</p>
+      </div>
+      <p style="margin-top: 16px;">
+        <a href="https://linkedin.com/in/achint-satsangi/recent-activity/all/">All posts on LinkedIn →</a> Cadence: 2 posts / week.
+      </p>
+    </div>
+    <div>
+      <h2>Code &amp; community</h2>
+      <div class="card" style="margin-bottom: 16px;">
+        <h3>GitHub</h3>
+        <div class="card-meta"><span>@achintSatsangi</span></div>
+        <p>Public work-in-progress and personal tooling. Selected: <em>personal-claude-assistant</em> (memory + workflow scaffolding for Claude Code), <em>ecommerce-demo</em>.</p>
+      </div>
+      <div class="card" style="margin-bottom: 16px;">
+        <h3>BeerJS Oslo</h3>
+        <div class="card-meta"><span>Community</span> · <span class="date-chip">Since 2015</span></div>
+        <p>Hosted at FINN. Meetup for the Oslo JS community.</p>
+      </div>
+      <div class="card">
+        <h3>JavaZone 2026</h3>
+        <div class="card-meta"><span>Attendee</span></div>
+        <p>Went deep on the diver track. Sticker collection much refreshed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="container">
+  <h2>Get in touch</h2>
+  <p style="font-size: 17px; line-height: 28px; max-width: 640px; margin-bottom: 24px;">
+    LinkedIn is where I write and where most of my professional threads live. Email works if it's private.
+  </p>
+  <div class="cta-row">
+    <a class="btn btn-filled" href="https://linkedin.com/in/achint-satsangi">Connect on LinkedIn</a>
+    <a class="btn btn-text" href="mailto:achint.satsangi@gmail.com">achint.satsangi@gmail.com</a>
+  </div>
+</section>
+
+</body>
+</html>

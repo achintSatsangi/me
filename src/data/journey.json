@@ -1,0 +1,83 @@
+[
+  {
+    "company": "Vend Marketplaces",
+    "role": "Senior Software Engineer",
+    "location": "Oslo",
+    "start": "2022-10",
+    "end": null,
+    "nda": true,
+    "summary": "Leading backend + ops on FINN's distributed messaging platform. Four Nordic brands, one consolidated codebase after a near-zero-downtime migration, around 30 microservices on Kubernetes, 133M+ req/day on the largest. Championing GenAI adoption inside the team — from POC to production-shaped bets."
+  },
+  {
+    "company": "DNB",
+    "role": "Senior Software Engineer",
+    "location": "Oslo",
+    "start": "2021-06",
+    "end": "2022-09",
+    "summary": "Open banking APIs under PSD2. Data-sharing APIs for Skatteetaten and Politi. End-to-end ownership, clean-code guidance."
+  },
+  {
+    "company": "CGI Norge",
+    "role": "Senior Consultant",
+    "location": "Oslo",
+    "start": "2019-12",
+    "end": "2021-05",
+    "summary": "Cards base product — global, millions of transactions per day. Led a team to ship a microservice in two months. ASOP + Agile lead through an Atlassian transformation. Cloud infrastructure pilot on GCP + Pub/Sub, shelved by COVID budget cuts."
+  },
+  {
+    "company": "Altran Norge",
+    "role": "Senior Software Consultant",
+    "location": "Oslo",
+    "start": "2019-06",
+    "end": "2019-11",
+    "summary": "Identity & access management (STIM), internal React + Spring app, GDPR document-redactor POC on Google Cloud OCR."
+  },
+  {
+    "company": "Tata Consultancy Services",
+    "role": "Senior Java Developer",
+    "location": "Oslo + Mumbai",
+    "start": "2014-11",
+    "end": "2019-05",
+    "summary": "Distributed Agile team, 20–30 microservices, 15–20 deploys/day. In-house DevOps monitoring + deployment framework. Test-code volume exceeded production-code volume. The FINN messaging domain expertise started here."
+  },
+  {
+    "company": "TCS Initial Learning Program",
+    "role": "Java / J2EE Faculty",
+    "location": "Hyderabad",
+    "start": "2014-08",
+    "end": "2014-09",
+    "summary": "Trained cohorts of 30–35 new joiners on core Java and J2EE. Teacher before I was an engineer."
+  },
+  {
+    "company": "TCS New Delhi",
+    "role": "Scrum Master / Technical Lead",
+    "location": "New Delhi",
+    "start": "2012-12",
+    "end": "2014-07",
+    "summary": "Sprint ceremonies, user stories, code review, deploys to SIT/UAT. Functional analysis and technical documentation."
+  },
+  {
+    "company": "TCS Johannesburg",
+    "role": "Functional Consultant",
+    "location": "Johannesburg",
+    "start": "2012-01",
+    "end": "2012-11",
+    "summary": "Peoplesoft ERP enrollments module, end-to-end — requirements gathering through SIT/UAT."
+  },
+  {
+    "company": "TCS Johannesburg",
+    "role": "Senior Developer",
+    "location": "Johannesburg",
+    "start": "2010-11",
+    "end": "2011-12",
+    "summary": "Designed and shipped a rules engine for student admissions and progression at one of South Africa's largest universities."
+  },
+  {
+    "company": "TCS Mumbai",
+    "role": "Developer",
+    "location": "Mumbai",
+    "start": "2007-09",
+    "end": "2010-10",
+    "summary": "Java web solutions across mutual funds, fixed deposits, vendor management, and a CMS portal. India's first online mutual-fund trading platform is from this period."
+  }
+]

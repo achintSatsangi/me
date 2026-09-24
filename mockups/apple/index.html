@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Achint Satsangi — Senior Software Engineer</title>
+<style>
+  :root {
+    --bg: #FBFBFD;
+    --text: #1D1D1F;
+    --muted: #6E6E73;
+    --accent: #0071E3;
+    --divider: #D2D2D7;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #000000; --text: #F5F5F7; --muted: #86868B; --accent: #2997FF; --divider: #2C2C2E; }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", Inter, system-ui, sans-serif;
+    background: var(--bg); color: var(--text); font-weight: 400;
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  }
+  main { max-width: 980px; margin: 0 auto; padding: 0 32px; }
+  section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 120px 0; }
+  section.short { min-height: auto; padding: 80px 0; }
+  h1 { font-size: 80px; line-height: 84px; font-weight: 600; letter-spacing: -0.03em; margin-bottom: 24px; }
+  h2 { font-size: 48px; line-height: 52px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 40px; }
+  h3 { font-size: 32px; line-height: 36px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 8px; }
+  p { font-size: 21px; line-height: 32px; font-weight: 400; margin-bottom: 24px; }
+  p.hero-sub { font-size: 28px; line-height: 40px; color: var(--muted); font-weight: 400; max-width: 800px; }
+  .meta { font-size: 15px; line-height: 22px; font-weight: 500; letter-spacing: 0.01em; color: var(--muted); }
+  a { color: var(--accent); text-decoration: none; background-image: linear-gradient(var(--accent), var(--accent));
+      background-size: 0 1px; background-position: 0 100%; background-repeat: no-repeat; transition: background-size 200ms ease; }
+  a:hover { background-size: 100% 1px; }
+  .path { font-size: 24px; line-height: 32px; font-weight: 500; color: var(--text); margin-top: 32px; }
+  .path span { color: var(--muted); margin: 0 8px; }
+  .role { padding: 60px 0; border-top: 1px solid var(--divider); }
+  .role:first-child { border-top: none; padding-top: 0; }
+  .role h3 { margin-bottom: 4px; }
+  .role .meta { margin-bottom: 20px; }
+  .writing-card { padding: 32px 0; border-top: 1px solid var(--divider); display: flex; justify-content: space-between; align-items: baseline; gap: 32px; }
+  .writing-card h3 { font-size: 24px; line-height: 32px; font-weight: 500; margin-bottom: 4px; }
+  .writing-card .arrow { font-size: 24px; color: var(--accent); }
+  .cta { display: flex; gap: 16px; margin-top: 40px; flex-wrap: wrap; }
+  .cta a { display: inline-block; padding: 16px 32px; border: 1px solid var(--accent); border-radius: 980px;
+           font-size: 17px; font-weight: 500; background-image: none; transition: all 200ms ease; }
+  .cta a:hover { background: var(--accent); color: var(--bg); }
+  @media (max-width: 720px) {
+    h1 { font-size: 44px; line-height: 48px; }
+    h2 { font-size: 32px; line-height: 36px; }
+    p { font-size: 18px; line-height: 28px; }
+    p.hero-sub { font-size: 20px; line-height: 30px; }
+    section { min-height: auto; padding: 80px 0; }
+    main { padding: 0 24px; }
+    .writing-card { flex-direction: column; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<section>
+  <h1>Achint Satsangi</h1>
+  <p class="meta">Senior Software Engineer &nbsp;·&nbsp; Oslo, Norway</p>
+  <p class="hero-sub" style="margin-top: 40px;">
+    19 years turning complex problems into scalable systems across financial services, education, logistics, and marketplaces.
+  </p>
+  <div class="cta">
+    <a href="https://linkedin.com/in/achint-satsangi">LinkedIn</a>
+    <a href="mailto:achint.satsangi@gmail.com">Email</a>
+  </div>
+</section>
+
+<section>
+  <h2>Journey</h2>
+  <p>
+    Technical depth, practical problem-solving, and mentoring that creates impact beyond my own code. Built India's first online mutual-fund trading platform. Designed the rules engine for admissions and progression at one of South Africa's largest universities. Currently owning distributed messaging for four Nordic marketplaces — the largest alone handles 133 million requests a day.
+  </p>
+  <div class="path">
+    Agra <span>·</span> Mumbai <span>·</span> Johannesburg <span>·</span> Delhi <span>·</span> Hyderabad <span>·</span> Oslo
+  </div>
+</section>
+
+<section class="short">
+  <h2>Currently at Vend</h2>
+  <p>
+    Leading backend + ops on FINN's distributed messaging platform. Around 30 microservices on Kubernetes, four Nordic brands, one consolidated codebase after a near-zero-downtime migration. Champion of GenAI adoption inside the team — from POC to production-shaped bets.
+  </p>
+  <p class="meta">Under NDA on the specifics. Reach out on <a href="https://linkedin.com/in/achint-satsangi">LinkedIn</a> if you want the longer version.</p>
+</section>
+
+<section>
+  <h2>Career</h2>
+
+  <div class="role">
+    <h3>Vend Marketplaces</h3>
+    <p class="meta">Senior Software Engineer &nbsp;·&nbsp; Oslo &nbsp;·&nbsp; Oct 2022 — Present</p>
+    <p>FINN's distributed messaging platform. Four brands, ~30 microservices, 133M+ req/day on the largest. Consolidated four codebases into one at near-zero downtime. Won internal AI hackathons.</p>
+  </div>
+
+  <div class="role">
+    <h3>DNB</h3>
+    <p class="meta">Senior Software Engineer &nbsp;·&nbsp; Oslo &nbsp;·&nbsp; Jun 2021 — Sept 2022</p>
+    <p>Open banking APIs under PSD2. Data-sharing APIs for Skatteetaten and Politi. End-to-end ownership, clean-code guidance.</p>
+  </div>
+
+  <div class="role">
+    <h3>CGI Norge</h3>
+    <p class="meta">Senior Consultant &nbsp;·&nbsp; Oslo &nbsp;·&nbsp; Dec 2019 — May 2021</p>
+    <p>Cards base product — global, millions of tx/day. Led a team to ship a microservice in two months. ASOP + Agile lead through an Atlassian transformation. Cloud infra pilot on GCP + Pub/Sub, shelved by COVID budget cuts.</p>
+  </div>
+
+  <div class="role">
+    <h3>Altran Norge</h3>
+    <p class="meta">Senior Software Consultant &nbsp;·&nbsp; Oslo &nbsp;·&nbsp; Jun 2019 — Nov 2019</p>
+    <p>IAM (STIM), internal React + Spring app, GDPR document-redactor POC on Google Cloud OCR.</p>
+  </div>
+
+  <div class="role">
+    <h3>Tata Consultancy Services</h3>
+    <p class="meta">Senior Java Developer &nbsp;·&nbsp; Oslo + Mumbai &nbsp;·&nbsp; Nov 2014 — May 2019</p>
+    <p>Distributed Agile team, 20–30 microservices, 15–20 deploys/day. In-house DevOps framework. Test-code volume beat production-code volume. The FINN messaging heritage started here.</p>
+  </div>
+
+  <div class="role">
+    <h3>TCS Initial Learning Program</h3>
+    <p class="meta">Java/J2EE Faculty &nbsp;·&nbsp; Hyderabad &nbsp;·&nbsp; Aug 2014 — Sept 2014</p>
+    <p>Trained cohorts of 30–35 new joiners on core Java + J2EE. Mentorship muscle.</p>
+  </div>
+
+  <div class="role">
+    <h3>TCS</h3>
+    <p class="meta">Scrum Master / Tech Lead &nbsp;·&nbsp; New Delhi &nbsp;·&nbsp; Dec 2012 — Jul 2014</p>
+    <p>Sprint ceremonies, user stories, code review, deploys to SIT/UAT. Functional analysis + tech docs.</p>
+  </div>
+
+  <div class="role">
+    <h3>TCS</h3>
+    <p class="meta">Functional Consultant &nbsp;·&nbsp; Johannesburg &nbsp;·&nbsp; Jan 2012 — Nov 2012</p>
+    <p>Peoplesoft ERP enrollments module, end-to-end.</p>
+  </div>
+
+  <div class="role">
+    <h3>TCS</h3>
+    <p class="meta">Senior Developer &nbsp;·&nbsp; Johannesburg &nbsp;·&nbsp; Nov 2010 — Dec 2011</p>
+    <p>Designed and shipped a rules engine for student admissions and progression at a major South African university.</p>
+  </div>
+
+  <div class="role">
+    <h3>TCS</h3>
+    <p class="meta">Developer &nbsp;·&nbsp; Mumbai &nbsp;·&nbsp; Sept 2007 — Oct 2010</p>
+    <p>Java web solutions across mutual funds, fixed deposits, vendor management, and a CMS portal. The mutual-fund trading platform is from this period.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Writing</h2>
+  <div class="writing-card">
+    <div>
+      <h3>Taming the Machine: What AI regulation can learn from Wall Street and GDPR</h3>
+      <p class="meta">LinkedIn article &nbsp;·&nbsp; Aug 2025 &nbsp;·&nbsp; 4 min read</p>
+    </div>
+    <span class="arrow">→</span>
+  </div>
+  <div class="writing-card">
+    <div>
+      <h3>Claude Code session sprawl — three things slowing me down</h3>
+      <p class="meta">LinkedIn post &nbsp;·&nbsp; Sept 2026</p>
+    </div>
+    <span class="arrow">→</span>
+  </div>
+  <div class="writing-card">
+    <div>
+      <h3>Playwright + BrowserMCP — same tool, opposite roles</h3>
+      <p class="meta">LinkedIn post &nbsp;·&nbsp; Sept 2026</p>
+    </div>
+    <span class="arrow">→</span>
+  </div>
+  <div class="writing-card">
+    <div>
+      <h3>All posts on LinkedIn</h3>
+      <p class="meta">Cadence: 2 posts / week</p>
+    </div>
+    <span class="arrow">→</span>
+  </div>
+</section>
+
+<section class="short">
+  <h2>Code &amp; community</h2>
+  <p>
+    <a href="https://github.com/achintSatsangi">GitHub</a> — public work-in-progress and personal tooling. Selected: <em>personal-claude-assistant</em> (memory + workflow scaffolding for Claude Code), <em>ecommerce-demo</em>.
+  </p>
+  <p>
+    Hosting <a href="https://www.meetup.com/beerjs-oslo/">BeerJS Oslo</a> at FINN since ~2015. JavaZone 2026 attendee — went deep on the diver track.
+  </p>
+</section>
+
+<section class="short">
+  <h2>Get in touch</h2>
+  <p>The best place to talk shop, argue, or start a conversation about work is LinkedIn — that's where I write and where most of my professional threads live. Email works too if it's private.</p>
+  <div class="cta">
+    <a href="https://linkedin.com/in/achint-satsangi">LinkedIn</a>
+    <a href="mailto:achint.satsangi@gmail.com">Email</a>
+  </div>
+</section>
+
+</main>
+</body>
+</html>

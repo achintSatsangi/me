@@ -1,0 +1,47 @@
+[
+  {
+    "name": "Christian Kjendseth Wiik",
+    "role": "Senior Software Developer",
+    "company": "Storebrand",
+    "date": "2024-08-14",
+    "context": "Worked together at FINN",
+    "angle": "current peer",
+    "quote": "Achint combines profound technical abilities with excellent architectural insight, domain knowledge and understanding of the user perspective. He is committed to quality engineering and continuous improvement, searching for ways to improve himself and the team every day. During our time together in FINN, Achint was a pillar in our team — primarily in the backend and devops space but contributing across the stack and really all over the place. He has the capabilities required for troubleshooting those hard production problems in pragmatic, efficient ways."
+  },
+  {
+    "name": "Marius Jakobsen",
+    "role": "Staff Engineer",
+    "company": "Handelsbanken",
+    "date": "2021-03-25",
+    "context": "Former colleague",
+    "angle": "delete-first values",
+    "quote": "A software-engineer at heart. Always looking for ways to simplify and improve — be it the way of working or core Java. Adopting new technologies and sharing his knowledge comes natural to him. Hardworking, dedicated and a true team player."
+  },
+  {
+    "name": "Per Kristian Haakonsen",
+    "role": "Board Member",
+    "company": "ACAMS Airport Tower Solutions",
+    "date": "2021-01-27",
+    "context": "Hiring manager",
+    "angle": "hiring signal",
+    "quote": "As responsible for both hiring and managing Achint, I can strongly recommend him, for two reasons. First, his technical skills and willingness to learn are impressive. Second, he works independently and rises to action when he sees a task that needs to be done. Both current and future employers are happy to have Achint onboard."
+  },
+  {
+    "name": "Prashant Prakash",
+    "role": "Sales Director",
+    "company": "Accenture",
+    "date": "2023-04-11",
+    "context": "Rules engine project, South Africa",
+    "angle": "project corroboration",
+    "quote": "One of the smartest Java developers I have worked with. We collaborated on building a custom rules engine for a large university to automate their admission, enrollment, and progression rules. Achint designed and developed the rules engine from scratch and built an abstraction layer that provided an extremely well-designed user interface on top of the technical rules engine, allowing faculty admins to set up rules in English and test them on their own. His amazing work ethic ensured that he never missed a deadline."
+  },
+  {
+    "name": "Hina Kaur",
+    "role": "Senior Consultant",
+    "company": "CIBC",
+    "date": "2018-11-02",
+    "context": "Mentored her early-career",
+    "angle": "mentorship character",
+    "quote": "I have worked with Achint during the start of my career for almost 3 years. He has been a wonderful mentor to me. He always had answers to all my queries and doubts. He knows Java in and out and gives the best solution. He has and always will be my GO TO person for anything related to Java. His ability to juggle multiple projects was unlike any I've seen before, and made a dramatic difference in the productivity level of our team."
+  }
+]

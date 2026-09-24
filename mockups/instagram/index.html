@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>@achintsatsangi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FFFFFF;
+    --text: #000000;
+    --muted: #737373;
+    --divider: #DBDBDB;
+    --gradient: linear-gradient(45deg, #F58529, #DD2A7B, #8134AF, #515BD4);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #000000; --text: #FAFAFA; --muted: #A8A8A8; --divider: #262626; }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Inter", "Helvetica Neue", -apple-system, sans-serif;
+    background: var(--bg); color: var(--text);
+    letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 975px; margin: 0 auto; padding: 30px 20px; }
+  header {
+    display: flex; gap: 80px; align-items: center; padding: 20px 0 40px;
+    border-bottom: 1px solid var(--divider);
+  }
+  .avatar {
+    width: 150px; height: 150px; border-radius: 50%;
+    background: var(--gradient); padding: 4px; flex-shrink: 0;
+  }
+  .avatar-inner {
+    width: 100%; height: 100%; border-radius: 50%;
+    background: var(--bg); display: flex; align-items: center; justify-content: center;
+    font-size: 56px; font-weight: 700; color: var(--text); letter-spacing: -0.04em;
+  }
+  .profile-info { flex: 1; }
+  .username-row { display: flex; align-items: center; gap: 20px; margin-bottom: 20px; flex-wrap: wrap; }
+  .username { font-size: 28px; font-weight: 400; letter-spacing: -0.01em; }
+  .btn { padding: 7px 16px; border-radius: 8px; font-size: 14px; font-weight: 600;
+         border: none; cursor: pointer; text-decoration: none; display: inline-block; }
+  .btn-primary { background: #0095F6; color: #FFF; }
+  .btn-secondary { background: #EFEFEF; color: var(--text); }
+  @media (prefers-color-scheme: dark) { .btn-secondary { background: #262626; color: var(--text); } }
+  .stats { display: flex; gap: 40px; margin-bottom: 20px; }
+  .stat { font-size: 16px; }
+  .stat strong { font-weight: 600; }
+  .bio { font-size: 15px; line-height: 20px; }
+  .bio .name { font-weight: 600; display: block; }
+  .bio .handle-tag { color: #00376B; font-weight: 400; }
+  @media (prefers-color-scheme: dark) { .bio .handle-tag { color: #E0F1FF; } }
+
+  .highlights { display: flex; gap: 20px; padding: 40px 0 20px; overflow-x: auto; }
+  .highlight { display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 80px; }
+  .highlight-ring {
+    width: 78px; height: 78px; border-radius: 50%; padding: 3px;
+    border: 1.5px solid var(--divider);
+  }
+  .highlight-inner {
+    width: 100%; height: 100%; border-radius: 50%;
+    background: var(--bg); display: flex; align-items: center; justify-content: center;
+    font-size: 24px; font-weight: 600; color: var(--muted);
+  }
+  .highlight-label { font-size: 12px; font-weight: 400; }
+
+  .tabs {
+    display: flex; justify-content: center; gap: 60px;
+    padding: 12px 0; border-top: 1px solid var(--divider); margin-top: 20px;
+  }
+  .tab { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+         color: var(--muted); padding: 12px 4px; border-top: 1px solid transparent; }
+  .tab.active { color: var(--text); border-top-color: var(--text); }
+
+  .grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px;
+    margin-top: 20px;
+  }
+  .tile {
+    aspect-ratio: 1; position: relative; overflow: hidden;
+    background: var(--divider); cursor: pointer;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    padding: 16px; text-align: center;
+    transition: transform 200ms ease;
+  }
+  .tile:hover { transform: scale(1.02); }
+  .tile.role { background: linear-gradient(135deg, #F8F9FA 0%, #E9ECEF 100%); color: #000; }
+  .tile.role.current { background: var(--gradient); color: #FFF; }
+  .tile.role.emphasis { background: #000; color: #FFF; }
+  .tile .tile-title { font-size: 18px; font-weight: 700; line-height: 22px; margin-bottom: 4px; letter-spacing: -0.01em; }
+  .tile .tile-meta { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.75; }
+  .tile .tile-body { font-size: 12px; line-height: 16px; margin-top: 8px; opacity: 0.9; }
+  .tile.locked { background: #F0F0F0; color: var(--muted); }
+  @media (prefers-color-scheme: dark) {
+    .tile.role { background: linear-gradient(135deg, #262626 0%, #1A1A1A 100%); color: var(--text); }
+    .tile.locked { background: #1A1A1A; color: var(--muted); }
+  }
+  .lock-icon { font-size: 32px; margin-bottom: 8px; opacity: 0.5; }
+
+  @media (max-width: 720px) {
+    header { flex-direction: column; gap: 20px; text-align: center; }
+    .avatar { width: 96px; height: 96px; }
+    .avatar-inner { font-size: 36px; }
+    .stats { justify-content: center; gap: 24px; font-size: 14px; }
+    .grid { gap: 2px; }
+    .tile { padding: 10px; }
+    .tile .tile-title { font-size: 14px; line-height: 18px; }
+    .tile .tile-body { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <header>
+    <div class="avatar">
+      <div class="avatar-inner">AS</div>
+    </div>
+    <div class="profile-info">
+      <div class="username-row">
+        <span class="username">achintsatsangi</span>
+        <a class="btn btn-primary" href="https://linkedin.com/in/achint-satsangi">Message</a>
+        <a class="btn btn-secondary" href="mailto:achint.satsangi@gmail.com">Email</a>
+      </div>
+      <div class="stats">
+        <div class="stat"><strong>19</strong> yrs</div>
+        <div class="stat"><strong>10</strong> roles</div>
+        <div class="stat"><strong>6</strong> cities</div>
+        <div class="stat"><strong>133M+</strong> req/day</div>
+      </div>
+      <div class="bio">
+        <span class="name">Achint Satsangi</span>
+        Senior Software Engineer · Oslo 🇳🇴<br>
+        Distributed messaging @ four Nordic marketplaces.<br>
+        Ex-teacher · Delete-first · <span class="handle-tag">#AISkepticAndEnthusiast</span><br>
+        📍 Agra → Mumbai → Joburg → Delhi → Hyderabad → Oslo
+      </div>
+    </div>
+  </header>
+
+  <div class="highlights">
+    <div class="highlight"><div class="highlight-ring"><div class="highlight-inner">🇮🇳</div></div><div class="highlight-label">Agra</div></div>
+    <div class="highlight"><div class="highlight-ring"><div class="highlight-inner">🎬</div></div><div class="highlight-label">Mumbai</div></div>
+    <div class="highlight"><div class="highlight-ring"><div class="highlight-inner">🇿🇦</div></div><div class="highlight-label">Joburg</div></div>
+    <div class="highlight"><div class="highlight-ring"><div class="highlight-inner">🕌</div></div><div class="highlight-label">Delhi</div></div>
+    <div class="highlight"><div class="highlight-ring"><div class="highlight-inner">💻</div></div><div class="highlight-label">Hyderabad</div></div>
+    <div class="highlight"><div class="highlight-ring"><div class="highlight-inner">🇳🇴</div></div><div class="highlight-label">Oslo</div></div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active">▤ CAREER</div>
+    <div class="tab">▦ WRITING</div>
+    <div class="tab">◐ TAGGED</div>
+  </div>
+
+  <div class="grid">
+
+    <div class="tile role current">
+      <div class="tile-meta">Oct 2022 — Now</div>
+      <div class="tile-title">Vend Marketplaces</div>
+      <div class="tile-body">Senior SWE · Distributed messaging · 133M+ req/day</div>
+    </div>
+
+    <div class="tile role">
+      <div class="tile-meta">2021 — 2022</div>
+      <div class="tile-title">DNB</div>
+      <div class="tile-body">Senior SWE · Open banking (PSD2)</div>
+    </div>
+
+    <div class="tile role">
+      <div class="tile-meta">2019 — 2021</div>
+      <div class="tile-title">CGI Norge</div>
+      <div class="tile-body">Senior Consultant · Cards + GCP pilot</div>
+    </div>
+
+    <div class="tile role">
+      <div class="tile-meta">Jun — Nov 2019</div>
+      <div class="tile-title">Altran Norge</div>
+      <div class="tile-body">Senior Consultant · IAM + GDPR OCR</div>
+    </div>
+
+    <div class="tile role emphasis">
+      <div class="tile-meta">2014 — 2019</div>
+      <div class="tile-title">TCS · Oslo + Mumbai</div>
+      <div class="tile-body">Senior Java Dev · 15–20 deploys/day · FINN heritage</div>
+    </div>
+
+    <div class="tile role">
+      <div class="tile-meta">Aug — Sept 2014</div>
+      <div class="tile-title">TCS · ILP</div>
+      <div class="tile-body">Java/J2EE Faculty · Hyderabad · 30–35 per cohort</div>
+    </div>
+
+    <div class="tile role">
+      <div class="tile-meta">2012 — 2014</div>
+      <div class="tile-title">TCS · New Delhi</div>
+      <div class="tile-body">Scrum Master / Tech Lead</div>
+    </div>
+
+    <div class="tile role">
+      <div class="tile-meta">Jan — Nov 2012</div>
+      <div class="tile-title">TCS · Joburg</div>
+      <div class="tile-body">Functional Consultant · Peoplesoft ERP</div>
+    </div>
+
+    <div class="tile role emphasis">
+      <div class="tile-meta">2010 — 2011</div>
+      <div class="tile-title">TCS · Joburg</div>
+      <div class="tile-body">Senior Dev · Rules engine for a major SA university</div>
+    </div>
+
+    <div class="tile role emphasis">
+      <div class="tile-meta">2007 — 2010</div>
+      <div class="tile-title">TCS · Mumbai</div>
+      <div class="tile-body">Developer · India's first online mutual-fund trading platform</div>
+    </div>
+
+    <div class="tile locked">
+      <div class="lock-icon">🔒</div>
+      <div class="tile-title" style="font-size: 14px;">Ongoing work</div>
+      <div class="tile-body">Under NDA · DM for details</div>
+    </div>
+
+    <div class="tile role">
+      <div class="tile-meta">Since 2015</div>
+      <div class="tile-title">BeerJS Oslo</div>
+      <div class="tile-body">Community host @ FINN</div>
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>

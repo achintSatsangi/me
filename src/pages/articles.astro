@@ -1,0 +1,73 @@
+---
+import Layout from '../layouts/Layout.astro';
+import articles from '../data/articles.json';
+
+const [featured, ...rest] = articles;
+function fmt(iso: string): string {
+  if (!iso) return '';
+  const d = new Date(iso);
+  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+---
+<Layout title="Articles — Achint Satsangi">
+  <section class="page">
+    <p class="meta mb-4">Published in ThePrint</p>
+    <h1 class="font-serif text-4xl md:text-6xl leading-tight font-500 max-w-prose" data-testid="articles-hero">
+      I write occasionally on Indian politics, policy, and identity.
+    </h1>
+    <p class="mt-6 text-lg leading-relaxed max-w-prose text-muted dark:text-muted-dark">
+      A different register from LinkedIn — longer, quieter, more argument. Published at
+      <a href="https://theprint.in/author/achint-satsangi/">theprint.in</a>.
+    </p>
+  </section>
+
+  {featured && (
+    <section class="page pt-0" data-testid="articles-featured">
+      <div class="rule mb-12"></div>
+      <p class="meta mb-4">Latest</p>
+      <a href={featured.link} target="_blank" rel="noopener noreferrer" class="block group no-underline">
+        <h2 class="font-serif text-3xl md:text-5xl leading-tight font-500 max-w-prose group-hover:text-rust dark:group-hover:text-rust-dark transition-colors">
+          {featured.title}
+        </h2>
+        <p class="meta mt-4">{fmt(featured.date)} · Read on ThePrint →</p>
+        {featured.excerpt && (
+          <p class="mt-6 text-lg leading-relaxed max-w-prose text-muted dark:text-muted-dark italic font-serif">
+            {featured.excerpt}
+          </p>
+        )}
+      </a>
+    </section>
+  )}
+
+  {rest.length > 0 && (
+    <section class="page pt-0" data-testid="articles-list">
+      <div class="rule mb-12"></div>
+      <p class="meta mb-8">Earlier</p>
+      <div class="space-y-10">
+        {rest.map((a) => (
+          <article class="max-w-prose" data-testid="article-item">
+            <a href={a.link} target="_blank" rel="noopener noreferrer" class="block group no-underline">
+              <h3 class="font-serif text-xl md:text-2xl leading-snug font-500 group-hover:text-rust dark:group-hover:text-rust-dark transition-colors">
+                {a.title}
+              </h3>
+              <p class="meta mt-2">{fmt(a.date)} · ThePrint →</p>
+              {a.excerpt && (
+                <p class="mt-3 text-base leading-relaxed text-muted dark:text-muted-dark">{a.excerpt}</p>
+              )}
+            </a>
+          </article>
+        ))}
+      </div>
+    </section>
+  )}
+
+  {articles.length === 0 && (
+    <section class="page pt-0">
+      <div class="rule mb-12"></div>
+      <p class="meta italic opacity-60" data-testid="articles-empty">
+        Article list will land here — refresh the data script or read directly on
+        <a href="https://theprint.in/author/achint-satsangi/">theprint.in</a>.
+      </p>
+    </section>
+  )}
+</Layout>
