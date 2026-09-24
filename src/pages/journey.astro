@@ -46,7 +46,7 @@ function formatRecDate(iso: string): string {
           <div class="md:col-span-9 max-w-prose">
             <h3 class="display-md" data-testid="role-company">{role.company}</h3>
             <p class="meta mt-2" data-testid="role-title">{role.role}</p>
-            <p class="mt-5 body-lg text-muted dark:text-muted-dark" data-testid="role-summary">{role.summary}</p>
+            <p class="mt-5 body-lg text-muted dark:text-muted-dark text-justify hyphens-auto" data-testid="role-summary">{role.summary}</p>
             {role.nda && (
               <p class="meta mt-4 opacity-70">
                 Under NDA on the specifics — <a href="https://linkedin.com/in/achint-satsangi">LinkedIn</a> has what I can talk about publicly.
@@ -91,7 +91,7 @@ function formatRecDate(iso: string): string {
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8 19H5v-9h3v9zM6.5 8.25A1.75 1.75 0 1 1 8.3 6.5a1.78 1.78 0 0 1-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0 0 13 14.19a.66.66 0 0 0 0 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 0 1 2.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
           </div>
           <div class="font-display text-6xl leading-none text-accent dark:text-accent-dark opacity-30 mb-2" aria-hidden="true">“</div>
-          <p class="text-base md:text-lg leading-[1.55] text-ink dark:text-ink-dark mb-6">{r.quote}</p>
+          <p class="text-base md:text-lg leading-[1.55] text-ink dark:text-ink-dark mb-6 text-justify hyphens-auto">{r.quote}</p>
           <footer class="border-t border-rule dark:border-rule-dark pt-4">
             <div class="flex items-start gap-3">
               <div class="w-10 h-10 rounded-full bg-linkedin/10 dark:bg-linkedin/20 flex items-center justify-center text-linkedin font-semibold text-sm shrink-0">
