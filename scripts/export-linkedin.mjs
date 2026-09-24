@@ -16,12 +16,35 @@ const sql = `SELECT date, share_commentary, share_link FROM li_shares
              WHERE share_commentary IS NOT NULL AND share_commentary != ''
              ORDER BY date DESC LIMIT ${LIMIT};`;
 
+// LinkedIn's data export wraps every line in CSV-style quotes:
+//   "line one"
+//   ""              ← blank line
+//   "line two"
+// Strip the wrapping per line and collapse standalone "" into empty lines.
+function cleanCommentary(text) {
+  if (!text) return '';
+  return text
+    .split('\n')
+    .map((line) => {
+      let s = line.trimEnd();
+      if (s === '""') return '';
+      // Strip a leading `"` and trailing `"` regardless of pairing — the export wraps
+      // every visual line with quotes, so any orphan at a line boundary is noise.
+      if (s.startsWith('"')) s = s.slice(1);
+      if (s.endsWith('"')) s = s.slice(0, -1);
+      return s;
+    })
+    .join('\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+}
+
 try {
   const raw = execSync(`sqlite3 -json "${DB}" "${sql.replace(/"/g, '\\"')}"`, { encoding: 'utf8' });
   const rows = JSON.parse(raw || '[]');
   const posts = rows.map((r) => ({
     date: r.date,
-    text: r.share_commentary,
+    text: cleanCommentary(r.share_commentary),
     link: r.share_link,
   }));
   mkdirSync(dirname(OUT), { recursive: true });
