@@ -10,7 +10,7 @@ function fmt(iso: string): string {
 }
 ---
 <Layout title="Articles — Achint Satsangi">
-  <section class="page hero">
+  <section class="page hero-inner">
     <p class="meta mb-6">Published in ThePrint</p>
     <h1 class="display-lg max-w-5xl" data-testid="articles-hero">
       I write for ThePrint on Indian politics, policy, and identity.
@@ -25,11 +25,11 @@ function fmt(iso: string): string {
 
   {featured && (
     <section class="page section" data-testid="articles-featured">
-      <p class="meta mb-6">Latest</p>
-      <a href={featured.link} target="_blank" rel="noopener noreferrer" class="block group max-w-5xl">
-        <h2 class="display-md group-hover:text-accent dark:group-hover:text-accent-dark transition-colors">
+      <h2 class="meta mb-6">Latest</h2>
+      <a href={featured.link} target="_blank" rel="noopener noreferrer" class="block group max-w-5xl [background-image:none]">
+        <h3 class="display-md group-hover:text-accent dark:group-hover:text-accent-dark transition-colors">
           {featured.title}
-        </h2>
+        </h3>
         <p class="meta mt-6">{fmt(featured.date)} · Read on ThePrint →</p>
         {featured.excerpt && (
           <p class="mt-10 body-lg text-muted dark:text-muted-dark max-w-prose">
@@ -42,11 +42,11 @@ function fmt(iso: string): string {
 
   {rest.length > 0 && (
     <section class="page section border-t border-rule dark:border-rule-dark" data-testid="articles-list">
-      <p class="meta mb-10">Earlier</p>
+      <h2 class="meta mb-10">Earlier</h2>
       <div class="space-y-16 max-w-5xl">
         {rest.map((a) => (
           <article data-testid="article-item">
-            <a href={a.link} target="_blank" rel="noopener noreferrer" class="block group">
+            <a href={a.link} target="_blank" rel="noopener noreferrer" class="block group [background-image:none]">
               <h3 class="display-md group-hover:text-accent dark:group-hover:text-accent-dark transition-colors">
                 {a.title}
               </h3>
@@ -63,9 +63,8 @@ function fmt(iso: string): string {
 
   {articles.length === 0 && (
     <section class="page section">
-      <p class="meta italic opacity-60" data-testid="articles-empty">
-        Article list will land here — refresh the data script or read directly on
-        <a href="https://theprint.in/author/achint-satsangi/">theprint.in</a>.
+      <p class="meta italic text-muted dark:text-muted-dark" data-testid="articles-empty">
+        More pieces when the argument is ready. The latest live on <a href="https://theprint.in">ThePrint</a>.
       </p>
     </section>
   )}

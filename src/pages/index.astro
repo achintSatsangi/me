@@ -28,17 +28,17 @@ const knownFor = [
       and I write down what I learn on the way.
     </p>
 
+    <p class="meta mt-10 max-w-3xl" data-testid="hero-whofor">
+      Nineteen years in code. Mumbai → Johannesburg → Gurgaon → Oslo. Currently a senior
+      engineer at Vend Marketplaces — the umbrella behind finn.no, blocket.se, tori.fi
+      and dba.dk — working toward Staff.
+    </p>
+
     <div class="mt-16 flex flex-wrap gap-4" data-testid="hero-doors">
       <a href={`${base}/journey/`} class="pill">Journey</a>
       <a href={`${base}/feed/`} class="pill">Feed</a>
       <a href={`${base}/articles/`} class="pill">Articles</a>
     </div>
-
-    <p class="meta mt-10 opacity-70 max-w-3xl" data-testid="hero-whofor">
-      Nineteen years in code. Mumbai → Johannesburg → Gurgaon → Oslo. Currently a senior
-      engineer at Vend Marketplaces — the umbrella behind finn.no, blocket.se, tori.fi
-      and dba.dk — working toward Staff.
-    </p>
   </section>
 
   <section class="page section" data-testid="hero-photo-section">
@@ -53,13 +53,13 @@ const knownFor = [
       </div>
       <div class="md:col-span-7" data-testid="hero-intro-block">
         <h2 class="display-md mb-8">A short version.</h2>
-        <p class="body-lg text-muted dark:text-muted-dark max-w-prose" data-testid="hero-intro">Teacher before engineer — that habit hasn’t left. In 2007, three years into TCS Mumbai, I shipped India’s first online mutual-funds trading platform. Agra for college before that, Rajasthan before that. Johannesburg 2010–2012 — a rules engine at one of South Africa’s largest universities. Back to India with TCS, then Oslo since 2014. I run toward systems that need to be quiet under load: messaging, payments, the boring critical path.</p>
+        <p class="body-lg text-muted dark:text-muted-dark max-w-prose" data-testid="hero-intro">Teacher before engineer — that habit hasn’t left. At TCS Mumbai I shipped India’s first online mutual-fund trading platform. In Johannesburg, a rules engine non-engineers could read. In Oslo since 2014: messaging, payments, logistics. I run toward systems that fail loudly if you get them wrong — the boring critical path.</p>
       </div>
     </div>
   </section>
 
   <section class="page section" data-testid="hero-known-for-section">
-    <p class="meta mb-10">What I’m known for.</p>
+    <h2 class="meta mb-10">What I’m known for.</h2>
     <ul class="space-y-5 max-w-3xl body-lg text-ink dark:text-ink-dark list-none" data-testid="hero-known-for">
       {knownFor.map((line) => (
         <li class="flex gap-4">
@@ -71,11 +71,11 @@ const knownFor = [
   </section>
 
   <section class="page section" data-testid="hero-beliefs-section">
-    <p class="meta mb-10">What I believe about work.</p>
+    <h2 class="meta mb-10">What I believe about work.</h2>
     <div class="space-y-12 max-w-4xl" data-testid="hero-beliefs">
       {beliefs.map((line, i) => (
         <p class="text-2xl md:text-3xl leading-[1.35] text-ink dark:text-ink-dark font-display font-medium tracking-tight">
-          <span class="text-muted dark:text-muted-dark mr-4 opacity-60">0{i + 1}</span>
+          <span class="text-muted dark:text-muted-dark mr-4">0{i + 1}</span>
           {line}
         </p>
       ))}
@@ -83,7 +83,7 @@ const knownFor = [
   </section>
 
   <section class="page section" data-testid="hero-ai-section">
-    <p class="meta mb-10">How I think about AI.</p>
+    <h2 class="meta mb-10">How I think about AI.</h2>
     <div class="max-w-3xl space-y-6 body-lg text-muted dark:text-muted-dark" data-testid="hero-ai">
       <p>
         I’ve been building with LLMs since ChatGPT shipped in November 2022. Not learning —
@@ -105,8 +105,17 @@ const knownFor = [
     </div>
   </section>
 
+  <section class="page section" data-testid="hero-offclock-section">
+    <h2 class="meta mb-10">Off the clock.</h2>
+    <div class="max-w-3xl space-y-6 body-lg text-muted dark:text-muted-dark" data-testid="hero-offclock">
+      <p>Married, two kids, and a calendar that rarely has a gap in it.</p>
+      <p>I hike, swim and run — or I did, and I’m trying to claw some of it back around a life that doesn’t leave much room.</p>
+      <p>Recently I bought a walking pad so I could at least walk while I work. That’s about where my fitness ambitions have landed: negotiated down to what fits under a desk.</p>
+    </div>
+  </section>
+
   <section class="page section" data-testid="hero-contact-section">
-    <p class="meta mb-10">Get in touch.</p>
+    <h2 class="meta mb-10">Get in touch.</h2>
     <div class="max-w-3xl">
       <p class="display-md mb-10">
         If any of this makes you want to talk — a role, a partnership, a coffee in Oslo, or an

@@ -1,5 +1,25 @@
 [
   {
+    "date": "2026-09-24 00:00:00",
+    "text": "🔄 14 months ago, I posted about retiring my sticker collection for a fresh laptop. Clean slate. Fresh start. All of it.\n\nThe laptop is fully covered again. A few earned their place — \"have fun & get sh**t done\" (our department motto), a winter-edition conference tee that beats anything on the market.\n\nLesson from 2025, one year in: peeling stickers off was the ritual, not the point. Laptops get covered again because that's what happens when you actually use them.\n\n👇 If you peeled yours off tomorrow — which sticker do you replace first?",
+    "link": "https://www.linkedin.com/feed/update/urn%3Ali%3Aactivity%3A7508759721999261697"
+  },
+  {
+    "date": "2026-09-22 00:00:00",
+    "text": "🤖 A year ago I published Taming the Machine — arguing AI regulation should borrow Wall Street's playbook 💰 and GDPR's individual safeguards 🔒. Reading it back today, some of it holds up. Some of it clearly doesn't.\n\n✅ What still stands: circuit breakers on high-stakes AI systems, silos to limit blast radius when things fail, mandatory explainability audits, purpose limitation on training data. Regulating for risk containment, not trying to forecast where AI is going. The industry has drifted further toward the failure modes those are designed to contain, not less.\n\n❌ What doesn't: I spent too much of the piece on institutional form — \"AI SEC\", \"AI SEBI\" — as if the shape of the regulator was the interesting question. It isn't. Compute governance is the lever that actually moves.",
+    "link": "https://www.linkedin.com/feed/update/urn%3Ali%3Aactivity%3A7508027374270156800"
+  },
+  {
+    "date": "2026-09-19 00:00:00",
+    "text": "⚡ Two tools that showed up during the last stretch of learning genAI + living inside Claude Code. Both earned their place. For very different reasons.\n\n🎭 Playwright — deterministic, boring, does exactly what you tell it. Not AI. But paired with Claude Code the loop gets unreasonable: agent writes code, Playwright drives the browser, agent watches the trace, fixes, re-runs. No human in the middle. Bonus: per-test video recordings turn \"make a demo clip\" from an afternoon into a command.\n\n🕷 BrowserMCP — the AI-adjacent one, and where the Skeptic hat goes on. Handing an LLM a live handle on my real browser session — cookies, tabs, everything I'm logged into — is a bad default. Wide privilege surface for a thing whose failure mode is confident wrongness. Nothing I'd point at production. But for scoped, local, \"look at this page and click that\" work on a throwaway sandbox, it removes the last bit of glue that still needed a human.\n\nThe rule I'm settling on: Playwright when I need certainty. BrowserMCP when I need speed on work I don't mind blowing up. Not competing — different jobs.",
+    "link": "https://www.linkedin.com/feed/update/urn%3Ali%3Aactivity%3A7506587172679057409"
+  },
+  {
+    "date": "2026-09-17 00:00:00",
+    "text": "My AI Skeptic & Enthusiast reflex hesitates before installing third-party tools — each install is another dependency, another attack surface, another thing to keep updated — so I took the shapes people suggested and built local versions instead of adopting the tools.\n\n🎨 Terminal background per codebase. `tbg <path>` writes an OSC 11 escape to iTerm2, and a hard-coded mapping means the moment I switch codebases the terminal changes colour. Peripheral awareness, zero cognitive load. Rendering the colours is a one-liner — deciding the mapping took longer than writing the script.\n\n🔗 Per-project memory that auto-loads. Every project gets a MEMORY.md that Claude reads at session start. Small typed memory files sit alongside it — user preferences, project state, references — with [[wiki-style]] links between them. Cross-session context is now a filesystem, not a stitched-together conversation history.\n\n🧠 Session sprawl is still only half-solved.",
+    "link": "https://www.linkedin.com/feed/update/urn%3Ali%3Aactivity%3A7505497608090583040"
+  },
+  {
     "date": "2026-09-08 21:44:51",
     "text": "Nordic-marketplace data at real scale, product surfaces that actually ship, and a team that argues about the right things.\n\nIf you want AI work where the output lands in front of users next week - not in a slide deck - this one's worth a look.\n\n#DataScience #AI #MachineLearning #Hiring",
     "link": "https://www.linkedin.com/feed/update/urn%3Ali%3Ashare%3A7503206745683546112"
@@ -78,25 +98,5 @@
     "date": "2025-07-02 16:32:54",
     "text": "👋 Sharing a strong ML/AI engineer open to new opportunities (remotely from India/hybrid/open-to-relocation)\n\n🚀 Pratik Mehta (ex-Deloitte Digital USI) has 4+ years of experience building GenAI systems, REST APIs (FastAPI + LLaMA), and backend infra. He’s led testing frameworks for LLM apps and helped enterprise clients adopt AI.\n\n🎓 MS CS from UMass Amherst, past research at IIT Bombay and ISI @ USC.\n🛠️ Skilled in Python, PyTorch, Rust (WIP), LangChain, Postgres, Docker. \n\nProjects include:\n\n•⁠  ⁠Alfred: LLM-powered notifications\n•⁠  ⁠LegalEase: cross-lingual RAG / semantic-search system for legal documents\n•⁠  ⁠Finalist in Semantic Search hackathon (May 2025)\n\nHappy to intro if relevant!",
     "link": "https://www.linkedin.com/feed/update/urn%3Ali%3AugcPost%3A7346214297795973122"
-  },
-  {
-    "date": "2025-06-27 07:53:12",
-    "text": "As always great event, great energy... nice to see a community that started with 20 nerds 18 months ago has grown into such a vibrant, energetic and active community.... Keep it up!!!\n\nShout out to: \n- Lars Traaholt Vågnes for starting this whole thing\n- Emil Anker Wiik for growing it at 10x rate every month\n- All the speakers who have contributed and shared knowledge\n- The participants for showing up",
-    "link": "https://www.linkedin.com/feed/update/urn%3Ali%3AugcPost%3A7344271571726884864"
-  },
-  {
-    "date": "2025-06-23 11:46:15",
-    "text": "🚀 Tried something new — and genuinely impressed\n\nJust 12 days since launch, I tested a new AI-powered dev tool from a Stockholm-based startup focused on building native iOS and Android apps.\nThe experience? Surprisingly smooth.\n\n✅ Understands context well\n🔄 Real-time GitHub integration (watch code changes live)\n⚡️ Had a working prototype of a hobby project in just 2 days\n💬 Active Discord community with fast support\n\n🎯 Great fit for:\n\n🎓 Students working on study projects\n👩‍💻 Developers prototyping ideas\n🧠 Engineering Managers & Architects building POCs\n📱 First, second, or final drafts of native apps\n🎨 UI / UX / CX teams who want to iterate fast\n\n👉 Try it here: https://linkly.link/29kLE\n\n👏 Big shoutout to the founder and CEO: Timothy Lindblom\n\nHighly recommended. (Screeshots of what I built available in comments)\n\n#AI #MobileDevelopment #iOS #Android #NativeApps #UX #UI #Developers #NordicTech #Innovation #GitHub #Prototyping #Engineering",
-    "link": "https://www.linkedin.com/feed/update/urn%3Ali%3Ashare%3A7342880668953075714"
-  },
-  {
-    "date": "2025-05-28 08:34:24",
-    "text": "Feeling lazy so Ctrl C + Ctrl V\n\nThanks Rupinder Kaur for putting what most of us feel in words",
-    "link": "https://www.linkedin.com/feed/update/urn%3Ali%3Ashare%3A7333410302803230721"
-  },
-  {
-    "date": "2025-05-26 07:03:19",
-    "text": "Fire is the original disruptive technology.\n\nIt got the same reception AI gets today: fear, suspicion, addiction, and eventually total dependence.\n\nI guess the only constant is that every generation fears the tool the next one will master.\n\n(picture source: The Language Nerds)",
-    "link": "https://www.linkedin.com/feed/update/urn%3Ali%3Ashare%3A7332662606299582465"
   }
 ]

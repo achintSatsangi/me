@@ -3,7 +3,10 @@
 @tailwind utilities;
 
 @layer base {
-  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+    a { transition: background-size 220ms ease; }
+  }
   body {
     @apply bg-paper text-ink font-sans antialiased;
     @apply dark:bg-paper-dark dark:text-ink-dark;
@@ -13,9 +16,10 @@
   h1, h2, h3, h4 { @apply font-display; letter-spacing: -0.02em; font-weight: 600; }
   a { @apply text-accent dark:text-accent-dark; }
   a { text-decoration: none; background-image: linear-gradient(currentColor, currentColor);
-      background-size: 0 1px; background-position: 0 100%; background-repeat: no-repeat;
-      transition: background-size 220ms ease; }
-  a:hover { background-size: 100% 1px; }
+      background-size: 100% 1px; background-position: 0 100%; background-repeat: no-repeat; }
+  a:hover { background-size: 100% 2px; }
+  a:focus-visible, button:focus-visible { outline: 2px solid theme('colors.accent'); outline-offset: 2px; }
+  .dark a:focus-visible, .dark button:focus-visible { outline-color: theme('colors.accent-dark'); }
   ::selection { @apply bg-accent text-paper; }
   .dark ::selection { @apply bg-accent-dark text-paper-dark; }
 }
@@ -23,6 +27,7 @@
 @layer components {
   .page { @apply max-w-editorial mx-auto px-6 md:px-10; }
   .hero { @apply min-h-[85vh] flex flex-col justify-center py-24 md:py-32; }
+  .hero-inner { @apply min-h-[45vh] flex flex-col justify-center py-24 md:py-32; }
   .section { @apply py-24 md:py-32; }
   .meta { @apply text-sm font-medium text-muted dark:text-muted-dark tracking-wide; }
   .display { @apply font-display leading-[1.02] tracking-tightest; font-weight: 600; }

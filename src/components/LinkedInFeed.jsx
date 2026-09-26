@@ -1,4 +1,7 @@
 import { useMemo, useState } from 'react';
+import { collapsed } from './collapsed.js';
+
+export { collapsed };
 
 function fmtRelative(raw) {
   if (!raw) return '';
@@ -14,18 +17,6 @@ function fmtRelative(raw) {
   return `${Math.floor(diffDays / 365)}y`;
 }
 
-// Truncate at nearest sentence boundary after `minLen`; fall back to word boundary.
-function collapsed(text, minLen = 260) {
-  if (!text) return '';
-  const clean = text.replace(/^["]|["]$/g, '').trim();
-  if (clean.length <= minLen) return clean;
-  const rest = clean.slice(minLen);
-  const sentenceMatch = rest.match(/^[^.!?]*[.!?]/);
-  if (sentenceMatch) return clean.slice(0, minLen + sentenceMatch[0].length);
-  const wordCut = clean.slice(0, minLen).replace(/\s+\S*$/, '');
-  return wordCut;
-}
-
 const FILTERS = [
   { key: 'all', label: 'All' },
   { key: 'ai', label: 'AI', match: /ai\b|ai regulation|genai|claude|llm|artificial|governance/i },
@@ -34,9 +25,9 @@ const FILTERS = [
   { key: 'nordic', label: 'Nordic life', match: /oslo|norway|nordic|finn|vend|blocket|tori|dba/i },
 ];
 
-function PostCard({ post }) {
+function PostCard({ post, postId }) {
   const [expanded, setExpanded] = useState(false);
-  const clean = post.text.replace(/^["]|["]$/g, '').trim();
+  const clean = (post.text || '').replace(/^["]|["]$/g, '').trim();
   const preview = collapsed(clean);
   const needsToggle = preview.length < clean.length;
   const display = expanded ? clean : preview;
@@ -68,7 +59,7 @@ function PostCard({ post }) {
           href={post.link || 'https://linkedin.com/in/achint-satsangi/recent-activity/all/'}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-linkedin shrink-0"
+          className="text-linkedin shrink-0 [background-image:none]"
           title="View on LinkedIn"
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8 19H5v-9h3v9zM6.5 8.25A1.75 1.75 0 1 1 8.3 6.5a1.78 1.78 0 0 1-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0 0 13 14.19a.66.66 0 0 0 0 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 0 1 2.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
@@ -77,7 +68,7 @@ function PostCard({ post }) {
 
       {/* Body — preserved formatting */}
       <div className="px-6 pb-4">
-        <p className="text-[15px] leading-[1.55] whitespace-pre-line text-ink dark:text-ink-dark">
+        <p id={`post-body-${postId}`} className="text-[15px] leading-[1.55] whitespace-pre-line text-ink dark:text-ink-dark">
           {display}
           {needsToggle && !expanded && '…'}
           {needsToggle && (
@@ -85,7 +76,9 @@ function PostCard({ post }) {
               {' '}
               <button
                 onClick={() => setExpanded((e) => !e)}
-                className="text-muted dark:text-muted-dark hover:text-linkedin font-medium"
+                className="text-muted dark:text-muted-dark hover:text-linkedin font-medium px-1 py-1 -mx-1 -my-1"
+                aria-expanded={expanded}
+                aria-controls={`post-body-${postId}`}
                 data-testid="post-toggle"
               >
                 {expanded ? 'see less' : 'see more'}
@@ -101,7 +94,7 @@ function PostCard({ post }) {
             href={post.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-linkedin hover:underline font-medium"
+            className="text-linkedin font-medium"
           >
             Open on LinkedIn →
           </a>
@@ -140,14 +133,22 @@ export default function LinkedInFeed({ posts }) {
       </div>
 
       <div className="space-y-6 max-w-2xl mx-auto" data-testid="feed-posts">
-        {filtered.map((p, i) => (
-          <PostCard key={p.link || `${p.date}-${i}`} post={p} />
-        ))}
+        {filtered.map((p, i) => {
+          const postId = (p.link ? p.link.replace(/[^a-zA-Z0-9]/g, '') : p.date) + '-' + i;
+          return <PostCard key={p.link || `${p.date}-${i}`} post={p} postId={postId} />;
+        })}
       </div>
 
       {filtered.length === 0 && (
-        <p className="meta italic opacity-60 max-w-2xl mx-auto" data-testid="feed-empty">
-          No posts match that filter yet.
+        <p className="meta italic text-muted dark:text-muted-dark max-w-2xl mx-auto flex flex-wrap items-center justify-center gap-3" data-testid="feed-empty">
+          Nothing matches that filter.
+          <button
+            onClick={() => setFilter('all')}
+            className="not-italic font-medium text-accent dark:text-accent-dark px-2 py-1 -my-1"
+            data-testid="feed-empty-reset"
+          >
+            Show all
+          </button>
         </p>
       )}
     </div>

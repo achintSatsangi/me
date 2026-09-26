@@ -10,6 +10,7 @@
     "data:sync": "node scripts/sync-data.mjs",
     "data:linkedin": "node scripts/export-linkedin.mjs",
     "data:articles": "node scripts/fetch-articles.mjs",
+    "test:unit": "node --test tests/*.test.mjs",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:report": "playwright show-report",

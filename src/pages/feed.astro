@@ -4,7 +4,7 @@ import LinkedInFeed from '../components/LinkedInFeed.jsx';
 import posts from '../data/linkedin-posts.json';
 ---
 <Layout title="Feed — Achint Satsangi">
-  <section class="page hero">
+  <section class="page hero-inner">
     <p class="meta mb-6">The LinkedIn side</p>
     <h1 class="display-lg max-w-5xl" data-testid="feed-hero">
       What I've been writing, in the shorter, sharper voice.
@@ -14,7 +14,7 @@ import posts from '../data/linkedin-posts.json';
       I've published, searchable, no algorithm deciding what you see. LinkedIn shows you what it
       wants you to read; this shows you what I actually wrote.
     </p>
-    <p class="meta mt-8 opacity-70">
+    <p class="meta mt-8 text-muted dark:text-muted-dark">
       {posts.length} posts · Cadence: 2 posts / week ·
       <a href="https://linkedin.com/in/achint-satsangi/recent-activity/all/">See on LinkedIn →</a>
     </p>
