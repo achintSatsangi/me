@@ -16,14 +16,6 @@ const knownFor = [
   'Writing the Slack post that ends the thread instead of extending it.',
 ];
 
-const currently = [
-  { label: 'Building', body: 'Vend Assistant — an LLM-mediated buyer/seller surface inside FINN’s messaging thread.' },
-  { label: 'Reading', body: 'Mor(e) than Motherhood by Ruth Rostrup, and a slow re-read of The Design of Everyday Things.' },
-  { label: 'Writing', body: 'A longer piece on AI regulation, sequel to the ThePrint one from August 2025.' },
-  { label: 'Learning', body: 'Claude AI Architect certification (org-paid), formalising practice into credential.' },
-];
-
-const currentlyUpdated = 'September 2026';
 ---
 <Layout title="Achint Satsangi">
   <section class="page hero" data-testid="hero-content">
@@ -110,24 +102,8 @@ const currentlyUpdated = 'September 2026';
         is a strategy. The first one bleeds money into surface solutions while the real problem keeps fighting you.
       </p>
       <p>
-        What I want to work on next: the seam between domain experts and AI systems. Not
-        <span class="text-ink dark:text-ink-dark font-medium"> training people on tools</span> —
-        <span class="text-ink dark:text-ink-dark font-medium"> training leaders to enable domain experts to
-        innovate with tools.</span> That’s the harder problem, and the one worth the next five years.
+        What I want to work on next: the seam between domain experts and AI systems. Less preaching, less learning in public — more building. Real solutions that add value to <span class="text-ink dark:text-ink-dark font-medium">people I can name</span>: the users of the platforms I ship on, my peers at work, <span class="text-ink dark:text-ink-dark font-medium">my family and friends at home</span>.
       </p>
-    </div>
-  </section>
-
-  <section class="page section" data-testid="hero-currently-section">
-    <p class="meta mb-10">Currently.</p>
-    <div class="max-w-3xl space-y-6" data-testid="hero-currently">
-      {currently.map((c) => (
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
-          <div class="md:col-span-2 meta text-ink dark:text-ink-dark font-semibold">{c.label}</div>
-          <div class="md:col-span-10 text-base leading-relaxed text-muted dark:text-muted-dark">{c.body}</div>
-        </div>
-      ))}
-      <p class="meta opacity-60 pt-4">Updated {currentlyUpdated}</p>
     </div>
   </section>
 
