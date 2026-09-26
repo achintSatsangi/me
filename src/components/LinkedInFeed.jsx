@@ -141,7 +141,7 @@ export default function LinkedInFeed({ posts }) {
 
       <div className="space-y-6 max-w-2xl mx-auto" data-testid="feed-posts">
         {filtered.map((p, i) => (
-          <PostCard key={i} post={p} />
+          <PostCard key={p.link || `${p.date}-${i}`} post={p} />
         ))}
       </div>
 

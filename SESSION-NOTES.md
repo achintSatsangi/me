@@ -11,7 +11,14 @@ Autonomous improvement window while Achint was away. Everything below is committ
 - **Tests green.** 22/22 on chromium-light + chromium-dark. Walkthroughs regenerated (`walkthroughs/light.webm`, `walkthroughs/dark.webm`).
 
 ## What did NOT land
-- **Ingrid QA sweep** — Vertex EU quota returned 429 on `claude-haiku-4-5` mid-run. Skipped rather than retry-storm. Pick up next session; her lens is edge cases / empty states / i18n / offline behaviour.
+- **Ingrid QA sweep** — Vertex EU quota returned 429 on `claude-haiku-4-5` twice. Did a direct QA pass instead: fixed React `key={i}` (expanded state could bleed between filtered posts), added `target/rel="noopener"` on landing contact LinkedIn/GitHub links, gave Nav a mobile treatment (flex-wrap, smaller gap + text below md). Full agent sweep still worth running when quota clears.
+
+## Deferred nits
+- Duplicate quote-stripping in `LinkedInFeed.jsx` (both `collapsed()` and `PostCard` strip the same edge quotes). Pick one.
+- Nav has no proper mobile menu, just a wrap. Fine below md, will look weak on true small screens with all 4 nav links + toggle.
+- `mailto:` on contact section has no subject prefill.
+- `collapsed()` truncation could cut mid-URL; nit.
+- Articles empty-state string ("Article list will land here — refresh the data script") leaks tooling language.
 
 ## Open judgment calls (nothing blocks a push)
 - Photo placeholder is still the "AS unposed candid — TBD" tile. Sigrid didn't push on it; recruiters won't either. Whenever you're ready, drop a real image at `src/assets/` and swap the tile.
