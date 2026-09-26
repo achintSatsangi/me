@@ -6,7 +6,7 @@
     "start": "2022-10",
     "end": null,
     "nda": true,
-    "summary": "Leading backend + ops on FINN's distributed messaging platform. Four Nordic brands, one consolidated codebase after a near-zero-downtime migration, around 30 microservices on Kubernetes, 133M+ req/day on the largest. Championing GenAI adoption inside the team — from POC to production-shaped bets."
+    "summary": "Backend and platform lead on FINN's messaging platform — four Nordic marketplaces, one codebase after a near-zero-downtime consolidation, ~30 microservices on Kubernetes, 133M+ requests/day on the largest leg. Currently building Vend Assistant, an LLM-mediated buyer/seller surface inside the messaging thread — POC through to production shape, adjacent to the team's substrate, not around it."
   },
   {
     "company": "DNB",
@@ -14,7 +14,7 @@
     "location": "Oslo",
     "start": "2021-06",
     "end": "2022-09",
-    "summary": "Open banking APIs under PSD2. Data-sharing APIs for Skatteetaten and Politi. End-to-end ownership, clean-code guidance."
+    "summary": "Open banking under PSD2. Data-sharing APIs for Skatteetaten and Politi. Small team, end-to-end ownership, the kind of code review where the bar is set by the person asking the sharpest question."
   },
   {
     "company": "CGI Norge",
@@ -22,7 +22,7 @@
     "location": "Oslo",
     "start": "2019-12",
     "end": "2021-05",
-    "summary": "Cards base product — global, millions of transactions per day. Led a team to ship a microservice in two months. ASOP + Agile lead through an Atlassian transformation. Cloud infrastructure pilot on GCP + Pub/Sub, shelved by COVID budget cuts."
+    "summary": "Cards platform — global, millions of transactions a day. Led a team to ship a new microservice in two months. Ran a cloud infrastructure pilot on GCP + Pub/Sub, shelved by COVID budget cuts. Agile lead through the org's Atlassian migration."
   },
   {
     "company": "Altran Norge",
@@ -38,7 +38,7 @@
     "location": "Oslo + Mumbai",
     "start": "2014-11",
     "end": "2019-05",
-    "summary": "Distributed Agile team, 20–30 microservices, 15–20 deploys/day. In-house DevOps monitoring + deployment framework. Test-code volume exceeded production-code volume. The FINN messaging domain expertise started here."
+    "summary": "Distributed Agile team on FINN's messaging domain before it was Vend's. 20–30 microservices, 15–20 deploys a day, in-house DevOps + monitoring framework we built because nothing off-the-shelf fit. Test-code volume exceeded production-code volume — deliberate. The messaging expertise I lean on today started here."
   },
   {
     "company": "TCS Initial Learning Program",

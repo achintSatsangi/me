@@ -19,12 +19,12 @@ function formatRecDate(iso: string): string {
   <section class="page hero" data-testid="journey-hero-section">
     <p class="meta mb-6">The professional side</p>
     <h1 class="display-lg max-w-5xl" data-testid="journey-hero">
-      Nineteen years of shipping, teaching, and translating complexity into clean solutions.
+      Nineteen years of shipping. Ten of them in Oslo. Backend and platform work on systems
+      that fail loudly if you get them wrong.
     </h1>
     <p class="mt-10 body-lg max-w-3xl text-muted dark:text-muted-dark">
-      Backend and platform engineering. Started in Mumbai on Java web apps, moved to Johannesburg to
-      build a rules engine for a large university, landed in Oslo in 2014 and stayed. Currently at
-      Vend Marketplaces, leading the messaging platform behind four Nordic brands.
+      Mumbai → Johannesburg → Oslo. Currently at Vend Marketplaces, on the messaging platform
+      behind FINN, Blocket, Tori and DBA.
     </p>
   </section>
 
@@ -60,7 +60,10 @@ function formatRecDate(iso: string): string {
 
   <section class="page section border-t border-rule dark:border-rule-dark" data-testid="github-section">
     <p class="meta mb-8">On GitHub — <a href={github.profile.url} class="text-accent dark:text-accent-dark">@{github.profile.handle}</a></p>
-    <h2 class="display-md mb-14 max-w-3xl">{github.profile.bio_snippet}</h2>
+    <h2 class="display-md mb-14 max-w-3xl">
+      Nineteen public repos. Some AI experiments, some workshop material, one hobby project
+      I keep coming back to when I want to remember how React hooks work.
+    </h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10 max-w-5xl">
       {github.selected.map((repo) => (
         <a href={repo.url} target="_blank" rel="noopener noreferrer" class="group block">
@@ -112,5 +115,20 @@ function formatRecDate(iso: string): string {
     <p class="meta mt-10 opacity-70">
       See all on <a href="https://linkedin.com/in/achint-satsangi/details/recommendations/" class="text-linkedin">LinkedIn →</a>
     </p>
+  </section>
+
+  <section class="page section border-t border-rule dark:border-rule-dark" data-testid="journey-note-section">
+    <p class="meta mb-8">A note on nineteen years.</p>
+    <div class="max-w-3xl space-y-6 body-lg text-muted dark:text-muted-dark" data-testid="journey-note">
+      <p>
+        Some of this timeline was the work I wanted. Some of it was the work I had. A lot of it
+        was 3am pages, migrations that ran longer than they should have, teams that outgrew each
+        other, and the specific tiredness of shipping something you’re not sure anyone will use.
+      </p>
+      <p>
+        I mention this because the timeline reads clean and the work rarely is. If we end up in
+        a room together, that’s the room I show up in — the one that knows the difference.
+      </p>
+    </div>
   </section>
 </Layout>

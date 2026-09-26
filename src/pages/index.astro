@@ -6,7 +6,24 @@ const beliefs = [
   'Restraint over addition. Delete first, add only when it earns its cost.',
   'Warm about the person. Sharp about the work.',
   'Cross-cultural fluency is a technical skill.',
+  'Questions are data. If someone in the room is asking "wait, why?", the room is safer, not slower.',
 ];
+
+const knownFor = [
+  'Cutting a messy problem down to the smallest thing that actually solves it.',
+  'Holding the seam between teams when nobody else is watching it.',
+  'Teaching the person next to me so they can do the thing without me.',
+  'Writing the Slack post that ends the thread instead of extending it.',
+];
+
+const currently = [
+  { label: 'Building', body: 'Vend Assistant — an LLM-mediated buyer/seller surface inside FINN’s messaging thread.' },
+  { label: 'Reading', body: 'Mor(e) than Motherhood by Ruth Rostrup, and a slow re-read of The Design of Everyday Things.' },
+  { label: 'Writing', body: 'A longer piece on AI regulation, sequel to the ThePrint one from August 2025.' },
+  { label: 'Learning', body: 'Claude AI Architect certification (org-paid), formalising practice into credential.' },
+];
+
+const currentlyUpdated = 'September 2026';
 ---
 <Layout title="Achint Satsangi">
   <section class="page hero" data-testid="hero-content">
@@ -15,13 +32,30 @@ const beliefs = [
       Achint&nbsp;Satsangi.
     </h1>
     <p class="mt-10 body-lg max-w-4xl text-muted dark:text-muted-dark" data-testid="hero-masthead">
-      Born and studied engineering in India, Mechanical Engineer by qualification, Nineteen years in code, Developer by choice, Father of two.
+      I translate messy engineering problems into small, quiet solutions —
+      and I write down what I learn on the way.
     </p>
 
     <div class="mt-16 flex flex-wrap gap-4" data-testid="hero-doors">
       <a href={`${base}/journey/`} class="pill">Journey</a>
       <a href={`${base}/feed/`} class="pill">Feed</a>
       <a href={`${base}/articles/`} class="pill">Articles</a>
+    </div>
+
+    <p class="meta mt-10 opacity-70 max-w-3xl" data-testid="hero-whofor">
+      Nineteen years in code. Mumbai → Johannesburg → Oslo. Currently a senior
+      engineer on FINN’s messaging platform, working toward Staff.
+    </p>
+  </section>
+
+  <section class="page section" data-testid="hero-known-for-section">
+    <p class="meta mb-10">What I’m known for.</p>
+    <div class="space-y-8 max-w-4xl" data-testid="hero-known-for">
+      {knownFor.map((line) => (
+        <p class="text-xl md:text-2xl leading-[1.4] text-ink dark:text-ink-dark font-display font-medium tracking-tight">
+          {line}
+        </p>
+      ))}
     </div>
   </section>
 
@@ -38,12 +72,11 @@ const beliefs = [
       <div class="md:col-span-7" data-testid="hero-intro-block">
         <h2 class="display-md mb-8">A short version.</h2>
         <p class="body-lg text-muted dark:text-muted-dark max-w-prose" data-testid="hero-intro">
-          Mumbaikar at heart, Nordic desi by choice. Started in Mumbai on Java web apps, learned
-          winters in Oslo. Nineteen years of building systems that need to be quiet under load —
-          and a stubborn habit of mentoring the people around them; teacher before I was an
-          engineer, hasn't left. I write about AI, India, and the shape of good engineering. Most
-          days you'll find me in a messaging codebase, on a trail behind the house, or halfway
-          into a sketch.
+          Mumbaikar by birth, Nordic desi by choice. Started in Mumbai on Java web apps, shipped a
+          rules engine at one of South Africa’s largest universities, landed in Oslo in 2014
+          and stayed. I run toward the systems that need to be quiet under load — messaging,
+          payments, the boring critical path. Teacher before I was an engineer; that habit
+          hasn’t left.
         </p>
       </div>
     </div>
@@ -58,6 +91,57 @@ const beliefs = [
           {line}
         </p>
       ))}
+    </div>
+  </section>
+
+  <section class="page section" data-testid="hero-ai-section">
+    <p class="meta mb-10">How I think about AI.</p>
+    <div class="max-w-3xl space-y-6 body-lg text-muted dark:text-muted-dark" data-testid="hero-ai">
+      <p>
+        I’ve been building with LLMs since ChatGPT shipped in November 2022. Not learning —
+        building. Customer-facing features in production. Daily use to lift my own and my team’s
+        throughput. <a href={`${base}/articles/`} class="text-accent dark:text-accent-dark">A
+        published argument</a> on how to regulate the layer above it.
+      </p>
+      <p>
+        The position I hold: <em>“AI” is not a strategy.</em> <em>“AI for X, because
+        Y, replacing what Z does today”</em> is a strategy. The first one bleeds money into
+        surface solutions while the real problem keeps fighting you.
+      </p>
+      <p>
+        What I want to work on next: the seam between domain experts and AI systems. Not
+        <em> training people on tools</em> — <em>training leaders to enable domain experts to
+        innovate with tools.</em> That’s the harder problem, and the one worth the next five
+        years.
+      </p>
+    </div>
+  </section>
+
+  <section class="page section" data-testid="hero-currently-section">
+    <p class="meta mb-10">Currently.</p>
+    <div class="max-w-3xl space-y-6" data-testid="hero-currently">
+      {currently.map((c) => (
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+          <div class="md:col-span-2 meta text-ink dark:text-ink-dark font-semibold">{c.label}</div>
+          <div class="md:col-span-10 body-lg text-muted dark:text-muted-dark">{c.body}</div>
+        </div>
+      ))}
+      <p class="meta opacity-60 pt-4">Updated {currentlyUpdated}</p>
+    </div>
+  </section>
+
+  <section class="page section" data-testid="hero-contact-section">
+    <p class="meta mb-10">Get in touch.</p>
+    <div class="max-w-3xl">
+      <p class="display-md mb-8">
+        If any of this makes you want to talk — a role, a partnership, a coffee in Oslo, or an
+        argument about AI regulation — my inbox is open.
+      </p>
+      <div class="flex flex-wrap gap-x-8 gap-y-3 meta" data-testid="hero-contact-links">
+        <a href="mailto:achint.satsangi@gmail.com" class="text-accent dark:text-accent-dark">achint.satsangi@gmail.com</a>
+        <a href="https://linkedin.com/in/achint-satsangi" class="text-accent dark:text-accent-dark">LinkedIn</a>
+        <a href="https://github.com/achintSatsangi" class="text-accent dark:text-accent-dark">GitHub</a>
+      </div>
     </div>
   </section>
 </Layout>
