@@ -48,17 +48,6 @@ const currentlyUpdated = 'September 2026';
     </p>
   </section>
 
-  <section class="page section" data-testid="hero-known-for-section">
-    <p class="meta mb-10">What I’m known for.</p>
-    <div class="space-y-8 max-w-4xl" data-testid="hero-known-for">
-      {knownFor.map((line) => (
-        <p class="text-xl md:text-2xl leading-[1.4] text-ink dark:text-ink-dark font-display font-medium tracking-tight">
-          {line}
-        </p>
-      ))}
-    </div>
-  </section>
-
   <section class="page section" data-testid="hero-photo-section">
     <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-center">
       <div class="md:col-span-5" data-testid="hero-photo">
@@ -80,6 +69,18 @@ const currentlyUpdated = 'September 2026';
         </p>
       </div>
     </div>
+  </section>
+
+  <section class="page section" data-testid="hero-known-for-section">
+    <p class="meta mb-10">What I’m known for.</p>
+    <ul class="space-y-5 max-w-3xl body-lg text-ink dark:text-ink-dark list-none" data-testid="hero-known-for">
+      {knownFor.map((line) => (
+        <li class="flex gap-4">
+          <span class="text-muted dark:text-muted-dark opacity-50 select-none">—</span>
+          <span>{line}</span>
+        </li>
+      ))}
+    </ul>
   </section>
 
   <section class="page section" data-testid="hero-beliefs-section">
@@ -104,15 +105,15 @@ const currentlyUpdated = 'September 2026';
         published argument</a> on how to regulate the layer above it.
       </p>
       <p>
-        The position I hold: <em>“AI” is not a strategy.</em> <em>“AI for X, because
-        Y, replacing what Z does today”</em> is a strategy. The first one bleeds money into
-        surface solutions while the real problem keeps fighting you.
+        The position I hold: <span class="text-ink dark:text-ink-dark font-medium">“AI” is not a strategy.</span>
+        <span class="text-ink dark:text-ink-dark font-medium">“AI for X, because Y, replacing what Z does today”</span>
+        is a strategy. The first one bleeds money into surface solutions while the real problem keeps fighting you.
       </p>
       <p>
         What I want to work on next: the seam between domain experts and AI systems. Not
-        <em> training people on tools</em> — <em>training leaders to enable domain experts to
-        innovate with tools.</em> That’s the harder problem, and the one worth the next five
-        years.
+        <span class="text-ink dark:text-ink-dark font-medium"> training people on tools</span> —
+        <span class="text-ink dark:text-ink-dark font-medium"> training leaders to enable domain experts to
+        innovate with tools.</span> That’s the harder problem, and the one worth the next five years.
       </p>
     </div>
   </section>
@@ -123,7 +124,7 @@ const currentlyUpdated = 'September 2026';
       {currently.map((c) => (
         <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
           <div class="md:col-span-2 meta text-ink dark:text-ink-dark font-semibold">{c.label}</div>
-          <div class="md:col-span-10 body-lg text-muted dark:text-muted-dark">{c.body}</div>
+          <div class="md:col-span-10 text-base leading-relaxed text-muted dark:text-muted-dark">{c.body}</div>
         </div>
       ))}
       <p class="meta opacity-60 pt-4">Updated {currentlyUpdated}</p>
@@ -133,11 +134,11 @@ const currentlyUpdated = 'September 2026';
   <section class="page section" data-testid="hero-contact-section">
     <p class="meta mb-10">Get in touch.</p>
     <div class="max-w-3xl">
-      <p class="display-md mb-8">
+      <p class="display-md mb-10">
         If any of this makes you want to talk — a role, a partnership, a coffee in Oslo, or an
         argument about AI regulation — my inbox is open.
       </p>
-      <div class="flex flex-wrap gap-x-8 gap-y-3 meta" data-testid="hero-contact-links">
+      <div class="flex flex-wrap gap-x-10 gap-y-3 text-base md:text-lg" data-testid="hero-contact-links">
         <a href="mailto:achint.satsangi@gmail.com" class="text-accent dark:text-accent-dark">achint.satsangi@gmail.com</a>
         <a href="https://linkedin.com/in/achint-satsangi" class="text-accent dark:text-accent-dark">LinkedIn</a>
         <a href="https://github.com/achintSatsangi" class="text-accent dark:text-accent-dark">GitHub</a>
