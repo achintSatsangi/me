@@ -6,7 +6,7 @@
     "start": "2022-10",
     "end": null,
     "nda": true,
-    "summary": "Backend and platform lead on FINN's messaging platform — four Nordic marketplaces, one codebase after a near-zero-downtime consolidation, ~30 microservices on Kubernetes, 133M+ requests/day on the largest leg. Currently building Vend Assistant, an LLM-mediated buyer/seller surface inside the messaging thread — POC through to production shape, adjacent to the team's substrate, not around it."
+    "summary": "Backend and platform lead on Vend's messaging platform — four Nordic marketplaces (finn.no, blocket.se, tori.fi, dba.dk), one codebase after a near-zero-downtime consolidation, ~30 microservices on Kubernetes, 133M+ requests/day on the largest leg. Currently building Vend Assistant, an LLM-mediated buyer/seller surface inside the messaging thread — POC through to production shape, adjacent to the team's substrate, not around it."
   },
   {
     "company": "DNB",
@@ -38,7 +38,7 @@
     "location": "Oslo + Mumbai",
     "start": "2014-11",
     "end": "2019-05",
-    "summary": "Distributed Agile team on FINN's messaging domain before it was Vend's. 20–30 microservices, 15–20 deploys a day, in-house DevOps + monitoring framework we built because nothing off-the-shelf fit. Test-code volume exceeded production-code volume — deliberate. The messaging expertise I lean on today started here."
+    "summary": "Distributed Agile team on the messaging domain that would later consolidate under Vend. 20–30 microservices, 15–20 deploys a day, in-house DevOps + monitoring framework we built because nothing off-the-shelf fit. Test-code volume exceeded production-code volume — deliberate. The messaging expertise I lean on today started here."
   },
   {
     "company": "TCS Initial Learning Program",

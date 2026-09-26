@@ -36,7 +36,7 @@ test.describe('Landing content is complete', () => {
     await page.goto(`${BASE}/`);
     await expect(page.getByTestId('hero-name')).toContainText('Achint');
     await expect(page.getByTestId('hero-masthead')).toContainText('messy engineering');
-    await expect(page.getByTestId('hero-intro')).toContainText('Mumbaikar');
+    await expect(page.getByTestId('hero-intro')).toContainText('Rajasthan');
     await expect(page.getByTestId('hero-beliefs').locator('p')).toHaveCount(5);
     await expect(page.getByTestId('hero-doors').locator('a')).toHaveCount(3);
     await expect(page.getByTestId('hero-photo')).toBeVisible();
