@@ -6,7 +6,7 @@
     "start": "2022-10",
     "end": null,
     "nda": true,
-    "summary": "Backend and platform lead on Vend's messaging platform — four Nordic marketplaces (finn.no, blocket.se, tori.fi, dba.dk), one codebase after a near-zero-downtime consolidation, ~30 microservices on Kubernetes, 133M+ requests/day on the largest leg. Currently building Vend Assistant, an LLM-mediated buyer/seller surface inside the messaging thread — POC through to production shape, adjacent to the team's substrate, not around it."
+    "summary": "Backend and platform work on Vend's messaging platform — four Nordic marketplaces (finn.no, blocket.se, tori.fi, dba.dk), one codebase after a near-zero-downtime consolidation, ~30 microservices on Kubernetes, 133M+ requests/day on the largest leg. Occasional frontend forays when a change needs to land end-to-end. Currently building Vend Assistant, an LLM-mediated buyer/seller surface inside the messaging thread — POC through to production shape, adjacent to the team's substrate, not around it."
   },
   {
     "company": "DNB",
