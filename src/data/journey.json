@@ -6,7 +6,7 @@
     "start": "2022-10",
     "end": null,
     "restricted": true,
-    "summary": "Backend and platform work on Vend's messaging platform — four Nordic marketplaces (finn.no, blocket.se, tori.fi, dba.dk), one codebase after a near-zero-downtime consolidation, ~30 microservices on Kubernetes, 120M+ requests/day on the largest leg. Occasional frontend forays when a change needs to land end-to-end.\n\nCurrently building Vend Assistant, an LLM-mediated buyer/seller surface inside the messaging thread — POC through to production shape, adjacent to the team's substrate, not around it."
+    "summary": "Backend and platform work on Vend's messaging platform — four Nordic marketplaces (finn.no, blocket.se, tori.fi, dba.dk), one codebase after a near-zero-downtime consolidation, ~30 microservices on Kubernetes, 120M+ requests/day on the largest leg. The part I keep returning to is the cross-brand seam — where one brand's change becomes four brands' problem, the boundary no single team owns by default. Occasional frontend forays when a change needs to land end-to-end.\n\nCurrently building Vend Assistant, an LLM-mediated buyer/seller surface inside the messaging thread — POC through to production shape, adjacent to the team's substrate, not around it."
   },
   {
     "company": "DNB",
