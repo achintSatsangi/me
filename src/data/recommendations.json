@@ -9,24 +9,6 @@
     "quote": "Achint combines profound technical abilities with excellent architectural insight, domain knowledge and understanding of the user perspective. He is committed to quality engineering and continuous improvement, searching for ways to improve himself and the team every day. During our time together in FINN, Achint was a pillar in our team — primarily in the backend and devops space but contributing across the stack and really all over the place. He has the capabilities required for troubleshooting those hard production problems in pragmatic, efficient ways."
   },
   {
-    "name": "Prashant Prakash",
-    "role": "Sales Director",
-    "company": "Accenture",
-    "date": "2023-04-11",
-    "context": "Rules engine project, South Africa",
-    "angle": "project corroboration",
-    "quote": "One of the smartest Java developers I have worked with. We collaborated on building a custom rules engine for a large university to automate their admission, enrollment, and progression rules. Achint designed and developed the rules engine from scratch and built an abstraction layer that provided an extremely well-designed user interface on top of the technical rules engine, allowing faculty admins to set up rules in English and test them on their own. His amazing work ethic ensured that he never missed a deadline."
-  },
-  {
-    "name": "Hina Kaur",
-    "role": "Senior Consultant",
-    "company": "CIBC",
-    "date": "2018-11-02",
-    "context": "Mentored her early-career",
-    "angle": "mentorship character",
-    "quote": "I have worked with Achint during the start of my career for almost 3 years. He has been a wonderful mentor to me. He always had answers to all my queries and doubts. He knows Java in and out and gives the best solution. He has and always will be my GO TO person for anything related to Java. His ability to juggle multiple projects was unlike any I've seen before, and made a dramatic difference in the productivity level of our team."
-  },
-  {
     "name": "Per Kristian Haakonsen",
     "role": "Board Member",
     "company": "ACAMS Airport Tower Solutions",
@@ -34,6 +16,15 @@
     "context": "Hiring manager",
     "angle": "hiring signal",
     "quote": "As responsible for both hiring and managing Achint, I can strongly recommend him, for two reasons. First, his technical skills and willingness to learn are impressive. Second, he works independently and rises to action when he sees a task that needs to be done. Both current and future employers are happy to have Achint onboard."
+  },
+  {
+    "name": "Marius Jakobsen",
+    "role": "Staff Engineer",
+    "company": "Handelsbanken",
+    "date": "2021-03-25",
+    "context": "Former colleague",
+    "angle": "delete-first values",
+    "quote": "A software-engineer at heart. Always looking for ways to simplify and improve — be it the way of working or core Java. Adopting new technologies and sharing his knowledge comes natural to him. Hardworking, dedicated and a true team player."
   },
   {
     "name": "Endre Midtgård Meckelborg",
@@ -45,12 +36,39 @@
     "quote": "I have worked with Achint last 4 years in Posten Norge AS, where Achint was a consultant through TCS. Achint has worked hard and made good deliveries all the time. As he became more experienced, he got more responsibility and ended up as teamlead for one of the teams. Achint managed this role as well, where he worked close with business to understand business needs and was able to break up tasks and give good deliveries through his team."
   },
   {
-    "name": "Marius Jakobsen",
-    "role": "Staff Engineer",
-    "company": "Handelsbanken",
-    "date": "2021-03-25",
-    "context": "Former colleague",
-    "angle": "delete-first values",
-    "quote": "A software-engineer at heart. Always looking for ways to simplify and improve — be it the way of working or core Java. Adopting new technologies and sharing his knowledge comes natural to him. Hardworking, dedicated and a true team player."
+    "name": "Hina Kaur",
+    "role": "Senior Consultant",
+    "company": "CIBC",
+    "date": "2018-11-02",
+    "context": "Mentored her early-career",
+    "angle": "mentorship character",
+    "quote": "I have worked with Achint during the start of my career for almost 3 years. He has been a wonderful mentor to me. He always had answers to all my queries and doubts. He knows Java in and out and gives the best solution. He has and always will be my GO TO person for anything related to Java. His ability to juggle multiple projects was unlike any I've seen before, and made a dramatic difference in the productivity level of our team."
+  },
+  {
+    "name": "Prashant Prakash",
+    "role": "Sales Director",
+    "company": "Accenture",
+    "date": "2023-04-11",
+    "context": "Rules engine project, South Africa",
+    "angle": "project corroboration",
+    "quote": "One of the smartest Java developers I have worked with. We collaborated on building a custom rules engine for a large university to automate their admission, enrollment, and progression rules. Achint designed and developed the rules engine from scratch and built an abstraction layer that provided an extremely well-designed user interface on top of the technical rules engine, allowing faculty admins to set up rules in English and test them on their own. His amazing work ethic ensured that he never missed a deadline."
+  },
+  {
+    "name": "Priyanka Kamboj",
+    "role": "Manager, Data Management",
+    "company": "TD Bank",
+    "date": "2023-04-23",
+    "context": "Worked together at TCS Mumbai",
+    "angle": "Mumbai credibility",
+    "quote": "I had the pleasure of working with Achint during our time at TCS Mumbai and can confidently say that he is a top-performing professional. His passion for emerging technologies is unmatched, and he has an incredible ability to quickly learn and master new skills. He was always efficient in solving complex problems and consistently exceeded expectations. Achint was the MVP of the team, and his colleagues could always rely on him during moments of crisis."
+  },
+  {
+    "name": "Satguru Kulshrestha",
+    "role": "Vice President",
+    "company": "Nomura",
+    "date": "2023-03-23",
+    "context": "College mate at Dayalbagh, TCS together after",
+    "angle": "roots and alumnus",
+    "quote": "I've known Achint for several years — we were college mates in different engineering streams, but shared several subjects, and I saw first-hand his meticulous approach to mathematics and engineering drawing, and his ability to guide his classmates. We both landed at TCS together. These days our conversations revolve around giving back to our alma mater — internships and interview prep for budding engineers. His ability to bring any task to a logical conclusion, on time, was as evident in college assignments as it is now."
   }
 ]

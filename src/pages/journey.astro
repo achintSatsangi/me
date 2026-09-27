@@ -47,7 +47,7 @@ function formatRecDate(iso: string): string {
           <div class="md:col-span-9 max-w-prose">
             <h3 class="display-md" data-testid="role-company">{role.company}</h3>
             <p class="meta mt-2" data-testid="role-title">{role.role}</p>
-            <p class="mt-5 body-lg text-muted dark:text-muted-dark hyphens-auto" data-testid="role-summary">{role.summary}</p>
+            <p class="mt-5 body-lg text-muted dark:text-muted-dark hyphens-auto text-justify" data-testid="role-summary">{role.summary}</p>
             {role.nda && (
               <p class="meta mt-4 text-muted dark:text-muted-dark">
                 Under NDA on the specifics — <a href="https://linkedin.com/in/achint-satsangi">LinkedIn</a> has what I can talk about publicly.
@@ -80,15 +80,15 @@ function formatRecDate(iso: string): string {
     </div>
   </section>
 
-  <section class="page section border-t border-rule dark:border-rule-dark" data-testid="recommendations">
+  <section class="section max-w-[92rem] mx-auto px-6 md:px-10 border-t border-rule dark:border-rule-dark" data-testid="recommendations">
     <h2 class="meta mb-6">In their words</h2>
     <h3 class="display-lg max-w-4xl mb-16">
-      Five people who worked with me, in five different rooms.
+      Eight people, in eight different rooms.
     </h3>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       {recommendations.map((r) => (
         <blockquote
-          class="relative bg-paper dark:bg-[#1A1A1D] border border-rule dark:border-rule-dark rounded-xl p-8 md:p-10 flex flex-col h-full"
+          class="relative bg-paper dark:bg-[#1A1A1D] border border-rule dark:border-rule-dark rounded-xl p-8 md:p-9 flex flex-col h-full"
           data-testid={`rec-${r.name.split(' ')[0].toLowerCase()}`}
         >
           <div class="absolute top-6 right-6 text-linkedin opacity-90" title="Recommendation on LinkedIn">

@@ -2,6 +2,20 @@
 import Layout from '../layouts/Layout.astro';
 import LinkedInFeed from '../components/LinkedInFeed.jsx';
 import posts from '../data/linkedin-posts.json';
+import postImages from '../data/post-images.json';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const withImages = posts.map((p) => {
+  const entry = postImages[p.link];
+  if (!entry) return p;
+  const media = (entry.images || [{ file: entry.file, alt: entry.alt }])
+    .filter((m) => m.file)
+    .map((m) => ({ src: `${base}/images/feed/${m.file}`, alt: m.alt || '' }));
+  const next = { ...p };
+  if (media.length) next.images = media;
+  if (entry.article) next.article = entry.article;
+  return next;
+});
 ---
 <Layout title="Feed — Achint Satsangi">
   <section class="page hero-inner">
@@ -21,6 +35,6 @@ import posts from '../data/linkedin-posts.json';
   </section>
 
   <section class="page section">
-    <LinkedInFeed posts={posts} client:load />
+    <LinkedInFeed posts={withImages} client:load />
   </section>
 </Layout>

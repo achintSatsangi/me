@@ -54,9 +54,9 @@ test.describe('Journey page shows all roles + recommendations', () => {
   test('recommendations render with attribution', async ({ page }) => {
     await page.goto(`${BASE}/journey/`);
     const recs = page.getByTestId('recommendations');
-    await expect(recs.locator('blockquote')).toHaveCount(6);
+    await expect(recs.locator('blockquote')).toHaveCount(8);
     // Named recommenders each present
-    for (const first of ['christian', 'marius', 'per', 'prashant', 'hina', 'endre']) {
+    for (const first of ['christian', 'marius', 'per', 'prashant', 'hina', 'endre', 'priyanka', 'satguru']) {
       await expect(page.getByTestId(`rec-${first}`)).toBeVisible();
     }
   });

@@ -1,0 +1,12 @@
+{
+  "_comment": "Hand-authored, survives data:sync. Map a post's `link` (exact match) to a local image in public/images/feed/. Use `file`+`alt` for one image, or `images` for several. Optional `article` adds a link to a published article, distinct from the post permalink. Underscore keys are ignored.",
+  "https://www.linkedin.com/feed/update/urn%3Ali%3Aactivity%3A7508027374270156800": { "file": "taming-machine.png", "alt": "Taming the Machine — article header", "article": "https://www.linkedin.com/pulse/taming-machine-what-ai-regulation-can-learn-from-wall-achint-satsangi-zs3yf/" },
+  "https://www.linkedin.com/feed/update/urn%3Ali%3AugcPost%3A7353413965822984194": { "file": "guy-on-the-right.jpg", "alt": "The guy on the right, every hour every day" },
+  "https://www.linkedin.com/feed/update/urn%3Ali%3AugcPost%3A7501169485442097152": { "file": "javazone-socks.jpg", "alt": "Conference socks on display at JavaZone" },
+  "https://www.linkedin.com/feed/update/urn%3Ali%3AugcPost%3A7483475298689392641": { "file": "worldcup-time-machine.png", "alt": "World Cup Time Machine — the companion site I built" },
+  "https://www.linkedin.com/feed/update/urn%3Ali%3AugcPost%3A7480883929776889857": { "images": [
+    { "file": "worldcup-dataviz-radial.jpg", "alt": "My circular redesign of the World Cup knockout bracket" },
+    { "file": "worldcup-dataviz-bracket.jpg", "alt": "The traditional left-to-right World Cup knockout bracket" }
+  ] },
+  "https://www.linkedin.com/feed/update/urn%3Ali%3Aactivity%3A7508759721999261697": { "file": "sticker-laptop.jpg", "alt": "My old laptop covered in tech and conference stickers" }
+}

@@ -88,8 +88,30 @@ function PostCard({ post, postId }) {
         </p>
       </div>
 
+      {post.images?.map((im, idx) => (
+        <img
+          key={idx}
+          src={im.src}
+          alt={im.alt}
+          loading="lazy"
+          className="w-full border-t border-rule dark:border-rule-dark"
+        />
+      ))}
+
       {post.link && (
-        <footer className="border-t border-rule dark:border-rule-dark px-6 py-3 flex items-center justify-end text-[13px]">
+        <footer className="border-t border-rule dark:border-rule-dark px-6 py-3 flex items-center justify-between text-[13px]">
+          {post.article ? (
+            <a
+              href={post.article}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-linkedin font-medium"
+            >
+              ← Read article
+            </a>
+          ) : (
+            <span />
+          )}
           <a
             href={post.link}
             target="_blank"
@@ -132,7 +154,7 @@ export default function LinkedInFeed({ posts }) {
         ))}
       </div>
 
-      <div className="space-y-6 max-w-2xl mx-auto" data-testid="feed-posts">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start max-w-5xl mx-auto" data-testid="feed-posts">
         {filtered.map((p, i) => {
           const postId = (p.link ? p.link.replace(/[^a-zA-Z0-9]/g, '') : p.date) + '-' + i;
           return <PostCard key={p.link || `${p.date}-${i}`} post={p} postId={postId} />;
