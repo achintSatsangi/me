@@ -14,6 +14,16 @@ function formatRecDate(iso: string): string {
   const d = new Date(iso);
   return d.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
 }
+
+const featuredRecNames = [
+  'Christian Kjendseth Wiik',
+  'Per Kristian Haakonsen',
+  'Endre Midtgård Meckelborg',
+  'Prashant Prakash',
+];
+const featuredRecs = featuredRecNames
+  .map((name) => recommendations.find((r) => r.name === name))
+  .filter(Boolean);
 ---
 <Layout title="Journey — Achint Satsangi">
   <section class="page hero" data-testid="journey-hero-section">
@@ -47,11 +57,42 @@ function formatRecDate(iso: string): string {
           <div class="md:col-span-9 max-w-prose">
             <h3 class="display-md" data-testid="role-company">{role.company}</h3>
             <p class="meta mt-2" data-testid="role-title">{role.role}</p>
-            <p class="mt-5 body-lg text-muted dark:text-muted-dark hyphens-auto text-justify" data-testid="role-summary">{role.summary}</p>
-            {role.nda && (
+            <div class="mt-5 space-y-4" data-testid="role-summary">
+              {role.summary.split('\n\n').map((para) => (
+                <p class="body-lg text-muted dark:text-muted-dark hyphens-auto text-justify">{para}</p>
+              ))}
+            </div>
+            {role.restricted && (
               <p class="meta mt-4 text-muted dark:text-muted-dark">
-                Under NDA on the specifics — <a href="https://linkedin.com/in/achint-satsangi">LinkedIn</a> has what I can talk about publicly.
+                Company privacy policy and code of conduct keep the specifics off this page — <a href="https://linkedin.com/in/achint-satsangi">LinkedIn</a> has what I can share publicly.
               </p>
+            )}
+            {role.projects && (
+              <details class="group mt-6" data-testid="role-projects">
+                <summary class="meta text-muted dark:text-muted-dark cursor-pointer list-none [&::-webkit-details-marker]:hidden inline-flex items-center gap-2 hover:text-ink dark:hover:text-ink-dark">
+                  <span class="transition-transform group-open:rotate-90">▸</span>
+                  <span class="group-open:hidden">The projects — {role.projects.reduce((n, g) => n + g.items.length, 0)} at {role.projects.map((g) => g.client).join(' and ')}</span>
+                  <span class="hidden group-open:inline">Hide projects</span>
+                </summary>
+                <div class="mt-6 space-y-8">
+                  {role.projects.map((group) => (
+                    <div>
+                      <div class="meta font-semibold text-ink dark:text-ink-dark mb-4">{group.client}</div>
+                      <ul class="space-y-4 list-none">
+                        {group.items.map((p) => (
+                          <li class="border-l border-rule dark:border-rule-dark pl-5">
+                            <div class="flex items-baseline gap-2 flex-wrap">
+                              <span class="text-sm font-semibold text-ink dark:text-ink-dark">{p.name}</span>
+                              <span class="meta text-muted dark:text-muted-dark">{p.role}</span>
+                            </div>
+                            <p class="mt-1 text-base leading-[1.5] text-muted dark:text-muted-dark">{p.blurb}</p>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </details>
             )}
           </div>
         </div>
@@ -59,34 +100,13 @@ function formatRecDate(iso: string): string {
     ))}
   </section>
 
-  <section class="page section border-t border-rule dark:border-rule-dark" data-testid="github-section">
-    <h2 class="meta mb-8">On GitHub — <a href={github.profile.url} class="text-accent dark:text-accent-dark">@{github.profile.handle}</a></h2>
-    <h3 class="display-md mb-14 max-w-3xl">
-      Nineteen public repos. Some AI experiments, some workshop material, one hobby project
-      I keep coming back to when I want to remember how React hooks work.
-    </h3>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10 max-w-5xl">
-      {github.selected.map((repo) => (
-        <a href={repo.url} target="_blank" rel="noopener noreferrer" class="group block [background-image:none]">
-          <div class="flex items-baseline justify-between gap-4 mb-2">
-            <h3 class="text-lg md:text-xl font-display font-semibold tracking-tight text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors">
-              {repo.name}
-            </h3>
-            {repo.language !== '-' && <span class="meta text-muted dark:text-muted-dark shrink-0">{repo.language}</span>}
-          </div>
-          <p class="text-base leading-[1.55] text-muted dark:text-muted-dark max-w-prose">{repo.blurb}</p>
-        </a>
-      ))}
-    </div>
-  </section>
-
-  <section class="section max-w-[92rem] mx-auto px-6 md:px-10 border-t border-rule dark:border-rule-dark" data-testid="recommendations">
+  <section id="recommendations" class="section max-w-[92rem] mx-auto px-6 md:px-10 border-t border-rule dark:border-rule-dark" data-testid="recommendations">
     <h2 class="meta mb-6">In their words</h2>
     <h3 class="display-lg max-w-4xl mb-16">
-      Eight people, in eight different rooms.
+      Four people, four different rooms.
     </h3>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      {recommendations.map((r) => (
+      {featuredRecs.map((r) => (
         <blockquote
           class="relative bg-paper dark:bg-[#1A1A1D] border border-rule dark:border-rule-dark rounded-xl p-8 md:p-9 flex flex-col h-full"
           data-testid={`rec-${r.name.split(' ')[0].toLowerCase()}`}
@@ -116,6 +136,27 @@ function formatRecDate(iso: string): string {
     <p class="meta mt-10 text-muted dark:text-muted-dark">
       See all on <a href="https://linkedin.com/in/achint-satsangi/details/recommendations/" class="text-linkedin">LinkedIn →</a>
     </p>
+  </section>
+
+  <section class="page section border-t border-rule dark:border-rule-dark" data-testid="github-section">
+    <h2 class="meta mb-8">On GitHub — <a href={github.profile.url} class="text-accent dark:text-accent-dark">@{github.profile.handle}</a></h2>
+    <h3 class="display-md mb-14 max-w-3xl">
+      Nineteen public repos. Some AI experiments, some workshop material, one hobby project
+      I keep coming back to when I want to remember how React hooks work.
+    </h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10 max-w-5xl">
+      {github.selected.map((repo) => (
+        <a href={repo.url} target="_blank" rel="noopener noreferrer" class="group block [background-image:none]">
+          <div class="flex items-baseline justify-between gap-4 mb-2">
+            <h3 class="text-lg md:text-xl font-display font-semibold tracking-tight text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors">
+              {repo.name}
+            </h3>
+            {repo.language !== '-' && <span class="meta text-muted dark:text-muted-dark shrink-0">{repo.language}</span>}
+          </div>
+          <p class="text-base leading-[1.55] text-muted dark:text-muted-dark max-w-prose">{repo.blurb}</p>
+        </a>
+      ))}
+    </div>
   </section>
 
   <section class="page section border-t border-rule dark:border-rule-dark" data-testid="early-life-section">

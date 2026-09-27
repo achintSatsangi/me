@@ -42,23 +42,51 @@ test.describe('Landing content is complete', () => {
     await expect(page.getByTestId('hero-photo')).toBeVisible();
     await expect(page.getByTestId('hero-offclock')).toContainText('walking pad');
   });
+
+  test('social-proof strip shows three fragments and deep-links to journey recs', async ({ page }) => {
+    await page.goto(`${BASE}/`);
+    const proof = page.getByTestId('hero-proof');
+    await expect(proof.locator('> div')).toHaveCount(3);
+    await expect(proof).toContainText('smartest Java developers');
+    await expect(page.getByTestId('hero-proof-section').getByRole('link', { name: 'Read all →' }))
+      .toHaveAttribute('href', /\/journey\/#recommendations$/);
+  });
 });
 
 test.describe('Journey page shows all roles + recommendations', () => {
-  test('all 10 roles land on the timeline', async ({ page }) => {
+  test('all 9 roles land on the timeline', async ({ page }) => {
     await page.goto(`${BASE}/journey/`);
     const timeline = page.getByTestId('journey-timeline');
-    await expect(timeline.locator('article')).toHaveCount(10);
+    await expect(timeline.locator('article')).toHaveCount(9);
   });
 
   test('recommendations render with attribution', async ({ page }) => {
     await page.goto(`${BASE}/journey/`);
     const recs = page.getByTestId('recommendations');
-    await expect(recs.locator('blockquote')).toHaveCount(8);
-    // Named recommenders each present
-    for (const first of ['christian', 'marius', 'per', 'prashant', 'hina', 'endre', 'priyanka', 'satguru']) {
+    await expect(recs).toHaveAttribute('id', 'recommendations');
+    await expect(recs.locator('blockquote')).toHaveCount(4);
+    // Curated four each present
+    for (const first of ['christian', 'per', 'endre', 'prashant']) {
       await expect(page.getByTestId(`rec-${first}`)).toBeVisible();
     }
+  });
+
+  test('project details are collapsed by default and expand on click', async ({ page }) => {
+    await page.goto(`${BASE}/journey/`);
+    const mumbai = page.getByTestId('role-projects').last();
+    const blurb = mumbai.getByText('first online mutual-fund');
+    await expect(blurb).toBeHidden();
+    await mumbai.getByText(/^The projects —/).click();
+    await expect(blurb).toBeVisible();
+  });
+
+  test('restricted role shows policy note, not an NDA', async ({ page }) => {
+    await page.goto(`${BASE}/journey/`);
+    const vend = page.getByTestId('journey-timeline').locator('article').first();
+    await expect(vend).toContainText('privacy policy and code of conduct');
+    await expect(vend).not.toContainText('NDA');
+    // Vend summary renders as two paragraphs
+    await expect(vend.getByTestId('role-summary').locator('p')).toHaveCount(2);
   });
 });
 

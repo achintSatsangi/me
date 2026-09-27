@@ -5,8 +5,8 @@
     "location": "Oslo",
     "start": "2022-10",
     "end": null,
-    "nda": true,
-    "summary": "Backend and platform work on Vend's messaging platform — four Nordic marketplaces (finn.no, blocket.se, tori.fi, dba.dk), one codebase after a near-zero-downtime consolidation, ~30 microservices on Kubernetes, 133M+ requests/day on the largest leg. Occasional frontend forays when a change needs to land end-to-end. Currently building Vend Assistant, an LLM-mediated buyer/seller surface inside the messaging thread — POC through to production shape, adjacent to the team's substrate, not around it."
+    "restricted": true,
+    "summary": "Backend and platform work on Vend's messaging platform — four Nordic marketplaces (finn.no, blocket.se, tori.fi, dba.dk), one codebase after a near-zero-downtime consolidation, ~30 microservices on Kubernetes, 120M+ requests/day on the largest leg. Occasional frontend forays when a change needs to land end-to-end.\n\nCurrently building Vend Assistant, an LLM-mediated buyer/seller surface inside the messaging thread — POC through to production shape, adjacent to the team's substrate, not around it."
   },
   {
     "company": "DNB",
@@ -33,12 +33,12 @@
     "summary": "Identity & access management (STIM), internal React + Spring app, GDPR document-redactor POC on Google Cloud OCR."
   },
   {
-    "company": "Tata Consultancy Services — Posten Norge / Bring",
-    "role": "Senior Java Developer",
-    "location": "Oslo",
+    "company": "Tata Consultancy Services - Posten Norge / Bring",
+    "role": "Senior Java Developer → Scrum Master",
+    "location": "Oslo & India",
     "start": "2014-11",
     "end": "2019-05",
-    "summary": "Distributed Agile team building the logistics web platform for Posten Norge / Bring — 20+ Java web applications, 15–20 deploys a day, an in-house DevOps + monitoring framework we built because nothing off-the-shelf fit. Test-code volume exceeded production-code volume, deliberately. Grew into team-lead responsibility. The high-cadence, delete-first engineering discipline I run on today started here."
+    "summary": "Distributed Agile team building the logistics web platform for Posten Norge / Bring — 20+ Java web applications, 15–20 deploys a day, an in-house DevOps + monitoring framework we built because nothing off-the-shelf fit. A rotational posting: a few years in Oslo, the rest back in India between Delhi and Mumbai. Test-code volume exceeded production-code volume, deliberately. Grew into team-lead responsibility. The high-cadence, delete-first engineering discipline I run on today started here."
   },
   {
     "company": "TCS Initial Learning Program",
@@ -58,26 +58,44 @@
   },
   {
     "company": "TCS Johannesburg",
-    "role": "Peoplesoft Functional Consultant",
-    "location": "Johannesburg",
-    "start": "2012-01",
-    "end": "2012-10",
-    "summary": "Peoplesoft Campus Solutions enrolments module, end-to-end — requirements gathering through SIT/UAT."
-  },
-  {
-    "company": "TCS Johannesburg",
-    "role": "Solutions Developer",
+    "role": "Solutions Developer → Peoplesoft Functional Consultant",
     "location": "Johannesburg",
     "start": "2010-11",
-    "end": "2011-11",
-    "summary": "Designed and shipped a rules engine for student admissions and progression at the University of the Witwatersrand — including a plain-English abstraction layer so non-engineers could read and reason about the rules."
+    "end": "2012-10",
+    "summary": "Two years for the University of the Witwatersrand — a student admissions and progression rules engine, then a Peoplesoft Campus Solutions enrolments rollout. Grew from building the engine to owning the functional analysis on the platform side.",
+    "projects": [
+      {
+        "client": "University of the Witwatersrand",
+        "items": [
+          { "name": "Peoplesoft Campus Solutions — Enrolments", "role": "Peoplesoft Functional Consultant", "blurb": "Enrolments module for Campus Solutions, end-to-end — requirements gathering through SIT/UAT." },
+          { "name": "Admissions & Progression Rules Engine", "role": "Solutions Developer", "blurb": "Designed and shipped a rules engine for student admissions and progression — including a plain-English abstraction layer so non-engineers could read and reason about the rules." }
+        ]
+      }
+    ]
   },
   {
     "company": "TCS Mumbai",
-    "role": "Software Developer",
+    "role": "Software Developer → Technical Lead",
     "location": "Mumbai",
     "start": "2007-12",
     "end": "2010-11",
-    "summary": "Java web solutions across mutual funds, fixed deposits, vendor management, and a CMS portal. India's first online mutual-fund trading platform is from this period."
+    "summary": "First job. Three years of Java/J2EE financial platforms for two clients — TATA Capital and AXIS Bank. Mutual funds, fixed deposits, vendor reference data, a trading-portal CMS — the origin of the financial-platform work. Started as a developer, grew into technical lead on the back-office and reconciliation systems.",
+    "projects": [
+      {
+        "client": "AXIS Bank",
+        "items": [
+          { "name": "AXIS Direct", "role": "Senior Developer", "blurb": "Online trading portal for AXIS Bank customers on Weblogic Portal, integrated with eibs front and back office. Built the CMS — screens, application forms, PDFs, video tutorials — and the interface engine pulling live market data (Geodesic, Capital Markets) and research feeds (Thomson Reuters, CRISIL)." }
+        ]
+      },
+      {
+        "client": "TATA Capital",
+        "items": [
+          { "name": "TCL VRDMS — Vendor Reference Data Management System", "role": "Technical Lead / Designer", "blurb": "A bridge across TATA Capital's trading and finance systems (eibs, mutual funds, Bancs, SAP-GL) that dedupes and links unique vendors out of a huge messy dataset into one bird's-eye view. Built the file-upload and reconciliation algorithm interfacing six applications." },
+          { "name": "Fixed Deposit Trading System", "role": "Technical Lead", "blurb": "Two apps: an investor UI for placing FD orders and moving funds across banks, and an admin console for plans, rates, roles, registrar instruction/response files, reconciliation, and generating FD forms and cheques." },
+          { "name": "Mutual Fund Online Trading & Back Office", "role": "Developer → Technical Lead", "blurb": "India's first online mutual-fund trading platform — the mutual-fund counterpart to eibs, the firm's existing stock-trading platform. Built the user-facing frontend, where investors place orders online or via call centre, and the administration backend that ran it: AMCs, schemes, brokerage rates, batch runs, RTA file loading, transaction reconciliation, brokerage rules, and sub-broker payments." },
+          { "name": "MF Lead Distribution System", "role": "Developer", "blurb": "A fast temporary bridge to capture mutual-fund investment requests from existing eibs investors. Two apps, secured login, wired into the trading product." }
+        ]
+      }
+    ]
   }
 ]

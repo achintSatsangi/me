@@ -16,6 +16,12 @@ const knownFor = [
   'Writing the Slack post that ends the thread instead of extending it.',
 ];
 
+const proof = [
+  { quote: 'Combines profound technical abilities with excellent architectural insight — a pillar in our team.', name: 'Christian Kjendseth Wiik', title: 'Senior Software Developer, Storebrand' },
+  { quote: 'Both current and future employers are happy to have Achint onboard.', name: 'Per Kristian Haakonsen', title: 'Board Member, ACAMS — hiring manager' },
+  { quote: 'One of the smartest Java developers I have worked with.', name: 'Prashant Prakash', title: 'Sales Director, Accenture' },
+];
+
 ---
 <Layout title="Achint Satsangi">
   <section class="page hero" data-testid="hero-content">
@@ -68,6 +74,22 @@ const knownFor = [
         </li>
       ))}
     </ul>
+  </section>
+
+  <section class="page section" data-testid="hero-proof-section">
+    <div class="border-t border-b border-rule dark:border-rule-dark py-12">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12" data-testid="hero-proof">
+        {proof.map((p) => (
+          <div>
+            <p class="text-lg md:text-xl leading-snug text-ink dark:text-ink-dark italic">“{p.quote}”</p>
+            <p class="meta mt-4 text-muted dark:text-muted-dark">{p.name} · {p.title}</p>
+          </div>
+        ))}
+      </div>
+      <p class="meta mt-10">
+        <a href={`${base}/journey/#recommendations`} class="text-accent dark:text-accent-dark">Read all →</a>
+      </p>
+    </div>
   </section>
 
   <section class="page section" data-testid="hero-beliefs-section">
