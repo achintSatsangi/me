@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "build": "npm run data:sync && astro build",
+    "build": "npm run data:sync && astro build && node scripts/inject-preview-shell.mjs",
     "preview": "astro preview",
     "data:sync": "node scripts/sync-data.mjs",
     "data:linkedin": "node scripts/export-linkedin.mjs",

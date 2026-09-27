@@ -12,6 +12,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://achintsatsa
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  {/* PREVIEW GATE — remove this line at public launch. Keeps the private-feedback build out of search indexes. */}
+  <meta name="robots" content="noindex, nofollow" />
   <title>{title}</title>
   <meta name="description" content={description} />
   <meta name="theme-color" content="#FBFBFD" media="(prefers-color-scheme: light)" />
