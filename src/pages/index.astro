@@ -18,7 +18,8 @@ const knownFor = [
 
 const proof = [
   { quote: 'Combines profound technical abilities with excellent architectural insight — a pillar in our team.', name: 'Christian Kjendseth Wiik', title: 'Senior Software Developer, Storebrand' },
-  { quote: 'He works independently and rises to action when he sees a task that needs to be done.', name: 'Per Kristian Haakonsen', title: 'Board Member, ACAMS — former manager' },
+  { quote: 'He got more responsibility and ended up as team lead — working close with business and delivering through his team.', name: 'Endre Midtgård Meckelborg', title: 'Architect, Digitaliseringsetaten' },
+  { quote: 'Always looking for ways to simplify and improve — the way of working, not just the code.', name: 'Marius Jakobsen', title: 'Staff Engineer, Handelsbanken' },
   { quote: 'One of the smartest Java developers I have worked with.', name: 'Prashant Prakash', title: 'Sales Director, Accenture' },
 ];
 
@@ -78,7 +79,7 @@ const proof = [
 
   <section class="page section" data-testid="hero-proof-section">
     <div class="border-t border-b border-rule dark:border-rule-dark py-12">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12" data-testid="hero-proof">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12" data-testid="hero-proof">
         {proof.map((p) => (
           <div>
             <p class="text-lg md:text-xl leading-snug text-ink dark:text-ink-dark italic">“{p.quote}”</p>

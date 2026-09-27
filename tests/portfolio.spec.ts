@@ -46,7 +46,7 @@ test.describe('Landing content is complete', () => {
   test('social-proof strip shows three fragments and deep-links to journey recs', async ({ page }) => {
     await page.goto(`${BASE}/`);
     const proof = page.getByTestId('hero-proof');
-    await expect(proof.locator('> div')).toHaveCount(3);
+    await expect(proof.locator('> div')).toHaveCount(4);
     await expect(proof).toContainText('smartest Java developers');
     await expect(page.getByTestId('hero-proof-section').getByRole('link', { name: 'Read all →' }))
       .toHaveAttribute('href', /\/journey\/#recommendations$/);
