@@ -2,7 +2,7 @@
 // Source DB lives in ~/dev/ultra-personal/social-dump — private, not committed.
 // Re-run this locally before shipping to refresh the feed.
 import { execSync } from 'node:child_process';
-import { writeFileSync, mkdirSync } from 'node:fs';
+import { writeFileSync, mkdirSync, existsSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { homedir } from 'node:os';
@@ -51,7 +51,12 @@ try {
   writeFileSync(OUT, JSON.stringify(posts, null, 2));
   console.log(`✓ Wrote ${posts.length} LinkedIn posts to ${OUT}`);
 } catch (err) {
-  console.warn(`⚠ Could not export LinkedIn posts (${err.message}). Writing empty array.`);
-  mkdirSync(dirname(OUT), { recursive: true });
-  writeFileSync(OUT, '[]');
+  if (existsSync(OUT)) {
+    const existing = JSON.parse(readFileSync(OUT, 'utf8'));
+    console.warn(`⚠ Could not export LinkedIn posts (${err.message}). Preserving existing ${existing.length} posts in ${OUT}.`);
+  } else {
+    mkdirSync(dirname(OUT), { recursive: true });
+    writeFileSync(OUT, '[]');
+    console.warn(`⚠ Could not export LinkedIn posts (${err.message}). No existing file — wrote empty array.`);
+  }
 }
