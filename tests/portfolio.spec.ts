@@ -66,7 +66,7 @@ test.describe('Journey page shows all roles + recommendations', () => {
     await expect(recs).toHaveAttribute('id', 'recommendations');
     await expect(recs.locator('blockquote')).toHaveCount(4);
     // Curated four each present
-    for (const first of ['christian', 'per', 'endre', 'prashant']) {
+    for (const first of ['christian', 'marius', 'endre', 'prashant']) {
       await expect(page.getByTestId(`rec-${first}`)).toBeVisible();
     }
   });
