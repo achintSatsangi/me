@@ -124,10 +124,7 @@ async function walkthrough(page: Page, theme: 'light' | 'dark') {
   await attachCursor(page);
   await expect(page.getByTestId('feed-hero')).toBeVisible();
   await moveTo(page, 600, 400, 25);
-  await scrollThroughPage(page, { readTopMs: 1600, scrollMs: 3000, readBottomMs: 500 });
-  await clickAt(page, '[data-testid="filter-ai"]');
-  await page.waitForTimeout(600);
-  await scrollThroughPage(page, { readTopMs: 800, scrollMs: 5000, readBottomMs: 800 });
+  await scrollThroughPage(page, { readTopMs: 1600, scrollMs: 8000, readBottomMs: 800 });
 
   // 4. Nav → Articles
   await clickAt(page, '[data-testid="nav-articles"]');
@@ -136,8 +133,8 @@ async function walkthrough(page: Page, theme: 'light' | 'dark') {
   await moveTo(page, 600, 400, 25);
   await scrollThroughPage(page, { readTopMs: 1500, scrollMs: 6000, readBottomMs: 1500 });
 
-  // 5. Home
-  await clickAt(page, '[data-testid="nav-home"]');
+  // 5. Home (name link)
+  await clickAt(page, '[data-testid="nav-name"]');
   await attachCursor(page);
   await expect(page.getByTestId('hero-name')).toBeVisible();
   await page.waitForTimeout(1500);

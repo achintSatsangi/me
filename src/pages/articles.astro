@@ -9,16 +9,16 @@ function fmt(iso: string): string {
   return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 }
 ---
-<Layout title="Articles — Achint Satsangi">
+<Layout title="Articles - Achint Satsangi" description="I write in ThePrint on geopolitics and policy through an Indian lens, and on technology and AI.">
   <section class="page hero-inner">
     <p class="meta mb-6">Published in ThePrint</p>
     <h1 class="display-lg max-w-5xl" data-testid="articles-hero">
-      I write for ThePrint — on Indian politics, policy, and identity, and on technology and AI.
+      I write in ThePrint on geopolitics and policy through an Indian lens, and on technology and AI.
     </h1>
     <p class="mt-10 body-lg max-w-3xl text-muted dark:text-muted-dark">
-      A different register from LinkedIn — longer, quieter, more argument.
+      A different register from LinkedIn - longer, quieter, more argument.
       <a href="https://theprint.in/author/achint-satsangi/">ThePrint</a> is one of India's larger
-      independent digital newsrooms; four pieces published so far, more when the argument
+      independent digital newsrooms; five pieces published so far, more when the argument
       is ready.
     </p>
   </section>
@@ -27,10 +27,10 @@ function fmt(iso: string): string {
     <section class="page section" data-testid="articles-featured">
       <h2 class="meta mb-6">Latest</h2>
       <a href={featured.link} target="_blank" rel="noopener noreferrer" class="block group max-w-5xl [background-image:none]">
-        <h3 class="display-md group-hover:text-accent dark:group-hover:text-accent-dark transition-colors">
+        <h3 class="display-md text-2xl md:text-5xl group-hover:text-accent dark:group-hover:text-accent-dark transition-colors">
           {featured.title}
         </h3>
-        <p class="meta mt-6">{fmt(featured.date)} · Read on ThePrint →</p>
+        <p class="meta mt-6">{fmt(featured.date)} · <span class="text-accent dark:text-accent-dark underline underline-offset-4">Read on ThePrint →</span></p>
         {featured.excerpt && (
           <p class="mt-10 body-lg text-muted dark:text-muted-dark max-w-prose">
             {featured.excerpt}
@@ -47,10 +47,10 @@ function fmt(iso: string): string {
         {rest.map((a) => (
           <article data-testid="article-item">
             <a href={a.link} target="_blank" rel="noopener noreferrer" class="block group [background-image:none]">
-              <h3 class="display-md group-hover:text-accent dark:group-hover:text-accent-dark transition-colors">
+              <h3 class="display-md text-2xl md:text-5xl group-hover:text-accent dark:group-hover:text-accent-dark transition-colors">
                 {a.title}
               </h3>
-              <p class="meta mt-4">{fmt(a.date)} · ThePrint →</p>
+              <p class="meta mt-4">{fmt(a.date)} · <span class="text-accent dark:text-accent-dark underline underline-offset-4">Read on ThePrint →</span></p>
               {a.excerpt && (
                 <p class="mt-5 body-lg text-muted dark:text-muted-dark max-w-prose">{a.excerpt}</p>
               )}

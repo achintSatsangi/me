@@ -25,7 +25,7 @@ const featuredRecs = featuredRecNames
   .map((name) => recommendations.find((r) => r.name === name))
   .filter(Boolean);
 ---
-<Layout title="Journey — Achint Satsangi">
+<Layout title="Journey - Achint Satsangi" description="Nineteen years of shipping. Ten of them in Oslo. Backend and platform work on systems that fail loudly if you get them wrong.">
   <section class="page hero" data-testid="journey-hero-section">
     <p class="meta mb-6">The professional side</p>
     <h1 class="display-lg max-w-5xl" data-testid="journey-hero">
@@ -33,8 +33,8 @@ const featuredRecs = featuredRecNames
       that fail loudly if you get them wrong.
     </h1>
     <p class="mt-10 body-lg max-w-3xl text-muted dark:text-muted-dark">
-      Mumbai → Johannesburg → Gurgaon → Oslo. Currently at Vend Marketplaces — the umbrella
-      parent behind finn.no, blocket.se, tori.fi and dba.dk — on the messaging platform that
+      Mumbai → Johannesburg → Gurgaon → Oslo. Currently at Vend Marketplaces - the umbrella
+      parent behind finn.no, blocket.se, tori.fi and dba.dk - on the messaging platform that
       all four brands run on.
     </p>
   </section>
@@ -50,28 +50,28 @@ const featuredRecs = featuredRecNames
               </span>
             )}
             <div class={`meta ${role.end === null ? 'text-base font-semibold text-ink dark:text-ink-dark' : ''}`} data-testid="role-dates">
-              {formatDate(role.start)} — {formatDate(role.end)}
+              {formatDate(role.start)} - {formatDate(role.end)}
             </div>
             <div class="meta text-muted dark:text-muted-dark mt-1">{role.location}</div>
           </div>
           <div class="md:col-span-9 max-w-prose">
-            <h3 class="display-md" data-testid="role-company">{role.company}</h3>
+            <h2 class="display-md" data-testid="role-company">{role.company}</h2>
             <p class="meta mt-2" data-testid="role-title">{role.role}</p>
             <div class="mt-5 space-y-4" data-testid="role-summary">
               {role.summary.split('\n\n').map((para) => (
-                <p class="body-lg text-muted dark:text-muted-dark hyphens-auto text-justify">{para}</p>
+                <p class="body-lg text-muted dark:text-muted-dark">{para}</p>
               ))}
             </div>
             {role.restricted && (
               <p class="meta mt-4 text-muted dark:text-muted-dark">
-                Company privacy policy and code of conduct keep the specifics off this page — <a href="https://linkedin.com/in/achint-satsangi">LinkedIn</a> has what I can share publicly.
+                Company privacy policy and code of conduct keep the specifics off this page - <a href="https://linkedin.com/in/achint-satsangi">LinkedIn</a> has what I can share publicly.
               </p>
             )}
             {role.projects && (
               <details class="group mt-6" data-testid="role-projects">
                 <summary class="meta text-muted dark:text-muted-dark cursor-pointer list-none [&::-webkit-details-marker]:hidden inline-flex items-center gap-2 hover:text-ink dark:hover:text-ink-dark">
                   <span class="transition-transform group-open:rotate-90">▸</span>
-                  <span class="group-open:hidden">The projects — {role.projects.reduce((n, g) => n + g.items.length, 0)} at {role.projects.map((g) => g.client).join(' and ')}</span>
+                  <span class="group-open:hidden">The projects - {role.projects.reduce((n, g) => n + g.items.length, 0)} at {role.projects.map((g) => g.client).join(' and ')}</span>
                   <span class="hidden group-open:inline">Hide projects</span>
                 </summary>
                 <div class="mt-6 space-y-8">
@@ -108,7 +108,7 @@ const featuredRecs = featuredRecNames
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       {featuredRecs.map((r) => (
         <blockquote
-          class="relative bg-paper dark:bg-[#1A1A1D] border border-rule dark:border-rule-dark rounded-xl p-8 md:p-9 flex flex-col h-full"
+          class="relative bg-paper dark:bg-[#1A1A1D] border border-rule dark:border-rule-dark rounded-xl p-5 md:p-9 flex flex-col h-full"
           data-testid={`rec-${r.name.split(' ')[0].toLowerCase()}`}
         >
           <div class="absolute top-6 right-6 text-linkedin opacity-90" title="Recommendation on LinkedIn">
@@ -116,7 +116,7 @@ const featuredRecs = featuredRecNames
           </div>
           <div class="flex-1">
             <div class="font-display text-6xl leading-none text-accent dark:text-accent-dark opacity-30 mb-2" aria-hidden="true">“</div>
-            <p class="text-base md:text-lg leading-[1.55] text-ink dark:text-ink-dark hyphens-auto text-justify">{r.quote}</p>
+            <p class="text-base md:text-lg leading-[1.55] text-ink dark:text-ink-dark">{r.quote}</p>
           </div>
           <footer class="border-t border-rule dark:border-rule-dark pt-4 mt-6">
             <div class="flex items-start gap-3">
@@ -126,6 +126,7 @@ const featuredRecs = featuredRecNames
               <div class="flex-1 min-w-0">
                 <div class="text-sm font-semibold text-ink dark:text-ink-dark">{r.name}</div>
                 <div class="text-xs text-muted dark:text-muted-dark line-clamp-2">{r.role} at {r.company}</div>
+                {r.together && <div class="text-xs text-ink dark:text-ink-dark mt-0.5" data-testid="rec-together">{r.together}</div>}
                 <div class="text-xs text-muted dark:text-muted-dark mt-0.5">Recommendation received {formatRecDate(r.date)}</div>
               </div>
             </div>
@@ -139,7 +140,7 @@ const featuredRecs = featuredRecNames
   </section>
 
   <section class="page section border-t border-rule dark:border-rule-dark" data-testid="github-section">
-    <h2 class="meta mb-8">On GitHub — <a href={github.profile.url} class="text-accent dark:text-accent-dark">@{github.profile.handle}</a></h2>
+    <h2 class="meta mb-8">On GitHub - <a href={github.profile.url} class="text-accent dark:text-accent-dark">@{github.profile.handle}</a></h2>
     <h3 class="display-md mb-14 max-w-3xl">
       Nineteen public repos. Some AI experiments, some workshop material, one hobby project
       I keep coming back to when I want to remember how React hooks work.
@@ -161,9 +162,9 @@ const featuredRecs = featuredRecNames
 
   <section class="page section border-t border-rule dark:border-rule-dark" data-testid="early-life-section">
     <h2 class="meta mb-8">Before the code.</h2>
-    <div class="max-w-3xl space-y-6 body-lg text-muted dark:text-muted-dark border-l border-rule dark:border-rule-dark pl-8" data-testid="early-life">
+    <div class="max-w-3xl space-y-6 body-lg text-muted dark:text-muted-dark border-l border-rule dark:border-rule-dark pl-4 md:pl-8" data-testid="early-life">
       <p>
-        Three years of diploma, then three of the engineering degree. The diploma built the practical fundamentals, so the degree came lighter — maths, analytical thinking, and engineering drawing already in hand. That left student life mostly for the field and the band: captain of the university and engineering-faculty volleyball teams, vice-captain in football and basketball, on the athletics podium most years, lead drummer of the university band for three years. Leading teams and keeping time for other people, long before I did either in a codebase.
+        Three years of diploma, then three of the engineering degree. The diploma built the practical fundamentals, so the degree came lighter - maths, analytical thinking, and engineering drawing already in hand. That left student life mostly for the field and the band: captain of the university and engineering-faculty volleyball teams, vice-captain in football and basketball, on the athletics podium most years, lead drummer of the university band for three years. Leading teams and keeping time for other people, long before I did either in a codebase.
       </p>
       <p class="meta">Dayalbagh Educational Institute · Agra · Diploma + engineering degree · 2001–2007</p>
     </div>
@@ -171,7 +172,7 @@ const featuredRecs = featuredRecNames
 
   <section class="page section border-t border-rule dark:border-rule-dark" data-testid="journey-note-section">
     <h2 class="meta mb-8">A note on nineteen years.</h2>
-    <div class="max-w-3xl space-y-6 body-lg text-muted dark:text-muted-dark border-l border-rule dark:border-rule-dark pl-8" data-testid="journey-note">
+    <div class="max-w-3xl space-y-6 body-lg text-muted dark:text-muted-dark border-l border-rule dark:border-rule-dark pl-4 md:pl-8" data-testid="journey-note">
       <p>
         Some of this timeline was the work I wanted. Some of it was the work I had. A lot of it
         was 3am pages, migrations that ran longer than they should have, teams that outgrew each
@@ -179,7 +180,7 @@ const featuredRecs = featuredRecNames
       </p>
       <p>
         I mention this because the timeline reads clean and the work rarely is. When we’re in
-        a room together, that’s the room I show up in — the one that knows the difference.
+        a room together, that’s the room I show up in - the one that knows the difference.
       </p>
     </div>
   </section>

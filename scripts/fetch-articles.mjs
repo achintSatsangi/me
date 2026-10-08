@@ -1,4 +1,5 @@
-// Fetch theprint.in author page and refresh src/data/articles.json.
+// Fetch theprint.in author pages and merge into src/data/articles.json.
+// ThePrint created two author accounts for the same person (one misspelled "Satasangi"), so both are read.
 // theprint.in is behind Cloudflare — the RSS endpoint requires JS challenge,
 // so we scrape the author page HTML with a UA that passes. On any failure
 // we PRESERVE the existing JSON rather than overwriting with empty.
@@ -8,38 +9,41 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUT = join(__dirname, '..', 'src', 'data', 'articles.json');
-const URL = 'https://theprint.in/author/achint-satsangi/';
+const AUTHOR_PAGES = [
+  'https://theprint.in/author/achint-satsangi/',
+  'https://theprint.in/author/achint-satasangi/',
+];
+
+async function fetchAuthorPage(url) {
+  const res = await fetch(url, {
+    headers: { 'User-Agent': 'Mozilla/5.0 (compatible; achintsatsangi.github.io build)' },
+  });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const html = await res.text();
+  if (html.includes('Just a moment') || html.length < 5000) {
+    throw new Error('Cloudflare challenge or empty response');
+  }
+  return parseArticles(html);
+}
 
 async function main() {
-  try {
-    const res = await fetch(URL, {
-      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; achintsatsangi.github.io build)' },
-    });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const html = await res.text();
-    if (html.includes('Just a moment') || html.length < 5000) {
-      throw new Error('Cloudflare challenge or empty response');
-    }
-    const fetched = parseArticles(html);
-    if (fetched.length === 0) throw new Error('No articles parsed');
-    const existing = existsSync(OUT) ? JSON.parse(readFileSync(OUT, 'utf8')) : [];
-    const merged = fetched.map((f) => {
-      const prior = existing.find((e) => e.link === f.link);
-      return { ...f, excerpt: prior?.excerpt || f.excerpt || '' };
-    });
-    mkdirSync(dirname(OUT), { recursive: true });
-    writeFileSync(OUT, JSON.stringify(merged, null, 2));
-    console.log(`✓ Wrote ${merged.length} theprint articles to ${OUT} (excerpts preserved from prior file)`);
-  } catch (err) {
-    if (existsSync(OUT)) {
-      const existing = JSON.parse(readFileSync(OUT, 'utf8'));
-      console.warn(`⚠ theprint fetch failed (${err.message}). Preserving existing ${existing.length} articles in ${OUT}.`);
-    } else {
-      mkdirSync(dirname(OUT), { recursive: true });
-      writeFileSync(OUT, '[]');
-      console.warn(`⚠ theprint fetch failed (${err.message}). No existing file — wrote empty array.`);
+  const existing = existsSync(OUT) ? JSON.parse(readFileSync(OUT, 'utf8')) : [];
+  const fetched = [];
+  for (const url of AUTHOR_PAGES) {
+    try {
+      fetched.push(...(await fetchAuthorPage(url)));
+    } catch (err) {
+      console.warn(`⚠ theprint fetch failed for ${url} (${err.message}).`);
     }
   }
+  const merged = [...existing];
+  for (const f of fetched) {
+    if (!merged.some((e) => e.link === f.link)) merged.push(f);
+  }
+  merged.sort((a, b) => b.date.localeCompare(a.date));
+  mkdirSync(dirname(OUT), { recursive: true });
+  writeFileSync(OUT, JSON.stringify(merged, null, 2));
+  console.log(`✓ ${merged.length} articles in ${OUT} (${merged.length - existing.length} new from theprint)`);
 }
 
 function parseArticles(html) {

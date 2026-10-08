@@ -11,7 +11,7 @@
       "name": "customer-support-scam-identifier",
       "url": "https://github.com/achintSatsangi/customer-support-scam-identifier",
       "language": "Python",
-      "blurb": "Practical AI at work — classifier for identifying scams in customer-support conversations."
+      "blurb": "Practical AI at work - classifier for identifying scams in customer-support conversations."
     },
     {
       "name": "langchain-rag-example",
@@ -23,25 +23,25 @@
       "name": "k8s-workshop",
       "url": "https://github.com/achintSatsangi/k8s-workshop",
       "language": "-",
-      "blurb": "Kubernetes workshop material — teaching-heritage carried over from TCS ILP days."
+      "blurb": "Kubernetes workshop material - teaching-heritage carried over from TCS ILP days."
     },
     {
       "name": "counter-app",
       "url": "https://github.com/achintSatsangi/counter-app",
       "language": "JavaScript",
-      "blurb": "Learning React slowly — the tiny app I keep coming back to when I forget how hooks work."
+      "blurb": "Learning React slowly - the tiny app I keep coming back to when I forget how hooks work."
     },
     {
       "name": "fifa-rankings",
       "url": "https://github.com/achintSatsangi/fifa-rankings",
       "language": "TypeScript",
-      "blurb": "Hobby project — FIFA rankings visualiser. Weekend curiosity."
+      "blurb": "Hobby project - FIFA rankings visualiser. Weekend curiosity."
     },
     {
       "name": "altrannorge-plank",
       "url": "https://github.com/achintSatsangi/altrannorge-plank",
       "language": "Java",
-      "blurb": "The planking-competition app from my Altran Norge days — React + Spring Boot on Heroku."
+      "blurb": "The planking-competition app from my Altran Norge days - React + Spring Boot on Heroku."
     }
   ]
 }

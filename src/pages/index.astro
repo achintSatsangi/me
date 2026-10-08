@@ -1,12 +1,44 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import journey from '../data/journey.json';
+import recommendations from '../data/recommendations.json';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const siteRoot = new URL(`${base}/`, Astro.site).toString();
+const currentRole = journey.find((r) => r.end === null);
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${siteRoot}#website`,
+      url: siteRoot,
+      name: 'Achint Satsangi',
+      inLanguage: 'en',
+      publisher: { '@id': `${siteRoot}#person` },
+    },
+    {
+      '@type': 'Person',
+      '@id': `${siteRoot}#person`,
+      name: 'Achint Satsangi',
+      url: siteRoot,
+      jobTitle: currentRole?.role,
+      worksFor: currentRole && { '@type': 'Organization', name: currentRole.company },
+      address: { '@type': 'PostalAddress', addressLocality: 'Oslo', addressCountry: 'NO' },
+      sameAs: [
+        'https://www.linkedin.com/in/achint-satsangi/',
+        'https://github.com/achintSatsangi',
+        'https://theprint.in/author/achint-satsangi/',
+      ],
+    },
+  ],
+};
 const beliefs = [
-  'No code is the best code. Simplicity is a prerequisite for reliability.',
-  'Restraint over addition. Delete first, add only when it earns its cost.',
-  'Warm about the person. Sharp about the work.',
+  'No code is the best code. Add only what earns its cost.',
+  'Simplicity is a prerequisite for reliability.',
+  'Plan for the failure, not the demo.',
   'Cross-cultural fluency is a technical skill.',
   'Questions are data. If someone in the room is asking "wait, why?", the room is safer, not slower.',
+  'Warm about the person. Sharp about the work.',
 ];
 
 const knownFor = [
@@ -17,50 +49,54 @@ const knownFor = [
 ];
 
 const proof = [
-  { quote: 'Combines profound technical abilities with excellent architectural insight — a pillar in our team.', name: 'Christian Kjendseth Wiik', title: 'Senior Software Developer, Storebrand' },
-  { quote: 'He got more responsibility and ended up as team lead — working close with business and delivering through his team.', name: 'Endre Midtgård Meckelborg', title: 'Architect, Digitaliseringsetaten' },
-  { quote: 'Always looking for ways to simplify and improve — the way of working, not just the code.', name: 'Marius Jakobsen', title: 'Staff Engineer, Handelsbanken' },
+  { quote: 'Combines profound technical abilities with excellent architectural insight… Achint was a pillar in our team.', name: 'Christian Kjendseth Wiik', title: 'Senior Software Developer, Storebrand' },
+  { quote: 'He got more responsibility and ended up as teamlead for one of the teams.', name: 'Endre Midtgård Meckelborg', title: 'Architect, Digitaliseringsetaten' },
+  { quote: 'Always looking for ways to simplify and improve, be it the way of working or core Java.', name: 'Marius Jakobsen', title: 'Staff Engineer, Handelsbanken' },
   { quote: 'One of the smartest Java developers I have worked with.', name: 'Prashant Prakash', title: 'Sales Director, Accenture' },
-];
+].map((p) => ({ ...p, together: recommendations.find((r) => r.name === p.name)?.together }));
 
 ---
-<Layout title="Achint Satsangi">
+<Layout title="Achint Satsangi" jsonLd={jsonLd}>
   <section class="page hero" data-testid="hero-content">
     <p class="meta mb-6" data-testid="hero-eyebrow">Nordic Desi, Mumbaikar at heart · Oslo, Norway</p>
     <h1 class="display-xl" data-testid="hero-name">
-      Achint&nbsp;Satsangi.
+      Achint Satsangi.
     </h1>
     <p class="mt-10 body-lg max-w-4xl text-muted dark:text-muted-dark" data-testid="hero-masthead">
-      I translate messy engineering problems into small, quiet solutions —
+      I translate messy engineering problems into small, quiet solutions -
       and I write down what I learn on the way.
     </p>
 
     <p class="meta mt-10 max-w-3xl" data-testid="hero-whofor">
       Nineteen years in code. Mumbai → Johannesburg → Gurgaon → Oslo. Currently a senior
-      engineer at Vend Marketplaces — the umbrella behind finn.no, blocket.se, tori.fi
-      and dba.dk — on the messaging platform all four run on, and pushing to own more of the calls that shape it.
+      engineer at Vend Marketplaces - the umbrella behind finn.no, blocket.se, tori.fi
+      and dba.dk - on the messaging platform all four run on, and pushing to own more of the calls that shape it.
     </p>
 
-    <div class="mt-16 flex flex-wrap gap-4" data-testid="hero-doors">
+    <div class="mt-16 hidden md:flex flex-wrap gap-4" data-testid="hero-doors">
       <a href={`${base}/journey/`} class="pill">Journey</a>
       <a href={`${base}/feed/`} class="pill">Feed</a>
       <a href={`${base}/articles/`} class="pill">Articles</a>
     </div>
   </section>
 
-  <section class="page section" data-testid="hero-photo-section">
+  <section class="page section pt-0 md:pt-32" data-testid="hero-photo-section">
     <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-center">
       <div class="md:col-span-5" data-testid="hero-photo">
-        <div class="aspect-[4/5] w-full bg-rule dark:bg-rule-dark rounded-2xl overflow-hidden flex items-center justify-center">
-          <div class="text-center text-muted dark:text-muted-dark p-8">
-            <div class="font-display text-5xl mb-2 opacity-40 font-semibold">AS</div>
-            <div class="meta opacity-60">unposed candid — TBD</div>
-          </div>
+        <div class="aspect-[4/5] w-full bg-rule dark:bg-rule-dark rounded-2xl overflow-hidden">
+          <img
+            src={`${base}/images/portrait.webp`}
+            alt="Achint Satsangi smiling at the camera in a snowy Norwegian forest"
+            width="1000"
+            height="1251"
+            decoding="async"
+            class="w-full h-full object-cover object-[50%_45%] dark:grayscale"
+          />
         </div>
       </div>
       <div class="md:col-span-7" data-testid="hero-intro-block">
         <h2 class="display-md mb-8">A short version.</h2>
-        <p class="body-lg text-muted dark:text-muted-dark max-w-prose text-justify hyphens-auto" data-testid="hero-intro">Teacher before engineer — that habit hasn’t left. At TCS Mumbai I shipped India’s first online mutual-fund trading platform. In Johannesburg, a rules engine non-engineers could read. In Oslo since 2014: messaging, payments, logistics. I run toward systems that fail loudly if you get them wrong — the boring critical path.</p>
+        <p class="body-lg text-muted dark:text-muted-dark max-w-prose" data-testid="hero-intro">Teacher before engineer - that habit hasn’t left. At TCS Mumbai I shipped one of India’s first online mutual-fund trading platforms. In Johannesburg, a rules engine non-engineers could read. In Oslo since 2014: messaging, payments, logistics. I run toward systems that fail loudly if you get them wrong - the boring critical path.</p>
       </div>
     </div>
   </section>
@@ -70,7 +106,7 @@ const proof = [
     <ul class="space-y-5 max-w-3xl body-lg text-ink dark:text-ink-dark list-none" data-testid="hero-known-for">
       {knownFor.map((line) => (
         <li class="flex gap-4">
-          <span class="text-muted dark:text-muted-dark opacity-50 select-none">—</span>
+          <span class="text-muted dark:text-muted-dark opacity-50 select-none">-</span>
           <span>{line}</span>
         </li>
       ))}
@@ -80,10 +116,11 @@ const proof = [
   <section class="page section" data-testid="hero-proof-section">
     <div class="border-t border-b border-rule dark:border-rule-dark py-12">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12" data-testid="hero-proof">
-        {proof.map((p) => (
-          <div>
+        {proof.map((p, i) => (
+          <div class={i >= 2 ? 'hidden md:block' : undefined}>
             <p class="text-lg md:text-xl leading-snug text-ink dark:text-ink-dark italic">“{p.quote}”</p>
             <p class="meta mt-4 text-muted dark:text-muted-dark">{p.name} · {p.title}</p>
+            <p class="meta mt-1 text-muted dark:text-muted-dark opacity-80" data-testid="proof-together">{p.together}</p>
           </div>
         ))}
       </div>
@@ -97,9 +134,9 @@ const proof = [
     <h2 class="meta mb-10">What I believe about work.</h2>
     <div class="space-y-12 max-w-4xl" data-testid="hero-beliefs">
       {beliefs.map((line, i) => (
-        <p class="text-2xl md:text-3xl leading-[1.35] text-ink dark:text-ink-dark font-display font-medium tracking-tight">
-          <span class="text-muted dark:text-muted-dark mr-4">0{i + 1}</span>
-          {line}
+        <p class="flex gap-4 text-xl md:text-3xl leading-[1.35] text-ink dark:text-ink-dark font-display font-medium tracking-tight">
+          <span class="shrink-0 text-muted dark:text-muted-dark">0{i + 1}</span>
+          <span>{line}</span>
         </p>
       ))}
     </div>
@@ -109,7 +146,7 @@ const proof = [
     <h2 class="meta mb-10">How I think about AI.</h2>
     <div class="max-w-3xl space-y-6 body-lg text-muted dark:text-muted-dark" data-testid="hero-ai">
       <p>
-        I’ve been building with LLMs since ChatGPT shipped in November 2022. Not learning —
+        I’ve been building with LLMs since ChatGPT shipped in November 2022. Not learning -
         building. Customer-facing features in production. Daily use to lift my own and my team’s
         throughput. <a href={`${base}/articles/`} class="text-accent dark:text-accent-dark">A
         published argument</a> on how to regulate the layer above it.
@@ -118,12 +155,12 @@ const proof = [
         Two stances I hold at the same time: <span class="text-ink dark:text-ink-dark font-medium">skeptic and enthusiast</span>. I ship AI features on weekdays and pick apart AI-as-strategy decks the same afternoon. The receipts make me hard to dismiss as a doomer; they also make me <span class="text-ink dark:text-ink-dark font-medium">hard to sell to</span>.
       </p>
       <p>
-        The position I hold: <span class="text-ink dark:text-ink-dark font-medium">“AI” is not a strategy</span> —
+        The position I hold: <span class="text-ink dark:text-ink-dark font-medium">“AI” is not a strategy</span> -
         <span class="text-ink dark:text-ink-dark font-medium">“AI for X, because Y, replacing what Z does today”</span>
         is. Skip the X, Y and Z and you bleed money into surface-level solutions while the real problem keeps fighting you.
       </p>
       <p>
-        What I want to work on next: the seam between domain experts and AI systems. Less preaching, less learning in public — more building. Real solutions that add value to <span class="text-ink dark:text-ink-dark font-medium">people I can name</span>: the users of the platforms I ship on, my peers at work, <span class="text-ink dark:text-ink-dark font-medium">my family and friends at home</span>.
+        What I want to work on next: the seam between domain experts and AI systems. Less preaching, less learning in public - more building. Real solutions that add value to <span class="text-ink dark:text-ink-dark font-medium">people I can name</span>: the users of the platforms I ship on, my peers at work, <span class="text-ink dark:text-ink-dark font-medium">my family and friends at home</span>.
       </p>
     </div>
   </section>
@@ -133,14 +170,20 @@ const proof = [
     <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-center">
       <div class="md:col-span-7 space-y-6 body-lg text-muted dark:text-muted-dark" data-testid="hero-offclock">
         <p>Married, two kids, and a calendar that rarely has a gap in it.</p>
-        <p>I hike, swim and run — or I did, and I’m trying to claw some of it back around a life that doesn’t leave much room.</p>
+        <p>I hike, swim and run - or I did, and I’m trying to claw some of it back around a life that doesn’t leave much room.</p>
         <p>Recently I bought a walking pad so I could at least walk while I work. That’s about where my fitness ambitions have landed: negotiated down to what fits under a desk.</p>
       </div>
       <div class="md:col-span-5" data-testid="hero-offclock-photo">
-        <div class="aspect-[3/2] w-full bg-rule dark:bg-rule-dark rounded-2xl overflow-hidden flex items-center justify-center border border-rule dark:border-rule-dark">
-          <div class="text-center text-muted dark:text-muted-dark p-8">
-            <div class="meta opacity-60">activity candid — running / hiking — TBD</div>
-          </div>
+        <div class="aspect-[2/1] md:aspect-[3/2] w-full bg-rule dark:bg-rule-dark rounded-2xl overflow-hidden border border-rule dark:border-rule-dark">
+          <img
+            src={`${base}/images/offclock-cairn.webp`}
+            alt="Achint crouching on a foggy mountainside with his two kids, building a stone cairn"
+            width="1600"
+            height="1067"
+            loading="lazy"
+            decoding="async"
+            class="w-full h-full object-cover object-[center_45%] dark:grayscale"
+          />
         </div>
       </div>
     </div>
@@ -150,8 +193,8 @@ const proof = [
     <h2 class="meta mb-10">Get in touch.</h2>
     <div class="max-w-3xl">
       <p class="display-md mb-10">
-        If any of this makes you want to talk — a partnership, a coffee in Oslo, or an
-        argument about AI regulation — my inbox is open.
+        If something here sparked a thought, whether it's a problem you're stuck on, a partnership,
+        a coffee in Oslo, or a different take on AI regulation, I'd like to hear it.
       </p>
       <div class="flex flex-wrap gap-x-10 gap-y-3 text-base md:text-lg" data-testid="hero-contact-links">
         <a href="mailto:achint.satsangi@gmail.com" class="text-accent dark:text-accent-dark">achint.satsangi@gmail.com</a>

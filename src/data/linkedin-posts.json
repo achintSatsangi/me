@@ -1,5 +1,35 @@
 [
   {
+    "date": "2026-10-04 07:07:52",
+    "text": "\"We'll all be jobless as developers in 2 years.\" 🤖\n\nOne view at my table at the Claude Code meetup at Mesh Oslo last Wednesday. We spent most of the evening on it.\n\n🧭 My bet is the opposite. The work moves up a level: what to build, why, and how. The agent writes the code, but a human still oversees it and owns whether what ships is right.\n\n🛡️ Martin A Kraft pitched a safety and ethics focused Claude meetup, and the whole table backed it: Dario Fernandez Castellon, Kai Norman, Yufei Wang and Rune Horneland. Mesh Oslo GritAI Aleksander Stensby, count us in.\n\nIf your team already ships mostly agent-written code: where did the human work go? 👇\n\n#ClaudeCode #SoftwareEngineering #ResponsibleAI #OsloTech",
+    "link": "https://www.linkedin.com/feed/update/urn%3Ali%3Aactivity%3A7512408132409720832"
+  },
+  {
+    "date": "2026-10-02 06:01:18",
+    "text": "Yesterday I posted that my AI coding bill dropped 3× because of context size, not the newer model. Then I did the full analysis. Context size was right. \"Not the model\" was wrong.\n\n38 days of my own Claude Code logs, priced at list rates: about $4,725. That's an estimate from my transcripts, not an invoice.\n\nWhere it went: 6% paid for the model writing answers. 94% paid for re-sending conversation history it had already seen. At 800k tokens of history, one message cost about 20× what it costs under 50k, for the same answer.\n\nThe part I didn't expect: the cache expires after 5 minutes. Get a coffee, check Slack, come back, and the whole history is written again at a premium. 81% of that re-writing cost came after gaps of 5 minutes or more, and the biggest bucket was 5 to 15 minutes. Not task switches. Coffee. ☕\n\nAt the Claude Community meetup at Mesh Oslo this week, Aleksander Stensby talked about /clear and /compact. I've used Claude Code daily since May and that was the first time I'd heard of either.\n\n📉 So I simulated the same 38 days as if I'd used them.\n\n- /clear when coming back after an hour: −49%\n- /compact once history passes 150k tokens: −56%\n- Both: −59%\n\nNow the correction. I ran /compact by hand exactly zero times in 38 days, so something else kept the context small. On the old model, Claude Code auto-compacted at ~1M tokens, which I hit about once a week. On the newer model it compacts at ~167k. The model switch is what shrank the context.\n\nSo the model did matter, just not the way I thought. It didn't think cheaper. It forgot sooner.\n\nIf you live in Claude Code or a similar tool every day: do you clear and compact by hand, or let the tool decide? And has anyone found a threshold where cost drops but answer quality holds? 👇\n\n#ClaudeCode #DeveloperProductivity",
+    "link": "https://www.linkedin.com/feed/update/urn%3Ali%3Aactivity%3A7511666605915942912"
+  },
+  {
+    "date": "2026-10-01 05:00:07",
+    "text": "Most meetups have a stage and an audience. Last night's Claude Community Conversation at Mesh Oslo had neither 🪑 About 50 of us, split into tables, and two questions to work through: 👉 What does AI mean for my job? 👉 What is AI doing to me, my kids, my community? Five prompts per question, ending on \"where do we start?\". It sounds tidy on paper. In practice, our table spent two hours on where the world is heading, what happens to the work we do, and what kind of future our kids are walking into.\n\n🤝 What made it work was the mix. Enthusiasts and skeptics at the same table, some worried about AI going badly wrong, others worried about being left behind, and nobody had to shrink their view to fit the room.\n\n🔐 The topic we kept coming back to was the OpenAI / Hugging Face incident. My take: the AI didn't do anything a good team of hackers couldn't. Same problem, same setup, and I'd bet they land in the same place. It would just take them months instead of weeks. The capability isn't new. The speed is, and that's the part worth worrying about.\n\n🙏 Thanks to Aleksander Stensby for organising and to Anthropic for sponsoring. And to Dario Fernandez Castellon, Martin A Kraft, Rune Horneland, Kai Norman and Yufei Wang: thanks for the honesty, the openness, and for sitting through two hours of my rants 😄\n\n🚀 Next up is the Impact Lab in October, where we try to build answers to some of the questions we raised. Count me in (If my boss at home and boss at work permits 😅)\n\n📸 Photo credits: Simon Sebergsen. I was too busy talking to take any myself. Eagerly waiting for the official ones to be shared from the event.\n\n#ClaudeCommunity #AI #Oslo #FutureOfWork #claudecode #claude",
+    "link": "https://www.linkedin.com/feed/update/urn%3Ali%3Aactivity%3A7511288818252316672"
+  },
+  {
+    "date": "2026-09-30 13:03:20",
+    "text": "I told my team that switching to a newer AI model cut my token bill 🤖💸 Then I actually measured it 😅\n\n📊 Two weeks of my own logs said: yes, usage dropped 3×. But the new model wasn't the reason.\n\n🧠 The real reason was memory. I'd been running with a huge context window, so the AI re-read a giant conversation on every single message. When I stopped doing that, the bill shrank 📉 Same kind of work, a third of the tokens.\n\n✨ The new model helped too, just a lot less than I thought.\n\n💡 Lesson for me: what you feed the AI costs more than which AI you pick. Start fresh often, and keep the conversation lean 🧹 Anyone else measured theirs, or are we all running on vibes? 👇\n\n#claude #claudecode #anthropic #ai #agenticdevelopment #tokens #costs",
+    "link": "https://www.linkedin.com/feed/update/urn%3Ali%3Aactivity%3A7511048036425502721"
+  },
+  {
+    "date": "2026-09-29 10:35:42",
+    "text": "♻️ 672,007 tonnes of CO2e avoided in a year, just from people buying and selling used stuff across Vend 's marketplaces. FINN.no – mulighetenes marked Blocket Tori.fi dba.dk\n\nThat's from our 2025 Second Hand Effect Report, released today (PDF attached, longer report link in comments). It's an estimate, not a measurement, and the report says so upfront. I like that. The direction is what matters: second-hand should be the first choice, not the fallback.\n\nAt home it already is. Most of what we buy comes from FINN, Fretex or the local bruktbutikk. And anything we no longer use that still has life left goes back on FINN. Quite often it's given away for free, but it doesn't go in the bin.\n\nThe number that surprised me more: 61% of sellers use what they earn to cover everyday household expenses. Selling your old pram isn't only about the climate, for many people it's what keeps the monthly budget working.\n\nI get to build the messaging that buyers and sellers use to strike these deals. Nice to see what all those conversations add up to. 💬\n\nWhat was the last thing you bought second-hand, or gave away instead of throwing out?\n\n#SecondHandEffect #CircularEconomy #Recommerce #Sustainability #FINN",
+    "link": "https://www.linkedin.com/feed/update/urn%3Ali%3Aactivity%3A7510648496010694656"
+  },
+  {
+    "date": "2026-09-27 04:01:11",
+    "text": "When the CEO of the world's largest sovereign wealth fund recommends a Bollywood revenge saga, a fellow Oslo resident from India has to chime in. 🎬 Nicolai Tangen is right - #Dhurandhar is a spectacle. #RanveerSingh is magnetic, #AdityaDhar holds tension like few in Hindi cinema right now, and across 3.5+ hours it mostly earns its runtime. Special mention for #GauravGera, hats off dude.\n\nThe \"A\" certificate is honest, though. Violence isn't just present — it's the film's default setting, dialled so far past impact it tips into numbness. Visceral becomes gratuitous more than once.\n\nWhere it separates itself is sound. 🎧 Instead of chasing new chartbusters, they reached for songs already etched in collective memory — \"Aari Aari,\" \"Tamma Tamma Loge\" — and placed them with real care to trigger instant recognition and lift the emotion. A familiar hook lands feeling a new one still has to earn. In a film built on excess, that instinct is what stayed with me.\n\nBloody, loud, a touch too long — and still worth the ticket. Number 2 = 1, as Nicolai put it. Agreement across Norway and India on this one.\n\n💬 If you've seen it — did the old-song callbacks land for you, or did the sheer violence drown them out?\n\n#Bollywood #Dhurandhar #FilmReview #SoundDesign #Cinema",
+    "link": "https://www.linkedin.com/feed/update/urn%3Ali%3Aactivity%3A7509824437077082112"
+  },
+  {
     "date": "2026-09-24 00:00:00",
     "text": "🔄 14 months ago, I posted about retiring my sticker collection for a fresh laptop. Clean slate. Fresh start. All of it.\n\nThe laptop is fully covered again. A few earned their place — \"have fun & get sh**t done\" (our department motto), a winter-edition conference tee that beats anything on the market.\n\nLesson from 2025, one year in: peeling stickers off was the ritual, not the point. Laptops get covered again because that's what happens when you actually use them.\n\n👇 If you peeled yours off tomorrow — which sticker do you replace first?",
     "link": "https://www.linkedin.com/feed/update/urn%3Ali%3Aactivity%3A7508759721999261697"
@@ -68,35 +98,5 @@
     "date": "2025-08-07 04:48:53",
     "text": "🧠💥 AI won’t wait—and neither should we.\n\nWhen one software glitch can ground planes and shut down hospitals across 100+ countries (like the recent CrowdStrike outage), imagine what an unchecked black-box AI could do.\n\nWe’re standing at a crossroads:\n➡️ One path leads to innovation with accountability.\n➡️ The other? Silent collapse, invisible causes, no one to blame.\n\n“Taming the Machine: What AI Regulation Can Learn from Wall Street and GDPR” - In this piece, I explore how we can stop guessing what AI might do—and start building guardrails that actually work.\n\n🔍 Key takeaways:\n✅ Agnostic regulation—like the SEC handles markets\n✅ Explainability audits—like GDPR ensures individual rights\n✅ Circuit breakers, kill switches, bias testing\n✅ Why siloed systems matter—and global cooperation matters more\n\n👉 If AI is already making decisions that shape justice, medicine, and markets, don’t we owe it the same scrutiny we give stock trades?\n\nLet’s build resilience, not just regulation. Feedback and discussion welcome 👇\n\n#AI #ArtificialIntelligence #AIEthics #TechPolicy #GDPR #WallStreet #AIRegulation #MachineLearning #Leadership #DigitalSovereignty #CrowdStrike #DataGovernance",
     "link": "https://www.linkedin.com/feed/update/urn%3Ali%3AugcPost%3A7359083086493421569"
-  },
-  {
-    "date": "2025-08-05 05:53:16",
-    "text": "Waterfall, Agile, AI... and Whatever That Is 🚗🛴🤖🎸\n\n🔧  Waterfall: Perfect car, delivered way too late.\n 🛴 Agile: Functional from day one, gets better over time.\n 🤖 AI: Starts with a spaceship, ends with a Corolla.\n 🎸 Vibe Coding: No plan. Just stickers, chaos, and it somehow runs.\n\nWhich one are you? 😅\n\n#TechHumor #Agile #AI #SoftwareEngineering #VibeCoding",
-    "link": "https://www.linkedin.com/feed/update/urn%3Ali%3Ashare%3A7358374515082510338"
-  },
-  {
-    "date": "2025-08-03 09:02:49",
-    "text": "🔄 Retiring the stickers, not the hustle\n\nBuilt up a sticker collection over years — each one tied to a memory, a project, a place, or just a moment that mattered.\nConferences. Side hustles. Caffeine-fueled nights. Late wins and quiet losses. ☕💻🎯\n\nPeeling them off wasn’t easy.\nThe laptop’s just a machine — but the stories stuck to it made it feel like more.\n\nNow it's day one with a fresh setup. Clean, fast, and full of potential. ⚡🧼\n\nAnd the first sticker’s already on:\n\n🧠💥 “Have fun and get sh*t done.”\n\nThat one’s not going anywhere.\n\nHere’s to what comes next.\n\n#TechLife 💼 #Productivity 📈 #FreshStart 🌱 #LaptopUpgrade 🔧 #WorkCulture 👥 #Mindset 🧘 #HaveFunGetShitDone 🎯",
-    "link": "https://www.linkedin.com/feed/update/urn%3Ali%3AugcPost%3A7357697439874580480"
-  },
-  {
-    "date": "2025-07-22 13:21:49",
-    "text": "I'm the guy on the right every hour, every day!! 😂",
-    "link": "https://www.linkedin.com/feed/update/urn%3Ali%3AugcPost%3A7353413965822984194"
-  },
-  {
-    "date": "2025-07-11 08:30:48",
-    "text": "AI avatars are finally here — and now they're actually affordable.🚀\n\nBeen playing with a hobby project using Simli, and this latest upgrade is a total game changer.\n\nHuge kudos to @Lars and the team for pushing this forward 🙌\nIf you're building with AI + video, now's the time to experiment.\n\n#Simli #AIAvatars #SideProject #FutureOfContent #AItools",
-    "link": "https://www.linkedin.com/feed/update/urn%3Ali%3AugcPost%3A7349354462458560512"
-  },
-  {
-    "date": "2025-07-07 07:50:58",
-    "text": "**🚀 Tried out Midio—AI agent building made simple.** **Fast, visual, and surprisingly flexible.**\nAs a Senior Developer, I appreciate tools that cut through complexity. Midio offers:\n\n- A visual programming language built in Rust for quick iteration.\n- 600+ tools connected for smooth automation.\n- Easy swapping of AI prompts and models on the fly.\n- Workflows that run automatically, triggered by events or schedules.\n- Fast ETL pipelines for handling diverse data sources.\n- It's good, no doubt. Now, it’s about finding the right target and market fit.\n\nHow do you approach testing new tools for your projects?\nIs this post fine, or should I add any insights on market fit challenges?",
-    "link": "https://www.linkedin.com/feed/update/urn%3Ali%3Ashare%3A7347894887251390465"
-  },
-  {
-    "date": "2025-07-02 16:32:54",
-    "text": "👋 Sharing a strong ML/AI engineer open to new opportunities (remotely from India/hybrid/open-to-relocation)\n\n🚀 Pratik Mehta (ex-Deloitte Digital USI) has 4+ years of experience building GenAI systems, REST APIs (FastAPI + LLaMA), and backend infra. He’s led testing frameworks for LLM apps and helped enterprise clients adopt AI.\n\n🎓 MS CS from UMass Amherst, past research at IIT Bombay and ISI @ USC.\n🛠️ Skilled in Python, PyTorch, Rust (WIP), LangChain, Postgres, Docker. \n\nProjects include:\n\n•⁠  ⁠Alfred: LLM-powered notifications\n•⁠  ⁠LegalEase: cross-lingual RAG / semantic-search system for legal documents\n•⁠  ⁠Finalist in Semantic Search hackathon (May 2025)\n\nHappy to intro if relevant!",
-    "link": "https://www.linkedin.com/feed/update/urn%3Ali%3AugcPost%3A7346214297795973122"
   }
 ]

@@ -1,0 +1,6 @@
+{
+  "cookies": [],
+  "origins": [
+    { "origin": "http://localhost:4321", "localStorage": [{ "name": "analytics-consent", "value": "denied" }] }
+  ]
+}

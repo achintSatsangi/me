@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { collapsed } from './collapsed.js';
 
 export { collapsed };
@@ -17,27 +17,56 @@ function fmtRelative(raw) {
   return `${Math.floor(diffDays / 365)}y`;
 }
 
-const FILTERS = [
-  { key: 'all', label: 'All' },
-  { key: 'ai', label: 'AI', match: /ai\b|ai regulation|genai|claude|llm|artificial|governance/i },
-  { key: 'engineering', label: 'Engineering', match: /engineer|code|kubernetes|java|kotlin|refactor|deploy|test|architecture/i },
-  { key: 'career', label: 'Career', match: /career|team|leadership|mentor|role|job|hiring/i },
-  { key: 'nordic', label: 'Nordic life', match: /oslo|norway|nordic|finn|vend|blocket|tori|dba/i },
-];
+
+const BODY_TEXT = 'text-[15px] leading-[1.55] whitespace-pre-line';
+
+function longestPrefixThatFits(text, minLength, fits) {
+  if (fits(text)) return text;
+  let lo = minLength;
+  let hi = text.length;
+  while (hi - lo > 1) {
+    const mid = (lo + hi) >> 1;
+    if (fits(text.slice(0, mid))) lo = mid;
+    else hi = mid;
+  }
+  if (lo === minLength) return text.slice(0, minLength);
+  return text.slice(0, lo).replace(/\s+\S*$/, '').replace(/[\uD800-\uDBFF]$/, '');
+}
 
 function PostCard({ post, postId }) {
   const [expanded, setExpanded] = useState(false);
   const clean = (post.text || '').replace(/^["]|["]$/g, '').trim();
   const preview = collapsed(clean);
-  const needsToggle = preview.length < clean.length;
-  const display = expanded ? clean : preview;
+  const [fitted, setFitted] = useState(preview);
+  const bodyRef = useRef(null);
+  const measureRef = useRef(null);
+  const measureTextRef = useRef(null);
+  const truncated = preview.length < clean.length;
+  const needsToggle = expanded ? truncated : fitted.length < clean.length;
+  const display = expanded ? clean : fitted;
+  const fillsSpareHeight = truncated && !expanded;
+
+  useLayoutEffect(() => {
+    if (!fillsSpareHeight) return;
+    const body = bodyRef.current;
+    const fit = () => {
+      const available = body.clientHeight - parseFloat(getComputedStyle(body).paddingBottom);
+      setFitted(longestPrefixThatFits(clean, preview.length, (text) => {
+        measureTextRef.current.textContent = text;
+        return measureRef.current.offsetHeight <= available;
+      }));
+    };
+    const observer = new ResizeObserver(fit);
+    observer.observe(body);
+    return () => observer.disconnect();
+  }, [fillsSpareHeight, clean, preview]);
 
   return (
     <article
       data-testid="feed-post"
-      className="bg-paper dark:bg-[#1A1A1D] border border-rule dark:border-rule-dark rounded-xl overflow-hidden"
+      className="bg-paper dark:bg-[#1A1A1D] border border-rule dark:border-rule-dark rounded-xl overflow-hidden flex flex-col"
     >
-      {/* Header — LinkedIn author strip */}
+      {/* Header - LinkedIn author strip */}
       <header className="flex items-start gap-3 px-6 pt-6 pb-3">
         <div className="w-12 h-12 rounded-full bg-linkedin/10 dark:bg-linkedin/20 flex items-center justify-center text-linkedin font-semibold shrink-0">
           AS
@@ -45,7 +74,6 @@ function PostCard({ post, postId }) {
         <div className="flex-1 min-w-0">
           <div className="flex items-baseline gap-2 flex-wrap">
             <span className="text-[15px] font-semibold text-ink dark:text-ink-dark">Achint Satsangi</span>
-            <span className="text-[13px] text-muted dark:text-muted-dark">· You</span>
           </div>
           <div className="text-[13px] text-muted dark:text-muted-dark">
             Senior Software Engineer at Vend Marketplaces
@@ -66,9 +94,17 @@ function PostCard({ post, postId }) {
         </a>
       </header>
 
-      {/* Body — preserved formatting */}
-      <div className="px-6 pb-4">
-        <p id={`post-body-${postId}`} className="text-[15px] leading-[1.55] whitespace-pre-line text-ink dark:text-ink-dark">
+      {/* Body - preserved formatting. Collapsed text fills whatever height the row gives the card. */}
+      <div ref={bodyRef} className="relative flex-1 px-6 pb-4">
+        {fillsSpareHeight && (
+          <>
+            <p aria-hidden="true" className={`${BODY_TEXT} invisible`}>{preview}… see more</p>
+            <p ref={measureRef} aria-hidden="true" className={`${BODY_TEXT} invisible absolute inset-x-6 top-0`}>
+              <span ref={measureTextRef} />… see more
+            </p>
+          </>
+        )}
+        <p id={`post-body-${postId}`} className={`${BODY_TEXT} text-ink dark:text-ink-dark ${fillsSpareHeight ? 'absolute inset-x-6 top-0' : ''}`}>
           {display}
           {needsToggle && !expanded && '…'}
           {needsToggle && (
@@ -88,18 +124,10 @@ function PostCard({ post, postId }) {
         </p>
       </div>
 
-      {post.images?.map((im, idx) => (
-        <img
-          key={idx}
-          src={im.src}
-          alt={im.alt}
-          loading="lazy"
-          className="w-full border-t border-rule dark:border-rule-dark"
-        />
-      ))}
+      {post.images?.length > 0 && <ImageCollage images={post.images} />}
 
       {post.link && (
-        <footer className="border-t border-rule dark:border-rule-dark px-6 py-3 flex items-center justify-between text-[13px]">
+        <footer className="mt-auto border-t border-rule dark:border-rule-dark px-6 py-3 flex items-center justify-between text-[13px]">
           {post.article ? (
             <a
               href={post.article}
@@ -127,52 +155,47 @@ function PostCard({ post, postId }) {
 }
 
 export default function LinkedInFeed({ posts }) {
-  const [filter, setFilter] = useState('all');
-
-  const filtered = useMemo(() => {
-    if (filter === 'all') return posts;
-    const spec = FILTERS.find((f) => f.key === filter);
-    if (!spec?.match) return posts;
-    return posts.filter((p) => spec.match.test(p.text));
-  }, [posts, filter]);
-
   return (
     <div>
-      <div className="flex flex-wrap gap-3 mb-16" data-testid="feed-filters">
-        {FILTERS.map((f) => (
-          <button
-            key={f.key}
-            onClick={() => setFilter(f.key)}
-            data-testid={`filter-${f.key}`}
-            className={`px-5 py-2 text-sm font-medium rounded-full border transition-all
-              ${filter === f.key
-                ? 'bg-ink text-paper border-ink dark:bg-ink-dark dark:text-paper-dark dark:border-ink-dark'
-                : 'border-rule dark:border-rule-dark text-muted dark:text-muted-dark hover:text-ink dark:hover:text-ink-dark hover:border-ink dark:hover:border-ink-dark'}`}
-          >
-            {f.label}
-          </button>
-        ))}
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start max-w-5xl mx-auto" data-testid="feed-posts">
-        {filtered.map((p, i) => {
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto" data-testid="feed-posts">
+        {posts.map((p, i) => {
           const postId = (p.link ? p.link.replace(/[^a-zA-Z0-9]/g, '') : p.date) + '-' + i;
           return <PostCard key={p.link || `${p.date}-${i}`} post={p} postId={postId} />;
         })}
       </div>
+    </div>
+  );
+}
 
-      {filtered.length === 0 && (
-        <p className="meta italic text-muted dark:text-muted-dark max-w-2xl mx-auto flex flex-wrap items-center justify-center gap-3" data-testid="feed-empty">
-          Nothing matches that filter.
-          <button
-            onClick={() => setFilter('all')}
-            className="not-italic font-medium text-accent dark:text-accent-dark px-2 py-1 -my-1"
-            data-testid="feed-empty-reset"
-          >
-            Show all
-          </button>
-        </p>
-      )}
+const COLLAGE_TILE_LIMIT = 5;
+
+function collageLayout(count) {
+  if (count === 2) return { grid: 'grid-cols-2 aspect-[2/1]', tile: () => '' };
+  if (count === 3) return { grid: 'grid-cols-3 grid-rows-2 aspect-[3/2]', tile: (i) => (i === 0 ? 'col-span-2 row-span-2' : '') };
+  if (count === 4) return { grid: 'grid-cols-3 grid-rows-3 aspect-square', tile: (i) => (i === 0 ? 'col-span-2 row-span-3' : '') };
+  return { grid: 'grid-cols-6 grid-rows-[3fr_2fr] aspect-[6/5]', tile: (i) => (i < 2 ? 'col-span-3' : 'col-span-2') };
+}
+
+function ImageCollage({ images }) {
+  if (images.length === 1) {
+    const [im] = images;
+    return (
+      <img src={im.src} alt={im.alt} width={im.width} height={im.height} loading="lazy" decoding="async" className="w-full border-t border-rule dark:border-rule-dark" />
+    );
+  }
+  const shown = images.slice(0, COLLAGE_TILE_LIMIT);
+  const hidden = images.length - shown.length;
+  const { grid, tile } = collageLayout(shown.length);
+  return (
+    <div className={`grid gap-0.5 w-full border-t border-rule dark:border-rule-dark bg-rule dark:bg-rule-dark ${grid}`} data-testid="post-collage">
+      {shown.map((im, idx) => (
+        <div key={idx} className={`relative overflow-hidden ${tile(idx)}`}>
+          <img src={im.src} alt={im.alt} width={im.width} height={im.height} loading="lazy" decoding="async" className="absolute inset-0 w-full h-full object-cover" />
+          {hidden > 0 && idx === shown.length - 1 && (
+            <span className="absolute inset-0 flex items-center justify-center bg-black/50 text-white text-2xl font-medium">+{hidden}</span>
+          )}
+        </div>
+      ))}
     </div>
   );
 }

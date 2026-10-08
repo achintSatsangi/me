@@ -1,12 +1,72 @@
 {
   "_comment": "Hand-authored, survives data:sync. Map a post's `link` (exact match) to a local image in public/images/feed/. Use `file`+`alt` for one image, or `images` for several. Optional `article` adds a link to a published article, distinct from the post permalink. Underscore keys are ignored.",
-  "https://www.linkedin.com/feed/update/urn%3Ali%3Aactivity%3A7508027374270156800": { "file": "taming-machine.png", "alt": "Taming the Machine — article header", "article": "https://www.linkedin.com/pulse/taming-machine-what-ai-regulation-can-learn-from-wall-achint-satsangi-zs3yf/" },
-  "https://www.linkedin.com/feed/update/urn%3Ali%3AugcPost%3A7353413965822984194": { "file": "guy-on-the-right.jpg", "alt": "The guy on the right, every hour every day" },
-  "https://www.linkedin.com/feed/update/urn%3Ali%3AugcPost%3A7501169485442097152": { "file": "javazone-socks.jpg", "alt": "Conference socks on display at JavaZone" },
-  "https://www.linkedin.com/feed/update/urn%3Ali%3AugcPost%3A7483475298689392641": { "file": "worldcup-time-machine.png", "alt": "World Cup Time Machine — the companion site I built" },
-  "https://www.linkedin.com/feed/update/urn%3Ali%3AugcPost%3A7480883929776889857": { "images": [
-    { "file": "worldcup-dataviz-radial.jpg", "alt": "My circular redesign of the World Cup knockout bracket" },
-    { "file": "worldcup-dataviz-bracket.jpg", "alt": "The traditional left-to-right World Cup knockout bracket" }
-  ] },
-  "https://www.linkedin.com/feed/update/urn%3Ali%3Aactivity%3A7508759721999261697": { "file": "sticker-laptop.jpg", "alt": "My old laptop covered in tech and conference stickers" }
+  "https://www.linkedin.com/feed/update/urn%3Ali%3Aactivity%3A7508027374270156800": {
+    "file": "taming-machine.webp",
+    "alt": "Taming the Machine - article header",
+    "article": "https://www.linkedin.com/pulse/taming-machine-what-ai-regulation-can-learn-from-wall-achint-satsangi-zs3yf/"
+  },
+  "https://www.linkedin.com/feed/update/urn%3Ali%3AugcPost%3A7353413965822984194": {
+    "file": "guy-on-the-right.jpg",
+    "alt": "The guy on the right, every hour every day"
+  },
+  "https://www.linkedin.com/feed/update/urn%3Ali%3AugcPost%3A7501169485442097152": {
+    "file": "javazone-socks.jpg",
+    "alt": "Conference socks on display at JavaZone"
+  },
+  "https://www.linkedin.com/feed/update/urn%3Ali%3AugcPost%3A7483475298689392641": {
+    "file": "worldcup-time-machine.webp",
+    "alt": "World Cup Time Machine - the companion site I built"
+  },
+  "https://www.linkedin.com/feed/update/urn%3Ali%3AugcPost%3A7480883929776889857": {
+    "images": [
+      {
+        "file": "worldcup-dataviz-radial.jpg",
+        "alt": "My circular redesign of the World Cup knockout bracket"
+      },
+      {
+        "file": "worldcup-dataviz-bracket.jpg",
+        "alt": "The traditional left-to-right World Cup knockout bracket"
+      }
+    ]
+  },
+  "https://www.linkedin.com/feed/update/urn%3Ali%3Aactivity%3A7508759721999261697": {
+    "file": "sticker-laptop.jpg",
+    "alt": "My old laptop covered in tech and conference stickers"
+  },
+  "https://www.linkedin.com/feed/update/urn%3Ali%3Aactivity%3A7511048036425502721": {
+    "file": "tokens-per-request.webp",
+    "alt": "Bar chart: average tokens per Claude Code request by day, 14–30 Sep 2026, dropping after the switch to newer models"
+  },
+  "https://www.linkedin.com/feed/update/urn%3Ali%3Aactivity%3A7511288818252316672": {
+    "images": [
+      {
+        "file": "claude-conversation-stage.webp",
+        "alt": "Claude Community Conversation at Mesh Oslo: a speaker on stage in front of the table groups"
+      },
+      {
+        "file": "claude-conversation-two-questions.webp",
+        "alt": "Slide: Two questions. Every table. What does AI mean for my job? What is AI doing to me, my kids, my community?"
+      }
+    ]
+  },
+  "https://www.linkedin.com/feed/update/urn%3Ali%3Aactivity%3A7511666605915942912": {
+    "images": [
+      {
+        "file": "cost-scenario-totals.webp",
+        "alt": "Bar chart: total Claude Code cost over 38 days. Actual $4,725; with /clear at idle over 60 min $2,418 (−49%); with /compact at 150k tokens $2,073 (−56%); both $1,951 (−59%)"
+      },
+      {
+        "file": "cost-rewarm-tax-by-gap.webp",
+        "alt": "Bar chart: 81% of cache re-writing came after a 5+ minute pause. Biggest bucket $567 at 5–15 minutes idle, a coffee or Slack break"
+      },
+      {
+        "file": "cost-daily-components.webp",
+        "alt": "Bar chart: daily Claude Code spend fell from about $137 to $44 a day after auto-compact at ~167k tokens; 94% of spend was re-sending history, 6% the model writing answers"
+      }
+    ]
+  },
+  "https://www.linkedin.com/feed/update/urn%3Ali%3Aactivity%3A7510648496010694656": {
+    "file": "second-hand-effect-2025.webp",
+    "alt": "Second Hand Effect Report 2025: four marketplaces, one Nordic circular economy, CO2e avoided per country"
+  }
 }

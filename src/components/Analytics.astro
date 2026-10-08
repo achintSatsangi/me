@@ -1,0 +1,35 @@
+---
+import { GA_MEASUREMENT_ID } from '../config';
+---
+{GA_MEASUREMENT_ID && (
+  <script is:inline define:vars={{ id: GA_MEASUREMENT_ID }}>
+    (function () {
+      const CONSENT_KEY = 'analytics-consent';
+      const MAX_LABEL_LENGTH = 60;
+      let loaded = false;
+
+      window.loadAnalytics = function () {
+        if (loaded) return;
+        loaded = true;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () { window.dataLayer.push(arguments); };
+        window.gtag('js', new Date());
+        window.gtag('config', id);
+        const s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + id;
+        document.head.appendChild(s);
+      };
+
+      if (localStorage.getItem(CONSENT_KEY) === 'granted') window.loadAnalytics();
+
+      document.addEventListener('click', function (e) {
+        if (!loaded) return;
+        const el = e.target.closest('a, button, [data-track]');
+        if (!el) return;
+        const label = el.dataset.track || el.dataset.testid || (el.getAttribute('aria-label') || el.textContent || '').trim().replace(/\s+/g, ' ').slice(0, MAX_LABEL_LENGTH);
+        window.gtag('event', 'ui_click', { click_label: label, link_url: el.href || '' });
+      }, true);
+    })();
+  </script>
+)}

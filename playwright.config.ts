@@ -9,6 +9,7 @@ export default defineConfig({
   timeout: 180_000,
   use: {
     baseURL: 'http://localhost:4321',
+    storageState: 'tests/consent-denied.json',
     trace: 'on',
     screenshot: 'on',
     video: 'on',
@@ -34,6 +35,7 @@ export default defineConfig({
     {
       name: 'walkthrough',
       testMatch: /walkthrough\.spec\.ts$/,
+      timeout: 300_000,
       use: {
         ...devices['Desktop Chrome'],
         viewport: { width: 1440, height: 900 },

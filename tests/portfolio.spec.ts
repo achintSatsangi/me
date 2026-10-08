@@ -37,10 +37,14 @@ test.describe('Landing content is complete', () => {
     await expect(page.getByTestId('hero-name')).toContainText('Achint');
     await expect(page.getByTestId('hero-masthead')).toContainText('messy engineering');
     await expect(page.getByTestId('hero-intro')).toContainText('mutual-fund');
-    await expect(page.getByTestId('hero-beliefs').locator('p')).toHaveCount(5);
+    await expect(page.getByTestId('hero-beliefs').locator('p')).toHaveCount(6);
     await expect(page.getByTestId('hero-doors').locator('a')).toHaveCount(3);
     await expect(page.getByTestId('hero-photo')).toBeVisible();
     await expect(page.getByTestId('hero-offclock')).toContainText('walking pad');
+    const offclockPhoto = page.getByTestId('hero-offclock-photo').locator('img');
+    await offclockPhoto.scrollIntoViewIfNeeded();
+    await expect(offclockPhoto).toHaveAttribute('alt', /cairn/);
+    await expect.poll(() => offclockPhoto.evaluate((img: HTMLImageElement) => img.naturalWidth)).toBeGreaterThan(0);
   });
 
   test('social-proof strip shows three fragments and deep-links to journey recs', async ({ page }) => {
@@ -48,6 +52,12 @@ test.describe('Landing content is complete', () => {
     const proof = page.getByTestId('hero-proof');
     await expect(proof.locator('> div')).toHaveCount(4);
     await expect(proof).toContainText('smartest Java developers');
+    await expect(page.getByTestId('proof-together')).toHaveText([
+      'Worked together at FINN, 2022–2024',
+      'Worked together at Posten Norge, 2015–2019',
+      'Worked together at CGI, 2019–2021',
+      'Worked together at TCS Johannesburg, 2010–2012',
+    ]);
     await expect(page.getByTestId('hero-proof-section').getByRole('link', { name: 'Read all →' }))
       .toHaveAttribute('href', /\/journey\/#recommendations$/);
   });
@@ -68,6 +78,7 @@ test.describe('Journey page shows all roles + recommendations', () => {
     // Curated four each present
     for (const first of ['christian', 'marius', 'endre', 'prashant']) {
       await expect(page.getByTestId(`rec-${first}`)).toBeVisible();
+      await expect(page.getByTestId(`rec-${first}`).getByTestId('rec-together')).toContainText('Worked together at');
     }
   });
 
@@ -76,7 +87,7 @@ test.describe('Journey page shows all roles + recommendations', () => {
     const mumbai = page.getByTestId('role-projects').last();
     const blurb = mumbai.getByText('first online mutual-fund');
     await expect(blurb).toBeHidden();
-    await mumbai.getByText(/^The projects —/).click();
+    await mumbai.getByText(/^The projects -/).click();
     await expect(blurb).toBeVisible();
   });
 
@@ -91,21 +102,63 @@ test.describe('Journey page shows all roles + recommendations', () => {
 });
 
 test.describe('Feed page — filters and posts', () => {
-  test('shows filter chips and at least one post', async ({ page }) => {
+  test('shows at least one post and no filter chips', async ({ page }) => {
     await page.goto(`${BASE}/feed/`);
-    await expect(page.getByTestId('feed-filters')).toBeVisible();
-    await expect(page.getByTestId('filter-all')).toBeVisible();
-    const posts = page.getByTestId('feed-post');
-    await expect(posts.first()).toBeVisible({ timeout: 5000 });
+    await expect(page.getByTestId('feed-post').first()).toBeVisible({ timeout: 5000 });
+    await expect(page.getByTestId('feed-filters')).toHaveCount(0);
+    await expect(page.getByTestId('feed-post').first()).not.toContainText('· You');
   });
 
-  test('filter narrows the list (AI filter)', async ({ page }) => {
+  test('multi-image posts render as a LinkedIn-style collage', async ({ page }) => {
     await page.goto(`${BASE}/feed/`);
-    const before = await page.getByTestId('feed-post').count();
-    await page.getByTestId('filter-ai').click();
-    const after = await page.getByTestId('feed-post').count();
-    // AI filter should either narrow or match — never expand
-    expect(after).toBeLessThanOrEqual(before);
+    const collage = page.getByTestId('post-collage').filter({ has: page.locator('img[src*="cost-scenario-totals"]') });
+    await expect(collage.locator('img')).toHaveCount(3);
+    const [big, small] = await Promise.all([
+      collage.locator('img').nth(0).boundingBox(),
+      collage.locator('img').nth(1).boundingBox(),
+    ]);
+    expect(big!.width).toBeGreaterThan(small!.width * 1.8);
+  });
+
+  test('posts side by side share the same height', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto(`${BASE}/feed/`);
+    await expect(page.locator('astro-island[client="idle"]')).not.toHaveAttribute('ssr', /.*/);
+    const [left, right] = await page.getByTestId('feed-post').evaluateAll((cards) =>
+      cards.slice(0, 2).map((c) => { const r = c.getBoundingClientRect(); return { top: r.top, height: r.height }; }));
+    expect(left).toEqual(right);
+  });
+
+  test('collapsed text fills the height the row gives it, also after the neighbour expands', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto(`${BASE}/feed/`);
+    await expect(page.locator('astro-island[client="idle"]')).not.toHaveAttribute('ssr', /.*/);
+    const TWO_LINES = 2 * 15 * 1.55;
+    const spareBelowText = (i: number) => page.getByTestId('feed-post').nth(i).evaluate((card) => {
+      const text = card.querySelector('p[id^="post-body-"]')!.getBoundingClientRect();
+      const body = card.querySelector('p[id^="post-body-"]')!.parentElement!.getBoundingClientRect();
+      return { spare: body.bottom - text.bottom, truncated: !!card.querySelector('[data-testid="post-toggle"]') };
+    });
+    for (const expandIndex of [null, 1, 2]) {
+      if (expandIndex !== null) await page.getByTestId('feed-post').nth(expandIndex).getByTestId('post-toggle').click();
+      const neighbour = expandIndex === null ? 0 : expandIndex ^ 1;
+      await expect.poll(async () => {
+        const { spare, truncated } = await spareBelowText(neighbour);
+        return spare >= 0 && (!truncated || spare < TWO_LINES);
+      }).toBe(true);
+    }
+  });
+
+  test('see more expands a post and see less collapses it', async ({ page }) => {
+    await page.goto(`${BASE}/feed/`);
+    await expect(page.locator('astro-island[client="idle"]')).not.toHaveAttribute('ssr', /.*/);
+    const toggle = page.getByTestId('post-toggle').first();
+    await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+    await toggle.click();
+    await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+    await expect(toggle).toHaveText('see less');
+    await toggle.click();
+    await expect(toggle).toHaveAttribute('aria-expanded', 'false');
   });
 });
 
@@ -122,7 +175,45 @@ test.describe('Theme toggle round-trip', () => {
     await page.goto(`${BASE}/`);
     const initial = await page.evaluate(() => document.documentElement.classList.contains('dark'));
     await page.getByTestId('theme-toggle').click();
+    await expect(page.getByTestId('theme-toggle')).toContainText(initial ? 'Turn off the lights' : 'Turn on the lights');
     const after = await page.evaluate(() => document.documentElement.classList.contains('dark'));
     expect(after).toBe(!initial);
+  });
+});
+
+test.describe('Responsive — 375px phone', () => {
+  test.use({ viewport: { width: 375, height: 812 } });
+
+  const phonePages = [
+    { name: 'landing', path: `${BASE}/` },
+    { name: 'journey', path: `${BASE}/journey/` },
+    { name: 'feed', path: `${BASE}/feed/` },
+    { name: 'articles', path: `${BASE}/articles/` },
+  ];
+
+  for (const p of phonePages) {
+    test(`${p.name} has no horizontal overflow and the nav links are visible`, async ({ page }) => {
+      await page.goto(p.path);
+      await page.waitForLoadState('networkidle');
+      const { scrollWidth, innerWidth } = await page.evaluate(() => ({
+        scrollWidth: document.scrollingElement!.scrollWidth,
+        innerWidth: window.innerWidth,
+      }));
+      expect(scrollWidth).toBeLessThanOrEqual(innerWidth);
+      for (const id of ['nav-journey', 'nav-feed', 'nav-articles']) {
+        await expect(page.getByTestId(id)).toBeVisible();
+      }
+      await expect(page.getByTestId('nav-home')).toHaveCount(0);
+    });
+  }
+
+  test('theme toggle sits in the nav as an icon only', async ({ page }) => {
+    await page.goto(`${BASE}/`);
+    const toggle = page.locator('nav').getByTestId('theme-toggle');
+    await expect(toggle).toBeVisible();
+    await expect(page.locator('footer [data-testid="theme-toggle"]')).toHaveCount(0);
+    await expect(toggle).toHaveAccessibleName(/Turn (on|off) the lights/);
+    const box = await toggle.boundingBox();
+    expect(box!.width).toBeLessThan(60);
   });
 });

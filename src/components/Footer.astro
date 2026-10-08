@@ -1,16 +1,51 @@
 ---
+import { GA_MEASUREMENT_ID } from '../config';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const year = new Date().getFullYear();
 ---
 <footer class="max-w-editorial mx-auto px-6 md:px-10 py-16 mt-32 border-t border-rule dark:border-rule-dark">
   <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-    <div class="meta text-base">
-      Achint Satsangi &nbsp;·&nbsp; Oslo, Norway
+    <div class="meta text-base flex flex-wrap items-center gap-x-6 gap-y-3">
+      <span>Achint Satsangi &nbsp;·&nbsp; Oslo, Norway</span>
     </div>
-    <div class="flex items-center gap-8">
-      <a href="https://linkedin.com/in/achint-satsangi" class="nav-link">LinkedIn</a>
-      <a href="https://github.com/achintSatsangi" class="nav-link">GitHub</a>
-      <a href="mailto:achint.satsangi@gmail.com" class="nav-link">Email</a>
+    <div class="flex flex-wrap items-center gap-x-8 gap-y-1">
+      <a href="https://linkedin.com/in/achint-satsangi" class="nav-link inline-flex items-center min-h-11 md:min-h-0">LinkedIn</a>
+      <a href="https://github.com/achintSatsangi" class="nav-link inline-flex items-center min-h-11 md:min-h-0">GitHub</a>
+      <a href="mailto:achint.satsangi@gmail.com" class="nav-link inline-flex items-center min-h-11 md:min-h-0">Email</a>
     </div>
   </div>
-  <div class="meta mt-8 text-muted dark:text-muted-dark text-xs">© {year}. Built the way I ship code — delete-first.</div>
+  <div class="meta mt-8 text-muted dark:text-muted-dark text-xs flex flex-wrap gap-x-6 gap-y-2">
+    <span>© {year}. Built the way I ship code - delete-first.</span>
+    {GA_MEASUREMENT_ID && (
+      <>
+        <a href={`${base}/privacy/`}>Privacy</a>
+        <button type="button" id="analytics-settings" data-testid="analytics-settings" class="underline underline-offset-4">Analytics: off</button>
+      </>
+    )}
+  </div>
 </footer>
+{GA_MEASUREMENT_ID && (
+  <script is:inline>
+    (function () {
+      const CONSENT_KEY = 'analytics-consent';
+      const button = document.getElementById('analytics-settings');
+      const render = () => { button.textContent = localStorage.getItem(CONSENT_KEY) === 'granted' ? 'Analytics: on' : 'Analytics: off'; };
+      render();
+      document.addEventListener('analytics-consent-changed', render);
+      button.addEventListener('click', function () {
+        if (localStorage.getItem(CONSENT_KEY) === 'granted') {
+          localStorage.setItem(CONSENT_KEY, 'denied');
+          const host = location.hostname;
+          document.cookie.split(';').map((c) => c.split('=')[0].trim()).filter((n) => n.startsWith('_ga')).forEach((n) => {
+            for (const domain of ['', '; domain=' + host, '; domain=.' + host]) document.cookie = n + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/' + domain;
+          });
+          location.reload();
+        } else {
+          localStorage.removeItem(CONSENT_KEY);
+          document.getElementById('consent-bar').hidden = false;
+        }
+      });
+    })();
+  </script>
+)}
+

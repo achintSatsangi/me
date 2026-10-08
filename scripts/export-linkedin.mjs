@@ -1,6 +1,6 @@
-// Export the latest N LinkedIn posts from social.sqlite to src/data/linkedin-posts.json.
+// Merge the latest N LinkedIn posts from social.sqlite into src/data/linkedin-posts.json.
 // Source DB lives in ~/dev/ultra-personal/social-dump — private, not committed.
-// Re-run this locally before shipping to refresh the feed.
+// Posts added to the JSON by hand at publish time are kept until the export catches up.
 import { execSync } from 'node:child_process';
 import { writeFileSync, mkdirSync, existsSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
@@ -39,21 +39,32 @@ function cleanCommentary(text) {
     .trim();
 }
 
+function readExisting() {
+  return existsSync(OUT) ? JSON.parse(readFileSync(OUT, 'utf8')) : [];
+}
+
+function samePost(a, b) {
+  if (a.link && b.link && a.link === b.link) return true;
+  return a.text.slice(0, 80) === b.text.slice(0, 80);
+}
+
 try {
   const raw = execSync(`sqlite3 -json "${DB}" "${sql.replace(/"/g, '\\"')}"`, { encoding: 'utf8' });
-  const rows = JSON.parse(raw || '[]');
-  const posts = rows.map((r) => ({
+  const exported = JSON.parse(raw || '[]').map((r) => ({
     date: r.date,
     text: cleanCommentary(r.share_commentary),
     link: r.share_link,
   }));
+  const handAdded = readExisting().filter((p) => !exported.some((e) => samePost(e, p)));
+  const posts = [...handAdded, ...exported]
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .slice(0, LIMIT);
   mkdirSync(dirname(OUT), { recursive: true });
   writeFileSync(OUT, JSON.stringify(posts, null, 2));
-  console.log(`✓ Wrote ${posts.length} LinkedIn posts to ${OUT}`);
+  console.log(`✓ Wrote ${posts.length} LinkedIn posts to ${OUT} (${handAdded.length} kept from the existing file)`);
 } catch (err) {
   if (existsSync(OUT)) {
-    const existing = JSON.parse(readFileSync(OUT, 'utf8'));
-    console.warn(`⚠ Could not export LinkedIn posts (${err.message}). Preserving existing ${existing.length} posts in ${OUT}.`);
+    console.warn(`⚠ Could not export LinkedIn posts (${err.message}). Preserving existing ${readExisting().length} posts in ${OUT}.`);
   } else {
     mkdirSync(dirname(OUT), { recursive: true });
     writeFileSync(OUT, '[]');

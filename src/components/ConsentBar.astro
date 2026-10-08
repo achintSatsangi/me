@@ -1,0 +1,32 @@
+---
+import { GA_MEASUREMENT_ID } from '../config';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+{GA_MEASUREMENT_ID && (
+  <>
+    <div id="consent-bar" data-testid="consent-bar" hidden class="fixed inset-x-0 bottom-0 z-50 border-t border-rule dark:border-rule-dark bg-paper dark:bg-paper-dark">
+      <div class="max-w-editorial mx-auto px-6 md:px-10 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3 text-sm text-ink dark:text-ink-dark">
+        <p>Can I count visits with Google Analytics? No ads, no selling. <a href={`${base}/privacy/`} class="text-accent dark:text-accent-dark">Privacy</a></p>
+        <div class="flex gap-3">
+          <button type="button" class="pill py-2" data-consent="granted" data-testid="consent-yes">Yes</button>
+          <button type="button" class="pill py-2" data-consent="denied" data-testid="consent-no">No</button>
+        </div>
+      </div>
+    </div>
+    <script is:inline>
+      (function () {
+        const CONSENT_KEY = 'analytics-consent';
+        const bar = document.getElementById('consent-bar');
+        if (!localStorage.getItem(CONSENT_KEY)) bar.hidden = false;
+        bar.addEventListener('click', function (e) {
+          const choice = e.target.closest('[data-consent]')?.dataset.consent;
+          if (!choice) return;
+          localStorage.setItem(CONSENT_KEY, choice);
+          bar.hidden = true;
+          if (choice === 'granted') window.loadAnalytics();
+          document.dispatchEvent(new Event('analytics-consent-changed'));
+        });
+      })();
+    </script>
+  </>
+)}

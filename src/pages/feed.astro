@@ -3,38 +3,46 @@ import Layout from '../layouts/Layout.astro';
 import LinkedInFeed from '../components/LinkedInFeed.jsx';
 import posts from '../data/linkedin-posts.json';
 import postImages from '../data/post-images.json';
+import sharp from 'sharp';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const withImages = posts.map((p) => {
+async function withDimensions(file: string, alt: string) {
+  const { width, height } = await sharp(`public/images/feed/${file}`).metadata();
+  return { src: `${base}/images/feed/${file}`, alt, width, height };
+}
+
+const withImages = await Promise.all(posts.map(async (p) => {
   const entry = postImages[p.link];
   if (!entry) return p;
-  const media = (entry.images || [{ file: entry.file, alt: entry.alt }])
-    .filter((m) => m.file)
-    .map((m) => ({ src: `${base}/images/feed/${m.file}`, alt: m.alt || '' }));
+  const media = await Promise.all(
+    (entry.images || [{ file: entry.file, alt: entry.alt }])
+      .filter((m) => m.file)
+      .map((m) => withDimensions(m.file, m.alt || '')),
+  );
   const next = { ...p };
   if (media.length) next.images = media;
   if (entry.article) next.article = entry.article;
   return next;
-});
+}));
 ---
-<Layout title="Feed — Achint Satsangi">
-  <section class="page hero-inner">
-    <p class="meta mb-6">The LinkedIn side</p>
+<Layout title="Feed - Achint Satsangi" description="Two posts a week on AI, engineering, and career. My latest posts in one place, in the order I wrote them, with no algorithm deciding what you see.">
+  <section class="page hero-inner pt-8 pb-6 md:py-32">
+    <p class="meta mb-3 md:mb-6">The LinkedIn side</p>
     <h1 class="display-lg max-w-5xl" data-testid="feed-hero">
       What I've been writing, in the shorter, sharper voice.
     </h1>
-    <p class="mt-10 body-lg max-w-3xl text-muted dark:text-muted-dark">
-      Two posts a week on AI, engineering, and career. This page is the archive — every post
-      I've published, searchable, no algorithm deciding what you see. LinkedIn shows you what it
-      wants you to read; this shows you what I actually wrote.
+    <p class="mt-4 md:mt-10 text-base md:text-xl leading-[1.55] max-w-3xl text-muted dark:text-muted-dark">
+      Two posts a week on AI, engineering, and career. My latest posts in one place, in the order
+      I wrote them, with no algorithm deciding what you see. LinkedIn shows you what it wants you
+      to read; this shows you what I actually wrote.
     </p>
-    <p class="meta mt-8 text-muted dark:text-muted-dark">
+    <p class="meta mt-4 md:mt-8 text-muted dark:text-muted-dark">
       {posts.length} posts · Cadence: 2 posts / week ·
       <a href="https://linkedin.com/in/achint-satsangi/recent-activity/all/">See on LinkedIn →</a>
     </p>
   </section>
 
-  <section class="page section">
-    <LinkedInFeed posts={withImages} client:load />
+  <section class="page section pt-2 md:pt-32">
+    <LinkedInFeed posts={withImages} client:idle />
   </section>
 </Layout>
