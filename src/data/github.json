@@ -11,7 +11,7 @@
       "name": "customer-support-scam-identifier",
       "url": "https://github.com/achintSatsangi/customer-support-scam-identifier",
       "language": "Python",
-      "blurb": "Practical AI at work - classifier for identifying scams in customer-support conversations."
+      "blurb": "A side-project classifier for spotting scams in customer-support conversations."
     },
     {
       "name": "langchain-rag-example",
@@ -29,7 +29,7 @@
       "name": "counter-app",
       "url": "https://github.com/achintSatsangi/counter-app",
       "language": "JavaScript",
-      "blurb": "Learning React slowly - the tiny app I keep coming back to when I forget how hooks work."
+      "blurb": "A small React app I use as a hooks scratchpad."
     },
     {
       "name": "fifa-rankings",

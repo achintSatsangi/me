@@ -6,7 +6,7 @@ import Analytics from '../components/Analytics.astro';
 import ConsentBar from '../components/ConsentBar.astro';
 
 interface Props { title: string; description?: string; jsonLd?: Record<string, unknown>; }
-const { title, description = 'Achint Satsangi - Senior Software Engineer, Oslo. Nordic Desi. Delete-first.', jsonLd } = Astro.props;
+const { title, description = 'Achint Satsangi, senior software engineer in Oslo. Backend, messaging, and AI in production.', jsonLd } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const canonicalPath = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`;
 const canonical = new URL(canonicalPath, Astro.site).toString();

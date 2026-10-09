@@ -25,19 +25,17 @@ const withImages = await Promise.all(posts.map(async (p) => {
   return next;
 }));
 ---
-<Layout title="Feed - Achint Satsangi" description="Two posts a week on AI, engineering, and career. My latest posts in one place, in the order I wrote them, with no algorithm deciding what you see.">
+<Layout title="Feed - Achint Satsangi" description="My LinkedIn posts in one place, newest first, no algorithm deciding what you see.">
   <section class="page hero-inner pt-8 pb-6 md:py-32">
     <p class="meta mb-3 md:mb-6">The LinkedIn side</p>
     <h1 class="display-lg max-w-5xl" data-testid="feed-hero">
       What I've been writing, in the shorter, sharper voice.
     </h1>
     <p class="mt-4 md:mt-10 text-base md:text-xl leading-[1.55] max-w-3xl text-muted dark:text-muted-dark">
-      Two posts a week on AI, engineering, and career. My latest posts in one place, in the order
-      I wrote them, with no algorithm deciding what you see. LinkedIn shows you what it wants you
-      to read; this shows you what I actually wrote.
+      My LinkedIn posts in one place, newest first, no algorithm deciding what you see.
     </p>
     <p class="meta mt-4 md:mt-8 text-muted dark:text-muted-dark">
-      {posts.length} posts · Cadence: 2 posts / week ·
+      {posts.length} posts ·
       <a href="https://linkedin.com/in/achint-satsangi/recent-activity/all/">See on LinkedIn →</a>
     </p>
   </section>

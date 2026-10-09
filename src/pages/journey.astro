@@ -25,11 +25,11 @@ const featuredRecs = featuredRecNames
   .map((name) => recommendations.find((r) => r.name === name))
   .filter(Boolean);
 ---
-<Layout title="Journey - Achint Satsangi" description="Nineteen years of shipping. Ten of them in Oslo. Backend and platform work on systems that fail loudly if you get them wrong.">
+<Layout title="Journey - Achint Satsangi" description="Nineteen years of shipping. Oslo on and off since 2014, for good since 2019. Backend and platform work on systems that fail loudly if you get them wrong.">
   <section class="page hero" data-testid="journey-hero-section">
     <p class="meta mb-6">The professional side</p>
     <h1 class="display-lg max-w-5xl" data-testid="journey-hero">
-      Nineteen years of shipping. Ten of them in Oslo. Backend and platform work on systems
+      Nineteen years of shipping. Oslo on and off since 2014, for good since 2019. Backend and platform work on systems
       that fail loudly if you get them wrong.
     </h1>
     <p class="mt-10 body-lg max-w-3xl text-muted dark:text-muted-dark">
@@ -142,8 +142,7 @@ const featuredRecs = featuredRecNames
   <section class="page section border-t border-rule dark:border-rule-dark" data-testid="github-section">
     <h2 class="meta mb-8">On GitHub - <a href={github.profile.url} class="text-accent dark:text-accent-dark">@{github.profile.handle}</a></h2>
     <h3 class="display-md mb-14 max-w-3xl">
-      Nineteen public repos. Some AI experiments, some workshop material, one hobby project
-      I keep coming back to when I want to remember how React hooks work.
+      Nineteen public repos. AI experiments, workshop material, and a few small frontend apps.
     </h3>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10 max-w-5xl">
       {github.selected.map((repo) => (
@@ -174,13 +173,8 @@ const featuredRecs = featuredRecNames
     <h2 class="meta mb-8">A note on nineteen years.</h2>
     <div class="max-w-3xl space-y-6 body-lg text-muted dark:text-muted-dark border-l border-rule dark:border-rule-dark pl-4 md:pl-8" data-testid="journey-note">
       <p>
-        Some of this timeline was the work I wanted. Some of it was the work I had. A lot of it
-        was 3am pages, migrations that ran longer than they should have, teams that outgrew each
-        other, and the specific tiredness of shipping something you’re not sure anyone will use.
-      </p>
-      <p>
-        I mention this because the timeline reads clean and the work rarely is. When we’re in
-        a room together, that’s the room I show up in - the one that knows the difference.
+        The timeline reads clean. The work rarely was: 3am pages, migrations that ran long, plans
+        that changed under us. That’s the experience I bring into the room.
       </p>
     </div>
   </section>
