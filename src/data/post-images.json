@@ -68,5 +68,17 @@
   "https://www.linkedin.com/feed/update/urn%3Ali%3Aactivity%3A7510648496010694656": {
     "file": "second-hand-effect-2025.webp",
     "alt": "Second Hand Effect Report 2025: four marketplaces, one Nordic circular economy, CO2e avoided per country"
+  },
+  "https://www.linkedin.com/feed/update/urn%3Ali%3Aactivity%3A7514176486027751424": {
+    "images": [
+      {
+        "file": "site-launch-phones.webp",
+        "alt": "The site's home page on a phone in light mode and dark mode side by side, with the portrait in colour and in greyscale"
+      },
+      {
+        "file": "site-launch-feed.webp",
+        "alt": "The site's feed page in dark mode showing two LinkedIn post cards, one with a collage of cost charts"
+      }
+    ]
   }
 }
