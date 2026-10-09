@@ -24,6 +24,7 @@ const jsonLd = {
       jobTitle: currentRole?.role,
       worksFor: currentRole && { '@type': 'Organization', name: currentRole.company },
       address: { '@type': 'PostalAddress', addressLocality: 'Oslo', addressCountry: 'NO' },
+      alumniOf: { '@type': 'CollegeOrUniversity', name: 'Dayalbagh Educational Institute' },
       sameAs: [
         'https://www.linkedin.com/in/achint-satsangi/',
         'https://github.com/achintSatsangi',
@@ -96,7 +97,7 @@ const proof = [
       </div>
       <div class="md:col-span-7" data-testid="hero-intro-block">
         <h2 class="display-md mb-8">A short version.</h2>
-        <p class="body-lg text-muted dark:text-muted-dark max-w-prose" data-testid="hero-intro">I was a teacher before I was an engineer, and the habit stuck. At TCS Mumbai I shipped one of India’s first online mutual-fund trading platforms. In Johannesburg, a rules engine non-engineers could read. In Oslo, on and off since 2014 and for good since 2019: messaging, payments, logistics. I gravitate to systems that fail loudly if you get them wrong.</p>
+        <p class="body-lg text-muted dark:text-muted-dark max-w-prose" data-testid="hero-intro">I was a teacher before I was an engineer, and the habit stuck: I still prepare students at my alma mater for job interviews, and I share what I learn on LinkedIn every week. At TCS Mumbai I shipped one of India’s first online mutual-fund trading platforms. In Johannesburg, a rules engine non-engineers could read. In Oslo, on and off since 2014 and for good since 2019: messaging, payments, logistics. I gravitate to systems that fail loudly if you get them wrong.</p>
       </div>
     </div>
   </section>
