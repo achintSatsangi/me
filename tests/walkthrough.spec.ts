@@ -1,6 +1,6 @@
 import { test, expect, Page } from '@playwright/test';
 
-const BASE = '/me/20f3e6d7ccaf900775';
+const BASE = '/me';
 
 // macOS arrow cursor — black outline, white fill, subtle shadow.
 const CURSOR_SVG = `

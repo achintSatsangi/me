@@ -1,5 +1,7 @@
 # Launch checklist
 
+**Status (2026-10-09):** launched on option B, https://achintsatsangi.github.io/me/. Section 1 is done; the old preview URL redirects to the live root. Sections 3-5 remain.
+
 Launched and ranking are different milestones. This file gets the site to launched and submitted. Ranking for "Achint Satsangi" takes weeks after that and nothing here speeds it up.
 
 ## 0. Decide the domain first (Achint's call)
@@ -106,7 +108,7 @@ curl -s $SITE/ | grep -o '<link rel="canonical"[^>]*>'      # live URL, trailing
 curl -s $SITE/ | grep -o '<meta property="og:image"[^>]*>'  # absolute, 200s below
 curl -sI $SITE/og-default.png | head -1                     # 200
 curl -s $SITE/sitemap-index.xml                             # points at sitemap-0.xml
-curl -s $SITE/sitemap-0.xml | grep -c '<loc>'               # 4
+curl -s $SITE/sitemap-0.xml | grep -c '<loc>'               # 5
 curl -sI $SITE/does-not-exist | head -1                     # 404
 curl -sI $SITE/favicon.svg | head -1                        # 200
 ```

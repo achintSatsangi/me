@@ -1,6 +1,6 @@
 import { test, expect, Page } from '@playwright/test';
 
-const BASE = '/me/20f3e6d7ccaf900775';
+const BASE = '/me';
 const pages = [
   { path: `${BASE}/`, name: 'landing', testid: 'hero-name' },
   { path: `${BASE}/journey/`, name: 'journey', testid: 'journey-hero' },
