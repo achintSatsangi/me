@@ -14,13 +14,37 @@ async function stubGoogle(page: Page) {
 }
 
 test.describe('Analytics consent', () => {
-  test('nothing loads from Google before a yes', async ({ page }) => {
+  test('the dialog asks first, nothing loads from Google before a yes, and No is as easy as Yes', async ({ page }) => {
+    const requests = await stubGoogle(page);
+    await page.goto(`${BASE}/`);
+    const dialog = page.getByTestId('consent-bar');
+    await expect(dialog).toBeVisible();
+    await expect(dialog.getByRole('heading')).toHaveText('Can I count your visit?');
+    await page.waitForLoadState('networkidle');
+    expect(requests).toHaveLength(0);
+    const [yes, no] = await Promise.all([
+      page.getByTestId('consent-yes').boundingBox(),
+      page.getByTestId('consent-no').boundingBox(),
+    ]);
+    expect(Math.round(yes!.width)).toBe(Math.round(no!.width));
+    expect(Math.round(yes!.height)).toBe(Math.round(no!.height));
+  });
+
+  test('Escape counts as No and is remembered on the next page', async ({ page }) => {
     const requests = await stubGoogle(page);
     await page.goto(`${BASE}/`);
     await expect(page.getByTestId('consent-bar')).toBeVisible();
+    await page.keyboard.press('Escape');
+    await expect(page.getByTestId('consent-bar')).toBeHidden();
     await page.getByTestId('nav-journey').click();
     await expect(page.getByTestId('journey-hero')).toBeVisible();
+    await expect(page.getByTestId('consent-bar')).toBeHidden();
     expect(requests).toHaveLength(0);
+  });
+
+  test('the dialog opens with focus on its question, not on a button or link', async ({ page }) => {
+    await page.goto(`${BASE}/`);
+    await expect(page.locator('#consent-title')).toBeFocused();
   });
 
   test('yes loads GA, hides the bar and reports clicks with readable labels', async ({ page }) => {
@@ -75,7 +99,7 @@ test.describe('Analytics consent', () => {
 test.describe('Analytics consent - 375px phone', () => {
   test.use({ viewport: { width: 375, height: 812 } });
 
-  test('the bar fits without horizontal overflow', async ({ page }) => {
+  test('the dialog fits without horizontal overflow', async ({ page }) => {
     await page.goto(`${BASE}/`);
     await expect(page.getByTestId('consent-bar')).toBeVisible();
     const { scrollWidth, innerWidth } = await page.evaluate(() => ({
@@ -83,5 +107,11 @@ test.describe('Analytics consent - 375px phone', () => {
       innerWidth: window.innerWidth,
     }));
     expect(scrollWidth).toBeLessThanOrEqual(innerWidth);
+    const [yes, no] = await Promise.all([
+      page.getByTestId('consent-yes').boundingBox(),
+      page.getByTestId('consent-no').boundingBox(),
+    ]);
+    expect(yes!.width).toBe(no!.width);
+    expect(yes!.height).toBeLessThan(60);
   });
 });

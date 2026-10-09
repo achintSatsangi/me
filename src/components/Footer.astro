@@ -42,7 +42,7 @@ const year = new Date().getFullYear();
           location.reload();
         } else {
           localStorage.removeItem(CONSENT_KEY);
-          document.getElementById('consent-bar').hidden = false;
+          window.openConsentDialog();
         }
       });
     })();
