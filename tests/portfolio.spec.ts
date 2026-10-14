@@ -37,7 +37,8 @@ test.describe('Landing content is complete', () => {
     await expect(page.getByTestId('hero-name')).toContainText('Achint');
     await expect(page.getByTestId('hero-masthead')).toContainText('messy engineering');
     await expect(page.getByTestId('hero-intro')).toContainText('mutual-fund');
-    await expect(page.getByTestId('hero-beliefs').locator('p')).toHaveCount(6);
+    await expect(page.getByTestId('hero-beliefs').locator('p')).toHaveCount(3);
+    await expect(page.getByTestId('hero-known-for')).toHaveCount(0);
     await expect(page.getByTestId('hero-doors').locator('a')).toHaveCount(3);
     await expect(page.getByTestId('hero-photo')).toBeVisible();
     await expect(page.getByTestId('hero-offclock')).toContainText('walking pad');
@@ -60,6 +61,71 @@ test.describe('Landing content is complete', () => {
     ]);
     await expect(page.getByTestId('hero-proof-section').getByRole('link', { name: 'Read all →' }))
       .toHaveAttribute('href', /\/journey\/#recommendations$/);
+  });
+});
+
+test.describe('Icons, flags and logos are decorative', () => {
+  test('home contact links keep their labels and carry aria-hidden icons', async ({ page }) => {
+    await page.goto(`${BASE}/`);
+    const links = page.getByTestId('hero-contact-links').locator('a');
+    await expect(links).toHaveCount(3);
+    expect(await links.evaluateAll((as) => as.map((a) => a.textContent?.trim()))).toEqual(['achint.satsangi@gmail.com', 'LinkedIn', 'GitHub']);
+    await expect(links.locator('svg[aria-hidden="true"]')).toHaveCount(3);
+    await expect(page.getByTestId('hero-contact-section')).toContainText('research collaboration');
+    await expect(page.getByTestId('hero-contact-section')).not.toContainText('partnership');
+  });
+
+  test('journey route line has four aria-hidden flags and the h1 is untouched', async ({ page }) => {
+    await page.goto(`${BASE}/journey/`);
+    const route = page.getByTestId('journey-route');
+    await expect(route).toHaveText('Mumbai → Johannesburg → Gurgaon → Oslo');
+    await expect(route.locator('svg[aria-hidden="true"]')).toHaveCount(4);
+    await expect(page.getByTestId('journey-hero').locator('svg, img')).toHaveCount(0);
+    for (const box of await route.locator('svg').all()) {
+      const { width, height } = (await box.boundingBox())!;
+      expect([width, height]).toEqual([18, 12]);
+    }
+  });
+
+  test('role logos are decorative, keep the company text clean, and rows without one render no image', async ({ page }) => {
+    await page.goto(`${BASE}/journey/`);
+    const articles = page.getByTestId('journey-timeline').locator('article');
+    const logos = page.getByTestId('role-logo');
+    await expect(logos).toHaveCount(5);
+    for (const logo of await logos.all()) {
+      await expect(logo).toHaveAttribute('alt', '');
+      await expect(logo).toHaveAttribute('aria-hidden', 'true');
+      await logo.scrollIntoViewIfNeeded();
+      await expect.poll(() => logo.evaluate((img: HTMLImageElement) => img.naturalWidth)).toBeGreaterThan(0);
+    }
+    await expect(articles.first().locator('img')).toHaveCount(0);
+    await expect(articles.first().getByTestId('role-company')).toHaveText('Vend Marketplaces');
+    await expect(articles.last().getByTestId('role-company')).toHaveText('TCS Mumbai');
+  });
+
+  test('On GitHub heading keeps its accessible name', async ({ page }) => {
+    await page.goto(`${BASE}/journey/`);
+    const heading = page.getByTestId('github-section').locator('h2');
+    await expect(heading.locator('svg[aria-hidden="true"]')).toHaveCount(1);
+    await expect(heading).toHaveText('On GitHub - @achintSatsangi');
+  });
+
+  test('belief numerals use the accent colour', async ({ page }) => {
+    await page.goto(`${BASE}/`);
+    const numeral = page.getByTestId('hero-beliefs').locator('p > span').first();
+    const accent = await page.getByTestId('hero-contact-links').locator('a').first().evaluate((a) => getComputedStyle(a).color);
+    expect(await numeral.evaluate((n) => getComputedStyle(n).color)).toBe(accent);
+  });
+});
+
+test.describe('Excluded feed posts', () => {
+  test('the #Hiring repost is gone from /feed/ and rss.xml', async ({ page, request }) => {
+    await page.goto(`${BASE}/feed/`);
+    await expect(page.getByTestId('feed-post').first()).toBeVisible();
+    await expect(page.getByTestId('feed-post').filter({ hasText: 'worth a look' })).toHaveCount(0);
+    const rss = await (await request.get(`${BASE}/rss.xml`)).text();
+    expect(rss).not.toContain('worth a look');
+    expect(rss).not.toContain('7503206745683546112');
   });
 });
 

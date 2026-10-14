@@ -67,6 +67,17 @@ test('every page advertises the RSS feed and the feed carries every post in full
   assert.match(xml, /<link>https:\/\/[^<]+\/me\/<\/link>/);
 });
 
+test('excluded posts are in neither the data, the feed page nor the RSS feed', () => {
+  const excluded = JSON.parse(readFileSync('scripts/excluded-posts.json', 'utf8'));
+  assert.ok(excluded.length > 0);
+  const posts = JSON.parse(readFileSync('src/data/linkedin-posts.json', 'utf8'));
+  for (const link of excluded) {
+    assert.ok(!posts.some((p) => p.link === link), link);
+    assert.ok(!read('rss.xml').includes(link), link);
+    assert.ok(!read('feed/index.html').includes(link), link);
+  }
+});
+
 test('home title carries the name and the role', () => {
   assert.match(read('index.html'), /<title>Achint Satsangi - Senior Software Engineer, Oslo<\/title>/);
 });
