@@ -207,7 +207,11 @@ test.describe('Feed page — filters and posts', () => {
       const body = card.querySelector('p[id^="post-body-"]')!.parentElement!.getBoundingClientRect();
       return { spare: body.bottom - text.bottom, truncated: !!card.querySelector('[data-testid="post-toggle"]') };
     });
-    for (const expandIndex of [null, 1, 2]) {
+    const truncatedIndexes = await page.getByTestId('feed-post').evaluateAll((cards) =>
+      cards.flatMap((c, i) => (c.querySelector('[data-testid="post-toggle"]') ? [i] : [])));
+    const oneTruncatedPostPerRow = truncatedIndexes.filter((i, n, all) => all.findIndex((j) => j >> 1 === i >> 1) === n).slice(0, 2);
+    expect(oneTruncatedPostPerRow.length).toBe(2);
+    for (const expandIndex of [null, ...oneTruncatedPostPerRow]) {
       if (expandIndex !== null) await page.getByTestId('feed-post').nth(expandIndex).getByTestId('post-toggle').click();
       const neighbour = expandIndex === null ? 0 : expandIndex ^ 1;
       await expect.poll(async () => {
