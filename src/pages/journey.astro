@@ -48,7 +48,7 @@ const featuredRecs = featuredRecNames
         <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12">
           <div class="md:col-span-3">
             {role.logo && (
-              <img src={`${base}/images/logos/${role.logo}.svg`} alt="" aria-hidden="true" width="40" height="40" loading="lazy" class="mb-4 h-10 w-10 rounded-lg bg-white p-1.5 ring-1 ring-black/10 dark:ring-white/20" data-testid="role-logo" />
+              <img src={`${base}/images/logos/${role.logo}`} alt="" aria-hidden="true" width="40" height="40" loading="lazy" class="mb-4 h-10 w-10 rounded-lg bg-white object-contain p-1 ring-1 ring-black/10 dark:ring-white/20" data-testid="role-logo" />
             )}
             {role.end === null && (
               <span class="inline-block mb-3 px-3 py-1 text-xs font-semibold uppercase tracking-wider rounded-full bg-accent text-paper dark:bg-accent-dark dark:text-paper-dark">

@@ -42,6 +42,7 @@ test.describe('Landing content is complete', () => {
     await expect(page.getByTestId('hero-doors').locator('a')).toHaveCount(3);
     await expect(page.getByTestId('hero-photo')).toBeVisible();
     await expect(page.getByTestId('hero-offclock')).toContainText('walking pad');
+    await expect(page.getByTestId('hero-offclock').locator('p')).toHaveCount(2);
     const offclockPhoto = page.getByTestId('hero-offclock-photo').locator('img');
     await offclockPhoto.scrollIntoViewIfNeeded();
     await expect(offclockPhoto).toHaveAttribute('alt', /cairn/);
@@ -83,22 +84,23 @@ test.describe('Icons, flags and logos are decorative', () => {
     await expect(page.getByTestId('journey-hero').locator('svg, img')).toHaveCount(0);
     for (const box of await route.locator('svg').all()) {
       const { width, height } = (await box.boundingBox())!;
-      expect([width, height]).toEqual([18, 12]);
+      expect([width, height]).toEqual([20, 14]);
     }
   });
 
-  test('role logos are decorative, keep the company text clean, and rows without one render no image', async ({ page }) => {
+  test('role logos are decorative, keep the company text clean, and every row has one', async ({ page }) => {
     await page.goto(`${BASE}/journey/`);
     const articles = page.getByTestId('journey-timeline').locator('article');
     const logos = page.getByTestId('role-logo');
-    await expect(logos).toHaveCount(5);
+    await expect(logos).toHaveCount(9);
     for (const logo of await logos.all()) {
       await expect(logo).toHaveAttribute('alt', '');
       await expect(logo).toHaveAttribute('aria-hidden', 'true');
       await logo.scrollIntoViewIfNeeded();
       await expect.poll(() => logo.evaluate((img: HTMLImageElement) => img.naturalWidth)).toBeGreaterThan(0);
     }
-    await expect(articles.first().locator('img')).toHaveCount(0);
+    await expect(articles.first().locator('img[aria-hidden="true"][alt=""]')).toHaveCount(1);
+    await expect(articles).toHaveCount(9);
     await expect(articles.first().getByTestId('role-company')).toHaveText('Vend Marketplaces');
     await expect(articles.last().getByTestId('role-company')).toHaveText('TCS Mumbai');
   });
