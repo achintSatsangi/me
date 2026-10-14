@@ -3,6 +3,9 @@ import Layout from '../layouts/Layout.astro';
 import journey from '../data/journey.json';
 import recommendations from '../data/recommendations.json';
 import github from '../data/github.json';
+import Flag from '../components/Flag.astro';
+import Icon from '../components/Icon.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 function formatDate(iso: string | null): string {
   if (!iso) return 'Present';
@@ -33,9 +36,9 @@ const featuredRecs = featuredRecNames
       that fail loudly if you get them wrong.
     </h1>
     <p class="mt-10 body-lg max-w-3xl text-muted dark:text-muted-dark">
-      Mumbai → Johannesburg → Gurgaon → Oslo. Currently at Vend Marketplaces - the umbrella
-      parent behind finn.no, blocket.se, tori.fi and dba.dk - on the messaging platform that
-      all four brands run on.
+      <span data-testid="journey-route"><span class="whitespace-nowrap"><Flag country="india" />Mumbai</span> → <span class="whitespace-nowrap"><Flag country="south-africa" />Johannesburg</span> → <span class="whitespace-nowrap"><Flag country="india" />Gurgaon</span> → <span class="whitespace-nowrap"><Flag country="norway" />Oslo</span></span>.
+      Currently at Vend Marketplaces - the umbrella parent behind finn.no, blocket.se, tori.fi
+      and dba.dk - on the messaging platform that all four brands run on.
     </p>
   </section>
 
@@ -44,6 +47,9 @@ const featuredRecs = featuredRecNames
       <article class={`max-w-5xl mx-auto py-16 ${idx === 0 ? '' : 'border-t border-rule dark:border-rule-dark'}`}>
         <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12">
           <div class="md:col-span-3">
+            {role.logo && (
+              <img src={`${base}/images/logos/${role.logo}.svg`} alt="" aria-hidden="true" width="40" height="40" loading="lazy" class="mb-4 h-10 w-10 rounded-lg bg-white p-1.5 ring-1 ring-black/10 dark:ring-white/20" data-testid="role-logo" />
+            )}
             {role.end === null && (
               <span class="inline-block mb-3 px-3 py-1 text-xs font-semibold uppercase tracking-wider rounded-full bg-accent text-paper dark:bg-accent-dark dark:text-paper-dark">
                 Current
@@ -140,7 +146,7 @@ const featuredRecs = featuredRecNames
   </section>
 
   <section class="page section border-t border-rule dark:border-rule-dark" data-testid="github-section">
-    <h2 class="meta mb-8">On GitHub - <a href={github.profile.url} class="text-accent dark:text-accent-dark">@{github.profile.handle}</a></h2>
+    <h2 class="meta mb-8 flex items-center gap-2"><Icon name="github" size={16} /><span>On GitHub - <a href={github.profile.url} class="text-accent dark:text-accent-dark">@{github.profile.handle}</a></span></h2>
     <h3 class="display-md mb-14 max-w-3xl">
       Nineteen public repos. AI experiments, workshop material, and a few small frontend apps.
     </h3>
