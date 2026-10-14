@@ -59,6 +59,18 @@ test('sitemap lists every page and robots.txt points at it', () => {
   assert.match(read('robots.txt'), /^Sitemap: https?:\/\/\S+\/sitemap-index\.xml$/m);
 });
 
+test('every page advertises the RSS feed and the feed carries every post in full', () => {
+  for (const page of pages) assert.match(read(page), /<link rel="alternate" type="application\/rss\+xml"[^>]*href="\/me\/rss\.xml"/, page);
+  const xml = read('rss.xml');
+  const posts = JSON.parse(readFileSync('src/data/linkedin-posts.json', 'utf8'));
+  assert.equal((xml.match(/<item>/g) ?? []).length, posts.length);
+  assert.match(xml, /<link>https:\/\/[^<]+\/me\/<\/link>/);
+});
+
+test('home title carries the name and the role', () => {
+  assert.match(read('index.html'), /<title>Achint Satsangi - Senior Software Engineer, Oslo<\/title>/);
+});
+
 test('404 page is built', () => {
   assert.ok(existsSync(join(root, '404.html')));
 });

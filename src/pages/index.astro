@@ -21,6 +21,7 @@ const jsonLd = {
       '@id': `${siteRoot}#person`,
       name: 'Achint Satsangi',
       url: siteRoot,
+      description: 'Senior software engineer in Oslo. Backend, messaging, and AI in production.',
       jobTitle: currentRole?.role,
       worksFor: currentRole && { '@type': 'Organization', name: currentRole.company },
       address: { '@type': 'PostalAddress', addressLocality: 'Oslo', addressCountry: 'NO' },
@@ -57,7 +58,7 @@ const proof = [
 ].map((p) => ({ ...p, together: recommendations.find((r) => r.name === p.name)?.together }));
 
 ---
-<Layout title="Achint Satsangi" jsonLd={jsonLd}>
+<Layout title="Achint Satsangi - Senior Software Engineer, Oslo" jsonLd={jsonLd}>
   <section class="page hero" data-testid="hero-content">
     <p class="meta mb-6" data-testid="hero-eyebrow">Nordic Desi, Mumbaikar at heart · Oslo, Norway</p>
     <h1 class="display-xl" data-testid="hero-name">
