@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import journey from '../data/journey.json';
 import recommendations from '../data/recommendations.json';
+import Icon from '../components/Icon.astro';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const siteRoot = new URL(`${base}/`, Astro.site).toString();
 const currentRole = journey.find((r) => r.end === null);
@@ -36,18 +37,8 @@ const jsonLd = {
 };
 const beliefs = [
   'No code is the best code. Add only what earns its cost.',
-  'Simplicity is a prerequisite for reliability.',
   'Plan for the failure, not the demo.',
-  'Cross-cultural fluency is a technical skill.',
-  'Questions are data. If someone in the room is asking "wait, why?", the room is safer, not slower.',
-  'Warm about the person. Sharp about the work.',
-];
-
-const knownFor = [
-  'Cutting a messy problem down to the smallest thing that actually solves it.',
-  'Holding the seam between teams when nobody else is watching it.',
-  'Teaching the person next to me so they can do the thing without me.',
-  'Writing the Slack post that ends the thread instead of extending it.',
+  'Hold the seam between teams. Teach the person next to me so they can do the thing without me.',
 ];
 
 const proof = [
@@ -103,18 +94,6 @@ const proof = [
     </div>
   </section>
 
-  <section class="page section" data-testid="hero-known-for-section">
-    <h2 class="meta mb-10">What I’m known for.</h2>
-    <ul class="space-y-5 max-w-3xl body-lg text-ink dark:text-ink-dark list-none" data-testid="hero-known-for">
-      {knownFor.map((line) => (
-        <li class="flex gap-4">
-          <span class="text-muted dark:text-muted-dark opacity-50 select-none">-</span>
-          <span>{line}</span>
-        </li>
-      ))}
-    </ul>
-  </section>
-
   <section class="page section" data-testid="hero-proof-section">
     <div class="border-t border-b border-rule dark:border-rule-dark py-12">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12" data-testid="hero-proof">
@@ -137,7 +116,7 @@ const proof = [
     <div class="space-y-12 max-w-4xl" data-testid="hero-beliefs">
       {beliefs.map((line, i) => (
         <p class="flex gap-4 text-xl md:text-3xl leading-[1.35] text-ink dark:text-ink-dark font-display font-medium tracking-tight">
-          <span class="shrink-0 text-muted dark:text-muted-dark">0{i + 1}</span>
+          <span class="shrink-0 text-accent dark:text-accent-dark">0{i + 1}</span>
           <span>{line}</span>
         </p>
       ))}
@@ -148,20 +127,13 @@ const proof = [
     <h2 class="meta mb-10">How I think about AI.</h2>
     <div class="max-w-3xl space-y-6 body-lg text-muted dark:text-muted-dark" data-testid="hero-ai">
       <p>
-        I’ve been building with LLMs since ChatGPT shipped in November 2022. Customer-facing features in production. Daily use to lift my own and my team’s
-        throughput. <a href={`${base}/articles/`} class="text-accent dark:text-accent-dark">A
+        I’ve been building with LLMs since ChatGPT shipped in November 2022: customer-facing features in production, and daily use to lift my own and my team’s throughput.
+        I’m a <span class="text-ink dark:text-ink-dark font-medium">skeptic and an enthusiast</span>. I ship AI features and I question AI plans that don’t name a problem. <a href={`${base}/articles/`} class="text-accent dark:text-accent-dark">A
         published argument</a> on how to regulate the layer above it.
       </p>
       <p>
-        Two stances I hold at the same time: <span class="text-ink dark:text-ink-dark font-medium">skeptic and enthusiast</span>. I ship AI features and I question AI plans that don’t name a problem. Both come from the same place.
-      </p>
-      <p>
-        My view: <span class="text-ink dark:text-ink-dark font-medium">“AI” is not a strategy</span> -
         <span class="text-ink dark:text-ink-dark font-medium">“AI for X, because Y, replacing what Z does today”</span>
-        is. Skip the X, Y and Z and you bleed money into surface-level solutions while the real problem keeps fighting you.
-      </p>
-      <p>
-        What I want to work on next: the seam between domain experts and AI systems. Real solutions for <span class="text-ink dark:text-ink-dark font-medium">people I can name</span>: the users of the platforms I ship on and my peers at work.
+        is a strategy; “AI” alone is not. What I want to work on next: the seam between domain experts and AI systems, with real solutions for <span class="text-ink dark:text-ink-dark font-medium">people I can name</span>: the users of the platforms I ship on and my peers at work.
       </p>
     </div>
   </section>
@@ -170,9 +142,8 @@ const proof = [
     <h2 class="meta mb-10">Off the clock.</h2>
     <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-center">
       <div class="md:col-span-7 space-y-6 body-lg text-muted dark:text-muted-dark" data-testid="hero-offclock">
-        <p>Married, two kids, and a calendar that rarely has a gap in it.</p>
-        <p>I hike, swim and run - or I did, and I’m trying to claw some of it back around a life that doesn’t leave much room.</p>
-        <p>Recently I bought a walking pad so I could at least walk while I work. That’s about where my fitness ambitions have landed: negotiated down to what fits under a desk.</p>
+        <p>Married, two kids.</p>
+        <p>I hike, swim and run, and I bought a walking pad so I can walk while I work.</p>
       </div>
       <div class="md:col-span-5" data-testid="hero-offclock-photo">
         <div class="aspect-[2/1] md:aspect-[3/2] w-full bg-rule dark:bg-rule-dark rounded-2xl overflow-hidden border border-rule dark:border-rule-dark">
@@ -194,13 +165,13 @@ const proof = [
     <h2 class="meta mb-10">Get in touch.</h2>
     <div class="max-w-3xl">
       <p class="display-md mb-10">
-        If something here sparked a thought, whether it's a problem you're stuck on, a partnership,
-        a coffee in Oslo, or a different take on AI regulation, I'd like to hear it.
+        If something here sparked a thought, whether it's a problem you're stuck on, a research collaboration,
+        volunteer work, a conference talk, a coffee in Oslo, or a different take on AI regulation, I'd like to hear it.
       </p>
       <div class="flex flex-wrap gap-x-10 gap-y-3 text-base md:text-lg" data-testid="hero-contact-links">
-        <a href="mailto:achint.satsangi@gmail.com" class="text-accent dark:text-accent-dark">achint.satsangi@gmail.com</a>
-        <a href="https://linkedin.com/in/achint-satsangi" target="_blank" rel="noopener noreferrer" class="text-accent dark:text-accent-dark">LinkedIn</a>
-        <a href="https://github.com/achintSatsangi" target="_blank" rel="noopener noreferrer" class="text-accent dark:text-accent-dark">GitHub</a>
+        <a href="mailto:achint.satsangi@gmail.com" class="inline-flex items-center gap-2 text-accent dark:text-accent-dark"><Icon name="mail" />achint.satsangi@gmail.com</a>
+        <a href="https://linkedin.com/in/achint-satsangi" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-accent dark:text-accent-dark"><Icon name="linkedin" />LinkedIn</a>
+        <a href="https://github.com/achintSatsangi" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-accent dark:text-accent-dark"><Icon name="github" />GitHub</a>
       </div>
     </div>
   </section>
