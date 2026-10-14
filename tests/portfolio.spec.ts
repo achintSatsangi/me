@@ -55,7 +55,7 @@ test.describe('Landing content is complete', () => {
     await expect(proof.locator('> div')).toHaveCount(4);
     await expect(proof).toContainText('smartest Java developers');
     await expect(page.getByTestId('proof-together')).toHaveText([
-      'Worked together at FINN, 2022–2024',
+      'Worked together at FINN (now Vend), 2022–2024',
       'Worked together at Posten Norge, 2015–2019',
       'Worked together at CGI, 2019–2021',
       'Worked together at TCS Johannesburg, 2010–2012',
