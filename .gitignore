@@ -157,3 +157,4 @@ playwright/.cache/
 
 # JetBrains IDE
 .idea/
+.DS_Store
