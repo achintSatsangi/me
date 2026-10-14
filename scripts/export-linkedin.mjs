@@ -11,6 +11,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const DB = join(homedir(), 'dev/ultra-personal/social-dump/data/social.sqlite');
 const OUT = join(__dirname, '..', 'src', 'data', 'linkedin-posts.json');
 const LIMIT = 20;
+const EXCLUDED_LINKS = new Set(JSON.parse(readFileSync(join(__dirname, 'excluded-posts.json'), 'utf8')));
 
 const sql = `SELECT date, share_commentary, share_link FROM li_shares
              WHERE share_commentary IS NOT NULL AND share_commentary != ''
@@ -57,6 +58,7 @@ try {
   }));
   const handAdded = readExisting().filter((p) => !exported.some((e) => samePost(e, p)));
   const posts = [...handAdded, ...exported]
+    .filter((p) => !EXCLUDED_LINKS.has(p.link))
     .sort((a, b) => b.date.localeCompare(a.date))
     .slice(0, LIMIT);
   mkdirSync(dirname(OUT), { recursive: true });
