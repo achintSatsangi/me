@@ -1,1 +1,2 @@
 export const GA_MEASUREMENT_ID = 'G-V5BMZHJXW5';
+export const GOOGLE_SITE_VERIFICATION = 'Fx9BxJAqio8NhzKVyT9347ulxpjFzUSIqzu4bgP6gUo';
