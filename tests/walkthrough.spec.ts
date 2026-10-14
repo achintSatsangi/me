@@ -1,6 +1,6 @@
 import { test, expect, Page } from '@playwright/test';
+import { BASE } from '../base.mjs';
 
-const BASE = '/me';
 
 // macOS arrow cursor — black outline, white fill, subtle shadow.
 const CURSOR_SVG = `

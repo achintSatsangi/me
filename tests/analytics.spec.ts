@@ -1,6 +1,6 @@
 import { test, expect, Page } from '@playwright/test';
+import { BASE } from '../base.mjs';
 
-const BASE = '/me';
 
 test.use({ storageState: { cookies: [], origins: [] } });
 

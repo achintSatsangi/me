@@ -78,6 +78,13 @@ test('excluded posts are in neither the data, the feed page nor the RSS feed', (
   }
 });
 
+test('home page carries the Search Console verification tag', () => {
+  const config = readFileSync('src/config.ts', 'utf8');
+  const token = config.match(/GOOGLE_SITE_VERIFICATION = '([^']+)'/)?.[1];
+  assert.ok(token);
+  assert.ok(read('index.html').includes(`<meta name="google-site-verification" content="${token}"`));
+});
+
 test('home title carries the name and the role', () => {
   assert.match(read('index.html'), /<title>Achint Satsangi - Senior Software Engineer, Oslo<\/title>/);
 });

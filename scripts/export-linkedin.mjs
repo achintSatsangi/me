@@ -1,14 +1,13 @@
 // Merge the latest N LinkedIn posts from social.sqlite into src/data/linkedin-posts.json.
-// Source DB lives in ~/dev/ultra-personal/social-dump — private, not committed.
+// The source DB is private and never committed: point LINKEDIN_DB at it. Without it the committed JSON is kept.
 // Posts added to the JSON by hand at publish time are kept until the export catches up.
 import { execSync } from 'node:child_process';
 import { writeFileSync, mkdirSync, existsSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { homedir } from 'node:os';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const DB = join(homedir(), 'dev/ultra-personal/social-dump/data/social.sqlite');
+const DB = process.env.LINKEDIN_DB;
 const OUT = join(__dirname, '..', 'src', 'data', 'linkedin-posts.json');
 const LIMIT = 20;
 const EXCLUDED_LINKS = new Set(JSON.parse(readFileSync(join(__dirname, 'excluded-posts.json'), 'utf8')));
@@ -50,6 +49,7 @@ function samePost(a, b) {
 }
 
 try {
+  if (!DB) throw new Error('LINKEDIN_DB is not set');
   const raw = execSync(`sqlite3 -json "${DB}" "${sql.replace(/"/g, '\\"')}"`, { encoding: 'utf8' });
   const exported = JSON.parse(raw || '[]').map((r) => ({
     date: r.date,

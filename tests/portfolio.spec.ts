@@ -1,6 +1,6 @@
 import { test, expect, Page } from '@playwright/test';
+import { BASE } from '../base.mjs';
 
-const BASE = '/me';
 const pages = [
   { path: `${BASE}/`, name: 'landing', testid: 'hero-name' },
   { path: `${BASE}/journey/`, name: 'journey', testid: 'journey-hero' },

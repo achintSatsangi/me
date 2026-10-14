@@ -29,6 +29,8 @@ jobs:
       # in CI it just fails-soft and preserves whatever is committed to src/data/
       - name: Build
         run: npm run build
+      - name: Unit tests
+        run: npm run test:unit
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
