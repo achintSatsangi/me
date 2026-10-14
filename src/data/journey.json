@@ -16,7 +16,7 @@
     "start": "2021-06",
     "end": "2022-09",
     "summary": "Open banking under PSD2. Data-sharing APIs for Skatteetaten and Politi. Small team, end-to-end ownership, the kind of code review where the bar is set by the person asking the sharpest question.",
-    "logo": "dnb.svg"
+    "logo": "dnb.png"
   },
   {
     "company": "CGI Norge",
@@ -43,7 +43,7 @@
     "start": "2014-11",
     "end": "2019-05",
     "summary": "Distributed Agile team building the logistics web platform for Posten Norge / Bring - 20+ Java web applications, 15–20 deploys a day, an in-house DevOps + monitoring framework we built because nothing off-the-shelf fit. A rotational posting from 2014 to 2019: a year in Oslo, then a year back in India, in turn. Test-code volume exceeded production-code volume, deliberately. Grew into team-lead responsibility. The high-cadence, delete-first engineering discipline I run on today started here.",
-    "logo": "tcs.svg"
+    "logo": "tcs.png"
   },
   {
     "company": "TCS Initial Learning Program",
@@ -52,7 +52,7 @@
     "start": "2014-08",
     "end": "2014-09",
     "summary": "Trained cohorts of 30–35 new joiners on core Java and J2EE. Teacher before I was an engineer.",
-    "logo": "tcs.svg"
+    "logo": "tcs.png"
   },
   {
     "company": "TCS Gurgaon",
@@ -61,7 +61,7 @@
     "start": "2012-12",
     "end": "2014-07",
     "summary": "Technical lead on a credit-rating platform for a European investment bank - functional analysis, technical design, code review, and deploys through SIT/UAT. Ran the sprint ceremonies alongside the build.",
-    "logo": "tcs.svg"
+    "logo": "tcs.png"
   },
   {
     "company": "TCS Johannesburg",
@@ -70,7 +70,7 @@
     "start": "2010-11",
     "end": "2012-10",
     "summary": "Two years for the University of the Witwatersrand - a student admissions and progression rules engine, then a Peoplesoft Campus Solutions enrolments rollout. Grew from building the engine to owning the functional analysis on the platform side.",
-    "logo": "tcs.svg"
+    "logo": "tcs.png"
   },
   {
     "company": "TCS Mumbai",
@@ -101,6 +101,6 @@
         ]
       }
     ],
-    "logo": "tcs.svg"
+    "logo": "tcs.png"
   }
 ]
