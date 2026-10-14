@@ -12,7 +12,7 @@ export default defineConfig({
   integrations: [
     react(),
     tailwind({ applyBaseStyles: false }),
-    sitemap(),
+    sitemap({ lastmod: new Date() }),
   ],
   build: {
     format: 'directory',

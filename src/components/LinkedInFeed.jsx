@@ -79,7 +79,7 @@ function PostCard({ post, postId }) {
             Senior Software Engineer at Vend Marketplaces
           </div>
           <div className="text-[12px] text-muted dark:text-muted-dark opacity-70 flex items-center gap-1 mt-0.5">
-            {fmtRelative(post.date)} <span>·</span>
+            <time datetime={post.date.replace(' ', 'T')}>{fmtRelative(post.date)}</time> <span>·</span>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm0 14.2a7.2 7.2 0 0 1-6-3.22c.03-2 4-3.08 6-3.08s5.97 1.08 6 3.08a7.2 7.2 0 0 1-6 3.22z"/></svg>
           </div>
         </div>

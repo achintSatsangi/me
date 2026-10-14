@@ -52,10 +52,26 @@ test('home carries Person JSON-LD tying the name to LinkedIn and GitHub', () => 
   assert.ok(person.sameAs.some((u) => u.includes('github.com/')));
 });
 
+test('Person carries image and knowsAbout; home has a ProfilePage whose mainEntity is the Person', () => {
+  const raw = read('index.html').match(/<script type="application\/ld\+json">(.*?)<\/script>/s)?.[1];
+  const graph = JSON.parse(raw)['@graph'];
+  const person = graph.find((n) => n['@type'] === 'Person');
+  assert.ok(person.image?.startsWith(config.site));
+  assert.ok(person.knowsAbout.length > 0);
+  const profile = graph.find((n) => n['@type'] === 'ProfilePage');
+  assert.equal(profile.mainEntity['@id'], person['@id']);
+  for (const page of pages.filter((p) => p !== 'index.html')) assert.doesNotMatch(read(page), /ProfilePage/, page);
+});
+
+test('feed dates are server-rendered in time elements', () => {
+  assert.match(read('feed/index.html'), /<time datetime="\d{4}-\d{2}-\d{2}T/);
+});
+
 test('sitemap lists every page and robots.txt points at it', () => {
   assert.ok(existsSync(join(root, 'sitemap-index.xml')));
   const sitemap = read('sitemap-0.xml');
   assert.equal((sitemap.match(/<loc>/g) ?? []).length, pages.length);
+  assert.equal((sitemap.match(/<lastmod>\d{4}-\d{2}-\d{2}/g) ?? []).length, pages.length);
   assert.match(read('robots.txt'), /^Sitemap: https?:\/\/\S+\/sitemap-index\.xml$/m);
 });
 
