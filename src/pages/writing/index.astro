@@ -2,28 +2,27 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import articles from '../../data/articles.json';
+import { formatDate as fmt } from '../../lib/format-date.js';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const essays = (await getCollection('writing')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 const [featured, ...rest] = articles;
-function fmt(iso: string | Date): string {
-  if (!iso) return '';
-  return new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
-}
+const switchButton = 'rounded-full px-5 py-2 text-sm font-medium text-accent dark:text-accent-dark hover:bg-rule/60 dark:hover:bg-rule-dark aria-pressed:bg-accent aria-pressed:text-paper aria-pressed:hover:bg-accent dark:aria-pressed:bg-accent-dark dark:aria-pressed:text-paper-dark dark:aria-pressed:hover:bg-accent-dark';
 ---
-<Layout title="Writing - Achint Satsangi" description="Essays on engineering by Achint Satsangi, and pieces published in ThePrint on geopolitics, policy and AI.">
+<Layout title="Writing - Achint Satsangi" description="Essays by Achint Satsangi on engineering and AI in practice, and his pieces in ThePrint on policy, geopolitics and AI.">
   <section class="page hero-inner">
-    <p class="meta mb-6">Essays and ThePrint</p>
     <h1 class="display-lg max-w-5xl" data-testid="writing-hero">
-      Longer pieces, with room for the argument.
+      The long version, with the data and the corrections.
     </h1>
-    <div id="writing-switch" class="mt-10 hidden flex-wrap gap-4" role="group" aria-label="Choose a list" data-testid="writing-switch">
-      <button type="button" class="pill" data-target="engineering" aria-pressed="true" data-testid="switch-engineering">Engineering</button>
-      <button type="button" class="pill" data-target="theprint" aria-pressed="false" data-testid="switch-theprint">ThePrint</button>
-    </div>
+    {essays.length > 0 && (
+      <div id="writing-switch" class="mt-10 hidden gap-1 p-1 rounded-full border border-rule dark:border-rule-dark w-fit" role="group" aria-label="Choose a list" data-testid="writing-switch">
+        <button type="button" class={switchButton} data-target="engineering" aria-pressed="true" data-testid="switch-engineering">Engineering</button>
+        <button type="button" class={switchButton} data-target="theprint" aria-pressed="false" data-testid="switch-theprint">ThePrint</button>
+      </div>
+    )}
   </section>
 
-  <div id="panel-engineering" data-testid="panel-engineering">
+  {essays.length > 0 && <div id="panel-engineering" data-testid="panel-engineering">
     <section class="page section border-t border-rule dark:border-rule-dark pt-10 md:pt-16" data-testid="essays-list">
       <h2 class="meta mb-10">Engineering</h2>
       <div class="space-y-16 max-w-5xl">
@@ -40,15 +39,14 @@ function fmt(iso: string | Date): string {
         ))}
       </div>
     </section>
-  </div>
+  </div>}
 
   <div id="panel-theprint" data-testid="panel-theprint">
     <section class="page section border-t border-rule dark:border-rule-dark pt-10 md:pt-16">
       <h2 class="meta mb-6">ThePrint</h2>
       <p class="body-lg max-w-3xl text-muted dark:text-muted-dark">
-        <a href="https://theprint.in/author/achint-satsangi/">ThePrint</a> is one of India's larger
-        independent digital newsrooms; five pieces published so far, more when the argument
-        is ready.
+        Pieces I've written for <a href="https://theprint.in/author/achint-satsangi/">ThePrint</a>, one of India's larger
+        independent digital newsrooms, on policy, geopolitics and AI.
       </p>
     </section>
 
@@ -93,7 +91,9 @@ function fmt(iso: string | Date): string {
   <script is:inline>
     (function () {
       var switchEl = document.getElementById('writing-switch');
+      if (!switchEl) return;
       var buttons = switchEl.querySelectorAll('button');
+      function fromHash() { return location.hash === '#theprint' ? 'theprint' : 'engineering'; }
       function show(target) {
         buttons.forEach(function (b) {
           b.setAttribute('aria-pressed', String(b.dataset.target === target));
@@ -101,11 +101,15 @@ function fmt(iso: string | Date): string {
         });
       }
       buttons.forEach(function (b) {
-        b.addEventListener('click', function () { show(b.dataset.target); });
+        b.addEventListener('click', function () {
+          show(b.dataset.target);
+          history.replaceState(null, '', '#' + b.dataset.target);
+        });
       });
+      window.addEventListener('hashchange', function () { show(fromHash()); });
       switchEl.classList.remove('hidden');
-      switchEl.classList.add('flex');
-      show(location.hash === '#theprint' ? 'theprint' : 'engineering');
+      switchEl.classList.add('inline-flex');
+      show(fromHash());
     })();
   </script>
 </Layout>

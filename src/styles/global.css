@@ -51,11 +51,12 @@
   .pill:hover { @apply bg-accent text-paper; background-image: none !important; }
   .dark .pill { @apply border-accent-dark text-accent-dark; }
   .dark .pill:hover { @apply bg-accent-dark text-paper-dark; }
-  .pill[aria-pressed="true"] { @apply bg-accent text-paper; }
-  .dark .pill[aria-pressed="true"] { @apply bg-accent-dark text-paper-dark; }
 
   .essay { @apply text-lg md:text-xl leading-[1.65] text-ink dark:text-ink-dark; }
+  .essay { overflow-wrap: anywhere; }
   .essay > * + * { @apply mt-6; }
+  .essay table { @apply block max-w-full overflow-x-auto text-base; }
+  .essay th, .essay td { @apply px-3 py-2 border border-rule dark:border-rule-dark text-left align-top; }
   .essay h2 { @apply text-2xl md:text-3xl mt-14; }
   .essay h3 { @apply text-xl md:text-2xl mt-10; }
   .essay ul { @apply list-disc pl-6 space-y-2; }

@@ -137,8 +137,34 @@ test('essay images have alt text', () => {
 test('/articles/ is a redirect page to /writing/ and stays out of the sitemap', () => {
   const html = read('articles/index.html');
   assert.match(html, /<link rel="canonical" href="https:\/\/[^"]+\/me\/writing\/">/);
-  assert.match(html, /<meta http-equiv="refresh" content="0; url=\/me\/writing\/[^"]*">/);
+  assert.match(html, /<meta http-equiv="refresh" content="0;\s*url=\/me\/writing\/">/);
   assert.ok(!read('sitemap-0.xml').includes('/articles/'));
+});
+
+const frontmatter = (slug) => Object.fromEntries(
+  readFileSync(`src/content/writing/${slug}.md`, 'utf8').split('---')[1].trim().split('\n')
+    .map((line) => [line.slice(0, line.indexOf(':')), line.slice(line.indexOf(':') + 1).trim()]),
+);
+
+test('essay pages render the updated line and the right LinkedIn label from their frontmatter', () => {
+  for (const slug of essaySlugs) {
+    const meta = frontmatter(slug);
+    const html = read(`writing/${slug}/index.html`);
+    if (meta.updated) {
+      assert.match(html, /data-testid="essay-updated">Updated <time/, slug);
+      if (meta.updateNote) assert.ok(html.includes(`: ${meta.updateNote}`), slug);
+    } else {
+      assert.doesNotMatch(html, /data-testid="essay-updated"/, slug);
+    }
+    const link = html.match(/<a href="([^"]+)"[^>]*data-testid="essay-discuss">([^<]+)</);
+    if (meta.linkedin) {
+      assert.equal(link[1], meta.linkedin, slug);
+      assert.equal(link[2], 'Discuss this on LinkedIn →', slug);
+    } else {
+      assert.match(link[1], /linkedin\.com\/in\//, slug);
+      assert.equal(link[2], 'Find me on LinkedIn →', slug);
+    }
+  }
 });
 
 test('home title carries the name and the role', () => {
