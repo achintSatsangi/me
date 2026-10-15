@@ -1,0 +1,111 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import articles from '../../data/articles.json';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const essays = (await getCollection('writing')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const [featured, ...rest] = articles;
+function fmt(iso: string | Date): string {
+  if (!iso) return '';
+  return new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+---
+<Layout title="Writing - Achint Satsangi" description="Essays on engineering by Achint Satsangi, and pieces published in ThePrint on geopolitics, policy and AI.">
+  <section class="page hero-inner">
+    <p class="meta mb-6">Essays and ThePrint</p>
+    <h1 class="display-lg max-w-5xl" data-testid="writing-hero">
+      Longer pieces, with room for the argument.
+    </h1>
+    <div id="writing-switch" class="mt-10 hidden flex-wrap gap-4" role="group" aria-label="Choose a list" data-testid="writing-switch">
+      <button type="button" class="pill" data-target="engineering" aria-pressed="true" data-testid="switch-engineering">Engineering</button>
+      <button type="button" class="pill" data-target="theprint" aria-pressed="false" data-testid="switch-theprint">ThePrint</button>
+    </div>
+  </section>
+
+  <div id="panel-engineering" data-testid="panel-engineering">
+    <section class="page section border-t border-rule dark:border-rule-dark pt-10 md:pt-16" data-testid="essays-list">
+      <h2 class="meta mb-10">Engineering</h2>
+      <div class="space-y-16 max-w-5xl">
+        {essays.map((e) => (
+          <article data-testid="essay-item">
+            <a href={`${base}/writing/${e.id}/`} class="block group [background-image:none]">
+              <h3 class="display-md text-2xl md:text-5xl group-hover:text-accent dark:group-hover:text-accent-dark transition-colors">
+                {e.data.title}
+              </h3>
+              <p class="meta mt-4"><time datetime={e.data.date.toISOString()}>{fmt(e.data.date)}</time> · <span class="text-accent dark:text-accent-dark underline underline-offset-4">Read →</span></p>
+              <p class="mt-5 body-lg text-muted dark:text-muted-dark max-w-prose">{e.data.description}</p>
+            </a>
+          </article>
+        ))}
+      </div>
+    </section>
+  </div>
+
+  <div id="panel-theprint" data-testid="panel-theprint">
+    <section class="page section border-t border-rule dark:border-rule-dark pt-10 md:pt-16">
+      <h2 class="meta mb-6">ThePrint</h2>
+      <p class="body-lg max-w-3xl text-muted dark:text-muted-dark">
+        <a href="https://theprint.in/author/achint-satsangi/">ThePrint</a> is one of India's larger
+        independent digital newsrooms; five pieces published so far, more when the argument
+        is ready.
+      </p>
+    </section>
+
+    {featured && (
+      <section class="page section pt-0 md:pt-0" data-testid="articles-featured">
+        <a href={featured.link} target="_blank" rel="noopener noreferrer" class="block group max-w-5xl [background-image:none]">
+          <h3 class="display-md text-2xl md:text-5xl group-hover:text-accent dark:group-hover:text-accent-dark transition-colors">
+            {featured.title}
+          </h3>
+          <p class="meta mt-6">{fmt(featured.date)} · <span class="text-accent dark:text-accent-dark underline underline-offset-4">Read on ThePrint →</span></p>
+          {featured.excerpt && (
+            <p class="mt-10 body-lg text-muted dark:text-muted-dark max-w-prose">
+              {featured.excerpt}
+            </p>
+          )}
+        </a>
+      </section>
+    )}
+
+    {rest.length > 0 && (
+      <section class="page section border-t border-rule dark:border-rule-dark" data-testid="articles-list">
+        <h2 class="meta mb-10">Earlier</h2>
+        <div class="space-y-16 max-w-5xl">
+          {rest.map((a) => (
+            <article data-testid="article-item">
+              <a href={a.link} target="_blank" rel="noopener noreferrer" class="block group [background-image:none]">
+                <h3 class="display-md text-2xl md:text-5xl group-hover:text-accent dark:group-hover:text-accent-dark transition-colors">
+                  {a.title}
+                </h3>
+                <p class="meta mt-4">{fmt(a.date)} · <span class="text-accent dark:text-accent-dark underline underline-offset-4">Read on ThePrint →</span></p>
+                {a.excerpt && (
+                  <p class="mt-5 body-lg text-muted dark:text-muted-dark max-w-prose">{a.excerpt}</p>
+                )}
+              </a>
+            </article>
+          ))}
+        </div>
+      </section>
+    )}
+  </div>
+
+  <script is:inline>
+    (function () {
+      var switchEl = document.getElementById('writing-switch');
+      var buttons = switchEl.querySelectorAll('button');
+      function show(target) {
+        buttons.forEach(function (b) {
+          b.setAttribute('aria-pressed', String(b.dataset.target === target));
+          document.getElementById('panel-' + b.dataset.target).hidden = b.dataset.target !== target;
+        });
+      }
+      buttons.forEach(function (b) {
+        b.addEventListener('click', function () { show(b.dataset.target); });
+      });
+      switchEl.classList.remove('hidden');
+      switchEl.classList.add('flex');
+      show(location.hash === '#theprint' ? 'theprint' : 'engineering');
+    })();
+  </script>
+</Layout>
