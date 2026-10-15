@@ -1,11 +1,13 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import config from '../astro.config.mjs';
 
 const root = config.outDir ?? './dist';
-const pages = ['index.html', 'journey/index.html', 'feed/index.html', 'articles/index.html', 'privacy/index.html'];
+const essaySlugs = readdirSync('src/content/writing').filter((f) => f.endsWith('.md')).map((f) => f.replace(/\.md$/, ''));
+const staticPages = ['index.html', 'journey/index.html', 'feed/index.html', 'writing/index.html', 'privacy/index.html'];
+const pages = [...staticPages, ...essaySlugs.map((slug) => `writing/${slug}/index.html`)];
 const read = (rel) => readFileSync(join(root, rel), 'utf8');
 const metaContent = (html, attr, name) =>
   html.match(new RegExp(`<meta ${attr}="${name}" content="([^"]*)"`))?.[1];
@@ -79,7 +81,7 @@ test('every page advertises the RSS feed and the feed carries every post in full
   for (const page of pages) assert.match(read(page), /<link rel="alternate" type="application\/rss\+xml"[^>]*href="\/me\/rss\.xml"/, page);
   const xml = read('rss.xml');
   const posts = JSON.parse(readFileSync('src/data/linkedin-posts.json', 'utf8'));
-  assert.equal((xml.match(/<item>/g) ?? []).length, posts.length);
+  assert.equal((xml.match(/<item>/g) ?? []).length, posts.length + essaySlugs.length);
   assert.match(xml, /<link>https:\/\/[^<]+\/me\/<\/link>/);
 });
 
@@ -99,6 +101,44 @@ test('home page carries the Search Console verification tag', () => {
   const token = config.match(/GOOGLE_SITE_VERIFICATION = '([^']+)'/)?.[1];
   assert.ok(token);
   assert.ok(read('index.html').includes(`<meta name="google-site-verification" content="${token}"`));
+});
+
+test('writing index has both lists in the static HTML', () => {
+  const html = read('writing/index.html');
+  assert.match(html, /data-testid="panel-engineering"/);
+  assert.match(html, /data-testid="panel-theprint"/);
+  assert.equal((html.match(/data-testid="essay-item"/g) ?? []).length, essaySlugs.length);
+  const articles = JSON.parse(readFileSync('src/data/articles.json', 'utf8'));
+  assert.equal((html.match(/data-testid="(articles-featured|article-item)"/g) ?? []).length, articles.length);
+});
+
+test('every essay has BlogPosting JSON-LD authored by the Person, and is in the sitemap and RSS', () => {
+  assert.ok(essaySlugs.length > 0);
+  const personId = `${config.site}${config.base}/#person`;
+  for (const slug of essaySlugs) {
+    const html = read(`writing/${slug}/index.html`);
+    const ld = JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)[1]);
+    assert.equal(ld['@type'], 'BlogPosting');
+    assert.equal(ld.author['@id'], personId);
+    assert.ok(ld.headline && ld.description && ld.datePublished && ld.dateModified && ld.mainEntityOfPage);
+    const url = `${config.site}${config.base}/writing/${slug}/`;
+    assert.ok(read('sitemap-0.xml').includes(`<loc>${url}</loc>`), url);
+    assert.ok(read('rss.xml').includes(url), url);
+  }
+});
+
+test('essay images have alt text', () => {
+  for (const slug of essaySlugs) {
+    const imgs = read(`writing/${slug}/index.html`).match(/<img\b[^>]*>/g) ?? [];
+    for (const img of imgs) assert.match(img, /\balt="[^"]+"/, img);
+  }
+});
+
+test('/articles/ is a redirect page to /writing/ and stays out of the sitemap', () => {
+  const html = read('articles/index.html');
+  assert.match(html, /<link rel="canonical" href="https:\/\/[^"]+\/me\/writing\/">/);
+  assert.match(html, /<meta http-equiv="refresh" content="0; url=\/me\/writing\/[^"]*">/);
+  assert.ok(!read('sitemap-0.xml').includes('/articles/'));
 });
 
 test('home title carries the name and the role', () => {

@@ -5,7 +5,7 @@ const pages = [
   { path: `${BASE}/`, name: 'landing', testid: 'hero-name' },
   { path: `${BASE}/journey/`, name: 'journey', testid: 'journey-hero' },
   { path: `${BASE}/feed/`, name: 'feed', testid: 'feed-hero' },
-  { path: `${BASE}/articles/`, name: 'articles', testid: 'articles-hero' },
+  { path: `${BASE}/writing/`, name: 'writing', testid: 'writing-hero' },
 ];
 
 async function ensureTheme(page: Page, want: 'light' | 'dark') {
@@ -234,11 +234,58 @@ test.describe('Feed page — filters and posts', () => {
   });
 });
 
-test.describe('Articles page — theprint list', () => {
-  test('featured + at least one earlier article', async ({ page }) => {
-    await page.goto(`${BASE}/articles/`);
+test.describe('Writing page', () => {
+  test('defaults to Engineering and the switch swaps the lists', async ({ page }) => {
+    await page.goto(`${BASE}/writing/`);
+    const engineering = page.getByTestId('switch-engineering');
+    const theprint = page.getByTestId('switch-theprint');
+    await expect(engineering).toHaveAttribute('aria-pressed', 'true');
+    await expect(theprint).toHaveAttribute('aria-pressed', 'false');
+    await expect(page.getByTestId('essay-item').first()).toBeVisible();
+    await expect(page.getByTestId('panel-theprint')).toBeHidden();
+    await theprint.click();
+    await expect(theprint).toHaveAttribute('aria-pressed', 'true');
+    await expect(engineering).toHaveAttribute('aria-pressed', 'false');
     await expect(page.getByTestId('articles-featured')).toBeVisible();
     await expect(page.getByTestId('article-item').first()).toBeVisible();
+    await expect(page.getByTestId('panel-engineering')).toBeHidden();
+    await engineering.click();
+    await expect(page.getByTestId('essay-item').first()).toBeVisible();
+  });
+
+  test('#theprint opens the ThePrint list', async ({ page }) => {
+    await page.goto(`${BASE}/writing/#theprint`);
+    await expect(page.getByTestId('switch-theprint')).toHaveAttribute('aria-pressed', 'true');
+    await expect(page.getByTestId('articles-featured')).toBeVisible();
+  });
+
+  test('/articles/ redirects to the ThePrint list', async ({ page }) => {
+    await page.goto(`${BASE}/articles/`);
+    await page.waitForURL(/\/writing\//);
+    await expect(page.getByTestId('writing-hero')).toBeVisible();
+  });
+
+  test('an essay page shows title, date, body and the LinkedIn link', async ({ page }) => {
+    await page.goto(`${BASE}/writing/`);
+    await page.getByTestId('essay-item').first().locator('a').click();
+    await expect(page.locator('h1')).toHaveCount(1);
+    await expect(page.getByTestId('essay-title')).toBeVisible();
+    await expect(page.getByTestId('essay-date').locator('time')).toBeVisible();
+    await expect(page.getByTestId('essay-body')).toBeVisible();
+    await expect(page.getByTestId('essay-discuss')).toHaveText('Discuss this on LinkedIn →');
+    await expect(page.getByTestId('essay-discuss')).toHaveAttribute('href', /linkedin\.com\//);
+    await expect(page.getByTestId('nav-writing')).toHaveAttribute('aria-current', 'page');
+  });
+});
+
+test.describe('Writing page without JavaScript', () => {
+  test.use({ javaScriptEnabled: false });
+
+  test('shows both lists and no dead switch', async ({ page }) => {
+    await page.goto(`${BASE}/writing/`);
+    await expect(page.getByTestId('panel-engineering')).toBeVisible();
+    await expect(page.getByTestId('panel-theprint')).toBeVisible();
+    await expect(page.getByTestId('writing-switch')).toBeHidden();
   });
 });
 
@@ -260,7 +307,7 @@ test.describe('Responsive — 375px phone', () => {
     { name: 'landing', path: `${BASE}/` },
     { name: 'journey', path: `${BASE}/journey/` },
     { name: 'feed', path: `${BASE}/feed/` },
-    { name: 'articles', path: `${BASE}/articles/` },
+    { name: 'writing', path: `${BASE}/writing/` },
   ];
 
   for (const p of phonePages) {
@@ -272,12 +319,23 @@ test.describe('Responsive — 375px phone', () => {
         innerWidth: window.innerWidth,
       }));
       expect(scrollWidth).toBeLessThanOrEqual(innerWidth);
-      for (const id of ['nav-journey', 'nav-feed', 'nav-articles']) {
+      for (const id of ['nav-journey', 'nav-feed', 'nav-writing']) {
         await expect(page.getByTestId(id)).toBeVisible();
       }
       await expect(page.getByTestId('nav-home')).toHaveCount(0);
     });
   }
+
+  test('an essay page has no horizontal overflow', async ({ page }) => {
+    await page.goto(`${BASE}/writing/`);
+    await page.getByTestId('essay-item').first().locator('a').click();
+    await expect(page.getByTestId('essay-body')).toBeVisible();
+    const { scrollWidth, innerWidth } = await page.evaluate(() => ({
+      scrollWidth: document.scrollingElement!.scrollWidth,
+      innerWidth: window.innerWidth,
+    }));
+    expect(scrollWidth).toBeLessThanOrEqual(innerWidth);
+  });
 
   test('theme toggle sits in the nav as an icon only', async ({ page }) => {
     await page.goto(`${BASE}/`);
