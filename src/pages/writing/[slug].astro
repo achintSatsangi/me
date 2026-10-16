@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import { LINKEDIN_PROFILE_URL } from '../../config';
 import { formatDate as fmt } from '../../lib/format-date.js';
+import { readingMinutes } from '../../lib/reading-time.js';
 
 export async function getStaticPaths() {
   const essays = await getCollection('writing');
@@ -11,7 +12,8 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
-const { title, description, date, updated, updateNote, linkedin } = entry.data;
+const { title, description, tldr, date, updated, updateNote, linkedin } = entry.data;
+const minutesToRead = readingMinutes(entry.body ?? '');
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const siteRoot = new URL(`${base}/`, Astro.site).toString();
 const url = new URL(`${base}/writing/${entry.id}/`, Astro.site).toString();
@@ -31,12 +33,16 @@ const jsonLd = {
   <article class="page section">
     <header class="max-w-3xl mx-auto">
       <h1 class="display-lg text-4xl md:text-6xl" data-testid="essay-title">{title}</h1>
-      <p class="meta mt-6" data-testid="essay-date"><time datetime={date.toISOString()}>{fmt(date)}</time></p>
+      <p class="meta mt-6" data-testid="essay-date"><time datetime={date.toISOString()}>{fmt(date)}</time> · <span data-testid="essay-reading-time">{minutesToRead} min read</span></p>
       {updated && (
         <p class="meta mt-1" data-testid="essay-updated">Updated <time datetime={updated.toISOString()}>{fmt(updated)}</time>{updateNote && `: ${updateNote}`}</p>
       )}
     </header>
-    <div class="essay max-w-3xl mx-auto mt-12" data-testid="essay-body">
+    <aside class="tldr max-w-3xl mx-auto mt-10" data-testid="essay-tldr" aria-label="TL;DR">
+      <p class="tldr-label">TL;DR</p>
+      <p class="tldr-text">{tldr}</p>
+    </aside>
+    <div class="essay max-w-3xl mx-auto mt-10" data-testid="essay-body">
       <Content />
     </div>
     <p class="max-w-3xl mx-auto mt-16 pt-8 border-t border-rule dark:border-rule-dark body-lg">

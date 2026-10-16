@@ -52,6 +52,9 @@
   .dark .pill { @apply border-accent-dark text-accent-dark; }
   .dark .pill:hover { @apply bg-accent-dark text-paper-dark; }
 
+  .tldr { @apply border-l-2 border-accent dark:border-accent-dark pl-5; }
+  .tldr-label { @apply text-sm font-semibold tracking-wide uppercase text-accent dark:text-accent-dark; }
+  .tldr-text { @apply mt-2 text-lg md:text-xl leading-[1.55] text-ink dark:text-ink-dark; }
   .essay { @apply text-lg md:text-xl leading-[1.65] text-ink dark:text-ink-dark; }
   .essay { overflow-wrap: anywhere; }
   .essay > * + * { @apply mt-6; }

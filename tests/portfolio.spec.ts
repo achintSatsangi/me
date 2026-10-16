@@ -312,6 +312,8 @@ test.describe('Writing page', () => {
     await expect(page.locator('h1')).toHaveCount(1);
     await expect(page.getByTestId('essay-title')).toBeVisible();
     await expect(page.getByTestId('essay-date').locator('time')).toBeVisible();
+    await expect(page.getByTestId('essay-reading-time')).toHaveText(/^\d+ min read$/);
+    await expect(page.getByTestId('essay-tldr')).toBeVisible();
     await expect(page.getByTestId('essay-body')).toBeVisible();
     await expect(page.getByTestId('essay-discuss')).toHaveText(/LinkedIn →$/);
     await expect(page.getByTestId('essay-discuss')).toHaveAttribute('href', /linkedin\.com\//);

@@ -180,3 +180,11 @@ test('EXPECT_INDEXABLE=1: no page carries noindex', { skip: !process.env.EXPECT_
     assert.doesNotMatch(read(page), /<meta name="robots"[^>]*noindex/, page);
   }
 });
+
+for (const slug of essaySlugs) {
+  test(`writing/${slug}: renders a TL;DR and a reading time`, () => {
+    const html = read(`writing/${slug}/index.html`);
+    assert.match(html, /data-testid="essay-tldr"[\s\S]*?TL;DR[\s\S]*?<p class="tldr-text[^>]*>[^<]{20,}<\/p>/);
+    assert.match(html, /data-testid="essay-reading-time"[^>]*>[1-9]\d* min read</);
+  });
+}

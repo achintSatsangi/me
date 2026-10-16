@@ -36,14 +36,15 @@ Add one Markdown file to `src/content/writing/`; the file name is the URL slug. 
 
 ```
 title: ...
-description: ...
+description: ...          # SEO and cards
+tldr: ...                # required; shown as the TL;DR block under the title
 date: 2026-10-15
 updated: 2026-11-01        # optional, with updateNote
 updateNote: ...
 linkedin: https://...      # optional; the discuss link falls back to my LinkedIn profile
 ```
 
-Drafts stay out of this repo. No code change is needed: the index, sitemap and RSS pick the file up.
+Reading time is computed at build time from the body. Drafts stay out of this repo. No code change is needed: the index, sitemap and RSS pick the file up.
 
 ## Data
 
