@@ -3,6 +3,7 @@ title: I was right about my AI coding bill for the wrong reason
 description: I set out to build Claude Code habits to cut the bill, then checked it against my cloud billing. Spend really did fall two-thirds, but a default I didn't set did it, and when an update lifted that default, spend doubled.
 tldr: "My Claude Code spend really did fall two-thirds after I left Opus 4.7, but not because of my habits. A Claude Code default capped my sessions at about 167k tokens, and when an update lifted it on 2 October, spend doubled. Pin the defaults that drive cost, watch daily spend rather than session cost, and check the cause against the bill."
 date: 2026-10-16
+linkedin: https://www.linkedin.com/feed/update/urn:li:ugcPost:7516723306952155136/
 ---
 Earlier this month I posted that most of my Claude Code bill wasn't paying for code. Over 90% of the spend went to re-sending conversation history. Then I set out to build two habits: clear every session in the evening, and keep each task's context in a Markdown file so a fresh session can pick it up. I believed the model was capping my sessions at around 160k tokens. A cost analysis Claude ran on my transcripts said my daily spend had dropped by about two-thirds, and I believed I was delivering more.
 
