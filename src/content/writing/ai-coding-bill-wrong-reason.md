@@ -1,6 +1,6 @@
 ---
 title: I was right about my AI coding bill for the wrong reason
-description: I set out to build Claude Code habits to cut the bill, then checked it against my cloud billing. Spend really did fall two-thirds, but a default I didn't set did it, and when an update lifted that default, spend went back up by half.
+description: I set out to build Claude Code habits to cut the bill, then checked it against my cloud billing. Spend really did fall two-thirds, but a default I didn't set did it, and when an update lifted that default, spend doubled.
 date: 2026-10-16
 ---
 Earlier this month I posted that most of my Claude Code bill wasn't paying for code. Over 90% of the spend went to re-sending conversation history. Then I set out to build two habits: clear every session in the evening, and keep each task's context in a Markdown file so a fresh session can pick it up. I believed the model was capping my sessions at around 160k tokens. A cost analysis Claude ran on my transcripts said my daily spend had dropped by about two-thirds, and I believed I was delivering more.
@@ -9,7 +9,7 @@ That's what I would have told you. Then I checked it against the bill. The numbe
 
 ## What I believed vs what the bill shows
 
-Same person, three periods. Spend comes from my cloud billing, by day and model. Session sizes and call-level detail come from Claude Code's own transcripts, because billing can't see either. My first estimate from the transcripts undercounted the older weeks, which is why spend here comes from the bill.
+Same person, three periods. Spend comes from my cloud billing, by day and model. Session sizes and call-level detail come from Claude Code's own transcripts, because billing can't see either. My first estimate from the transcripts undercounted the older weeks, which is why spend here comes from the bill. I leave out 26 September, the day I switched models, because it mixes both.
 
 | | I believed | The data shows |
 |---|---|---|
@@ -18,12 +18,12 @@ Same person, three periods. Spend comes from my cloud billing, by day and model.
 | Evening clear | A habit I was building | Didn't happen: 11 of 12 mornings |
 | Delivering more | Yes | No measure I have shows it |
 
-So my number was right and my reason was wrong. Spend fell to about a fifth *before* 3 October, while a Claude Code default capped my sessions, then rose by about half after an update on 2 October moved that cap to about a million tokens. Eleven of twelve mornings started in yesterday's session. The Markdown file per task I can't measure either way.
+So my number was right and my reason was wrong. Spend fell to about a sixth *before* 3 October, while a Claude Code default capped my sessions, then doubled after an update on 2 October moved that cap to about a million tokens. Eleven of twelve mornings started in yesterday's session. The Markdown file per task I can't measure either way.
 
 <figure class="chart" data-testid="chart-spend-billing">
-<p class="chart-title">Spend fell to a fifth before 3 October, then rose by half after.</p>
-<picture class="chart-light"><source media="(max-width: 639px)" srcset="/me/images/charts/spend-billing-light-narrow.svg" width="280" height="487"><img src="/me/images/charts/spend-billing-light.svg" width="640" height="410" alt="Line chart of daily billed spend, indexed so the Opus 4.7 average is 100. Spend averaged 100 on Opus 4.7, fell to an average of 22 on the capped newer models before 3 October, then rose by about half to an average of 33 after it. Markers show Claude Code 2.1.287 on 2 October and 3 October, when I set out to build the habits."></picture>
-<picture class="chart-dark"><source media="(max-width: 639px)" srcset="/me/images/charts/spend-billing-dark-narrow.svg" width="280" height="487"><img src="/me/images/charts/spend-billing-dark.svg" width="640" height="410" alt="Line chart of daily billed spend, indexed so the Opus 4.7 average is 100. Spend averaged 100 on Opus 4.7, fell to an average of 22 on the capped newer models before 3 October, then rose by about half to an average of 33 after it. Markers show Claude Code 2.1.287 on 2 October and 3 October, when I set out to build the habits."></picture>
+<p class="chart-title">Spend fell to a sixth before 3 October, then doubled after.</p>
+<picture class="chart-light"><source media="(max-width: 639px)" srcset="/me/images/charts/spend-billing-light-narrow.svg" width="280" height="487"><img src="/me/images/charts/spend-billing-light.svg" width="640" height="410" alt="Line chart of daily billed spend, indexed so the Opus 4.7 average is 100. Spend averaged 100 on Opus 4.7, fell to an average of 16 on the capped newer models before 3 October, then doubled to an average of 33 after it. Markers show Claude Code 2.1.287 on 2 October and 3 October, when I set out to build the habits."></picture>
+<picture class="chart-dark"><source media="(max-width: 639px)" srcset="/me/images/charts/spend-billing-dark-narrow.svg" width="280" height="487"><img src="/me/images/charts/spend-billing-dark.svg" width="640" height="410" alt="Line chart of daily billed spend, indexed so the Opus 4.7 average is 100. Spend averaged 100 on Opus 4.7, fell to an average of 16 on the capped newer models before 3 October, then doubled to an average of 33 after it. Markers show Claude Code 2.1.287 on 2 October and 3 October, when I set out to build the habits."></picture>
 </figure>
 
 ## The cap wasn't the model's
@@ -56,7 +56,7 @@ Quality is a bit better. My PRs get fewer review comments, and peers accept my S
 
 ## Why I didn't notice
 
-I didn't notice because the number I had was right. Two-thirds down against the old model is true, so I had no reason to look closer. But the drop came the week before I started on the habits, and when spend rose by half after 3 October, my status line couldn't show it. The dollar figure is the part of my status line I watch most, but it's the cost of one session, not one day, and a session that never ends never gives me a day's total. I watched the meter and missed the bill.
+I didn't notice because the number I had was right. Two-thirds down against the old model is true, so I had no reason to look closer. But the drop came the week before I started on the habits, and when spend doubled after 3 October, my status line couldn't show it. The dollar figure is the part of my status line I watch most, but it's the cost of one session, not one day, and a session that never ends never gives me a day's total. I watched the meter and missed the bill.
 
 <img src="/me/images/writing/claude-code-status-line.png" width="1060" height="112" alt="Claude Code status line in a terminal: model Opus 5.5, project folder, session cost (hidden), and session duration 112,376 seconds, about 31 hours. It shows the cost of one session that has run for more than a day, not the cost of any day.">
 
