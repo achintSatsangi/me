@@ -14,12 +14,14 @@ async function stubGoogle(page: Page) {
 }
 
 test.describe('Analytics consent', () => {
-  test('the dialog asks first, nothing loads from Google before a yes, and No is as easy as Yes', async ({ page }) => {
+  test('the bar asks first, nothing loads from Google before a yes, and No is as easy as Yes', async ({ page }) => {
     const requests = await stubGoogle(page);
     await page.goto(`${BASE}/`);
-    const dialog = page.getByTestId('consent-bar');
-    await expect(dialog).toBeVisible();
-    await expect(dialog.getByRole('heading')).toHaveText('Can I count your visit?');
+    const bar = page.getByTestId('consent-bar');
+    await expect(bar).toBeVisible();
+    await expect(page.getByRole('region', { name: 'Analytics consent' })).toBeVisible();
+    await expect(page.locator('dialog')).toHaveCount(0);
+    await expect(bar).toContainText('Can I count your visit?');
     await page.waitForLoadState('networkidle');
     expect(requests).toHaveLength(0);
     const [yes, no] = await Promise.all([
@@ -30,21 +32,36 @@ test.describe('Analytics consent', () => {
     expect(Math.round(yes!.height)).toBe(Math.round(no!.height));
   });
 
-  test('Escape counts as No and is remembered on the next page', async ({ page }) => {
-    const requests = await stubGoogle(page);
+  test('the bar is non-modal: no focus trap, no overlay, page stays clickable and scrollable behind it', async ({ page }) => {
     await page.goto(`${BASE}/`);
     await expect(page.getByTestId('consent-bar')).toBeVisible();
+    await expect(page.getByTestId('consent-yes')).not.toBeFocused();
     await page.keyboard.press('Escape');
-    await expect(page.getByTestId('consent-bar')).toBeHidden();
+    await expect(page.getByTestId('consent-bar')).toBeVisible();
     await page.getByTestId('nav-journey').click();
     await expect(page.getByTestId('journey-hero')).toBeVisible();
-    await expect(page.getByTestId('consent-bar')).toBeHidden();
-    expect(requests).toHaveLength(0);
+    const scrolled = await page.evaluate(() => { window.scrollTo({ top: 200, behavior: 'instant' }); return window.scrollY; });
+    expect(scrolled).toBeGreaterThan(0);
+    await expect(page.getByTestId('consent-bar')).toBeVisible();
   });
 
-  test('the dialog opens with focus on its question, not on a button or link', async ({ page }) => {
+  test('the bar sits at the bottom and reserves page padding so content is not permanently covered', async ({ page }) => {
     await page.goto(`${BASE}/`);
-    await expect(page.locator('#consent-title')).toBeFocused();
+    const bar = page.getByTestId('consent-bar');
+    await expect(bar).toBeVisible();
+    const { barHeight, padding, position } = await page.evaluate(() => {
+      const el = document.getElementById('consent-bar')!;
+      return {
+        barHeight: el.offsetHeight,
+        padding: parseFloat(getComputedStyle(document.body).paddingBottom),
+        position: getComputedStyle(el).position,
+      };
+    });
+    expect(position).toBe('fixed');
+    expect(padding).toBeGreaterThanOrEqual(barHeight);
+    await page.getByTestId('consent-no').click();
+    await expect(bar).toBeHidden();
+    expect(await page.evaluate(() => parseFloat(getComputedStyle(document.body).paddingBottom) || 0)).toBeLessThan(barHeight);
   });
 
   test('yes loads GA, hides the bar and reports clicks with readable labels', async ({ page }) => {
@@ -97,9 +114,9 @@ test.describe('Analytics consent', () => {
 });
 
 test.describe('Analytics consent - 375px phone', () => {
-  test.use({ viewport: { width: 375, height: 812 } });
+  test.use({ viewport: { width: 375, height: 667 } });
 
-  test('the dialog fits without horizontal overflow', async ({ page }) => {
+  test('the bar is compact, fits without horizontal overflow and has 44px tap targets', async ({ page }) => {
     await page.goto(`${BASE}/`);
     await expect(page.getByTestId('consent-bar')).toBeVisible();
     const { scrollWidth, innerWidth } = await page.evaluate(() => ({
@@ -112,6 +129,10 @@ test.describe('Analytics consent - 375px phone', () => {
       page.getByTestId('consent-no').boundingBox(),
     ]);
     expect(yes!.width).toBe(no!.width);
-    expect(yes!.height).toBeLessThan(60);
+    expect(yes!.height).toBeGreaterThanOrEqual(44);
+    expect(no!.height).toBeGreaterThanOrEqual(44);
+    const bar = await page.getByTestId('consent-bar').boundingBox();
+    expect(bar!.height).toBeLessThanOrEqual(667 * 0.25);
+    expect(bar!.y + bar!.height).toBeCloseTo(667, 0);
   });
 });
