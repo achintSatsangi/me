@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 410" width="640" height="410" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Text', Inter, system-ui, sans-serif" font-size="14" aria-hidden="true">
+<rect x="64" y="62" width="351.4" height="240" fill="#0072B2" fill-opacity="0.1"/>
+<text x="239.7" y="54" text-anchor="middle" fill="#1D1D1F" font-weight="600">Opus 4.7</text>
+<rect x="415.4" y="62" width="76.9" height="240" fill="#5B6B7A" fill-opacity="0.12"/>
+<text x="453.8" y="54" text-anchor="middle" fill="#1D1D1F" font-weight="600">Capped</text>
+<rect x="492.2" y="62" width="131.8" height="240" fill="#D55E00" fill-opacity="0.16"/>
+<text x="558.1" y="54" text-anchor="middle" fill="#1D1D1F" font-weight="600">After update</text>
+<line x1="64" x2="624" y1="302" y2="302" stroke="#D2D2D7" stroke-width="1"/>
+<text x="56" y="306.5" text-anchor="end" fill="#6E6E73">0</text>
+<line x1="64" x2="624" y1="242" y2="242" stroke="#D2D2D7" stroke-width="1"/>
+<text x="56" y="246.5" text-anchor="end" fill="#6E6E73">100</text>
+<line x1="64" x2="624" y1="182" y2="182" stroke="#D2D2D7" stroke-width="1"/>
+<text x="56" y="186.5" text-anchor="end" fill="#6E6E73">200</text>
+<line x1="64" x2="624" y1="122" y2="122" stroke="#D2D2D7" stroke-width="1"/>
+<text x="56" y="126.5" text-anchor="end" fill="#6E6E73">300</text>
+<line x1="64" x2="624" y1="62" y2="62" stroke="#D2D2D7" stroke-width="1"/>
+<text x="56" y="66.5" text-anchor="end" fill="#6E6E73">400</text>
+<line x1="64" x2="624" y1="302" y2="302" stroke="#6E6E73" stroke-width="1"/>
+<line x1="146.4" x2="146.4" y1="302" y2="307" stroke="#6E6E73" stroke-width="1"/>
+<text x="146.4" y="324" text-anchor="middle" fill="#6E6E73">1 Sep</text>
+<line x1="300.1" x2="300.1" y1="302" y2="307" stroke="#6E6E73" stroke-width="1"/>
+<text x="300.1" y="324" text-anchor="middle" fill="#6E6E73">15 Sep</text>
+<line x1="475.8" x2="475.8" y1="302" y2="307" stroke="#6E6E73" stroke-width="1"/>
+<text x="475.8" y="324" text-anchor="middle" fill="#6E6E73">1 Oct</text>
+<text transform="translate(14 182) rotate(-90)" text-anchor="middle" fill="#6E6E73">Daily billed spend (Opus 4.7 average = 100)</text>
+<line x1="64" x2="415.4" y1="242" y2="242" stroke="#0072B2" stroke-width="3"/>
+<line x1="415.4" x2="492.2" y1="288.8" y2="288.8" stroke="#5B6B7A" stroke-width="3"/>
+<line x1="492.2" x2="624" y1="282.3" y2="282.3" stroke="#D55E00" stroke-width="3"/>
+<line x1="486.7" x2="486.7" y1="38" y2="302" stroke="#1D1D1F" stroke-width="2"/>
+<text x="480.7" y="32" text-anchor="end" fill="#1D1D1F">Claude Code 2.1.287</text>
+<line x1="497.7" x2="497.7" y1="38" y2="302" stroke="#1D1D1F" stroke-width="1.5" stroke-dasharray="2 3"/>
+<text x="503.7" y="32" text-anchor="start" fill="#1D1D1F">Habits start</text>
+<polyline points="69.5,266.1 80.5,257.9 91.5,284.3 102.4,256.3 113.4,302 124.4,295.7 135.4,212.9 146.4,256.7 157.3,297.5 168.3,263 179.3,279.5 190.3,291.8 201.3,265 212.2,78.8 223.2,98.9 234.2,212.1 245.2,181.2 256.2,291.6 267.1,288.5 278.1,295.6 289.1,162.9 300.1,254.4 311.1,298.1 322,277.2 333,77.5 344,233.4 355,264.9 366,284.7 376.9,262.6 387.9,241 398.9,219.9 409.9,192.2 420.9,268.7 431.8,300.2 442.8,292.7 453.8,296.2 464.8,279.3 475.8,294.4 486.7,290.2 497.7,298.5 508.7,286.8 519.7,299.9 530.7,301.3 541.6,233.6 552.6,263.1 563.6,281.3 574.6,285.7 585.6,292.4 596.5,274.8 607.5,271.1 618.5,299.6" fill="none" stroke="#1D1D1F" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="56" y="335" width="12" height="12" rx="2" fill="#0072B2"/>
+<text x="74" y="346" fill="#1D1D1F">1  Opus 4.7 (1M window), 25 Aug–25 Sep, average 100</text>
+<rect x="56" y="357" width="12" height="12" rx="2" fill="#5B6B7A"/>
+<text x="74" y="368" fill="#1D1D1F">2  Opus 4.8 and 5.5, before 3 October, 27 Sep–2 Oct, average 22</text>
+<rect x="56" y="379" width="12" height="12" rx="2" fill="#D55E00"/>
+<text x="74" y="390" fill="#1D1D1F">3  Opus 5.5, from 3 October, 3–14 Oct, average 33</text>
+</svg>
