@@ -51,4 +51,35 @@
   .pill:hover { @apply bg-accent text-paper; background-image: none !important; }
   .dark .pill { @apply border-accent-dark text-accent-dark; }
   .dark .pill:hover { @apply bg-accent-dark text-paper-dark; }
+
+  .essay { @apply text-lg md:text-xl leading-[1.65] text-ink dark:text-ink-dark; }
+  .essay { overflow-wrap: anywhere; }
+  .essay > * + * { @apply mt-6; }
+  .essay table { @apply block max-w-full overflow-x-auto text-base; overflow-wrap: normal; }
+  .essay th, .essay td { @apply px-3 py-2 text-left align-top border-0 border-b border-rule dark:border-rule-dark; }
+  .essay th { @apply text-sm font-semibold text-muted dark:text-muted-dark; }
+  .essay td:first-child { @apply font-semibold whitespace-nowrap; }
+  .essay td:nth-child(2) { @apply text-muted dark:text-muted-dark; }
+  @media (max-width: 639px) {
+    .essay table:has(th:first-child:empty) :is(thead, tbody) { display: block; }
+    .essay table:has(th:first-child:empty) tr { display: grid; grid-template-columns: 1fr 1fr; }
+    .essay table:has(th:first-child:empty) th:first-child { display: none; }
+    .essay table:has(th:first-child:empty) td:first-child { grid-column: 1 / -1; @apply pb-0 border-b-0; }
+  }
+  .essay h2 { @apply text-2xl md:text-3xl mt-14; }
+  .essay h3 { @apply text-xl md:text-2xl mt-10; }
+  .essay ul { @apply list-disc pl-6 space-y-2; }
+  .essay ol { @apply list-decimal pl-6 space-y-2; }
+  .essay blockquote { @apply border-l-2 border-rule dark:border-rule-dark pl-5 text-muted dark:text-muted-dark; }
+  .essay img { @apply rounded-xl border border-rule dark:border-rule-dark h-auto max-w-full; }
+  .essay :not(pre) > code { @apply text-[0.9em] px-1.5 py-0.5 rounded bg-rule/50 dark:bg-rule-dark; }
+  .essay pre { @apply p-4 rounded-xl overflow-x-auto text-sm leading-relaxed; }
+  .essay .chart-title { @apply text-base md:text-lg font-semibold text-ink dark:text-ink-dark mb-3; }
+  .essay .chart picture { display: block; margin-inline: auto; max-width: 25rem; }
+  @media (min-width: 640px) { .essay .chart picture { max-width: 40rem; } }
+  .essay .chart img { display: block; width: 100%; height: auto; border: 0; border-radius: 0; }
+  .chart-dark { display: none !important; }
+  .dark .chart-light { display: none !important; }
+  .dark .chart-dark { display: block !important; }
+  .essay hr { @apply border-rule dark:border-rule-dark; }
 }

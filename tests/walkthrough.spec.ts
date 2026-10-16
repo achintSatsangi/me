@@ -126,10 +126,10 @@ async function walkthrough(page: Page, theme: 'light' | 'dark') {
   await moveTo(page, 600, 400, 25);
   await scrollThroughPage(page, { readTopMs: 1600, scrollMs: 8000, readBottomMs: 800 });
 
-  // 4. Nav → Articles
-  await clickAt(page, '[data-testid="nav-articles"]');
+  // 4. Nav → Writing
+  await clickAt(page, '[data-testid="nav-writing"]');
   await attachCursor(page);
-  await expect(page.getByTestId('articles-hero')).toBeVisible();
+  await expect(page.getByTestId('writing-hero')).toBeVisible();
   await moveTo(page, 600, 400, 25);
   await scrollThroughPage(page, { readTopMs: 1500, scrollMs: 6000, readBottomMs: 1500 });
 

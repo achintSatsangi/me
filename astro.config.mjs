@@ -9,6 +9,7 @@ const SITE_URL = 'https://achintsatsangi.github.io';
 export default defineConfig({
   site: SITE_URL,
   base: BASE,
+  redirects: { '/articles': `${BASE}/writing/` },
   integrations: [
     react(),
     tailwind({ applyBaseStyles: false }),

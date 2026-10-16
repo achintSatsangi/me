@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import journey from '../data/journey.json';
 import recommendations from '../data/recommendations.json';
 import Icon from '../components/Icon.astro';
+import { LINKEDIN_PROFILE_URL } from '../config';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const siteRoot = new URL(`${base}/`, Astro.site).toString();
 const currentRole = journey.find((r) => r.end === null);
@@ -38,7 +39,7 @@ const jsonLd = {
       knowsAbout: ['Messaging architecture', 'Backend engineering', 'AI-assisted engineering'],
       alumniOf: { '@type': 'CollegeOrUniversity', name: 'Dayalbagh Educational Institute' },
       sameAs: [
-        'https://www.linkedin.com/in/achint-satsangi/',
+        LINKEDIN_PROFILE_URL,
         'https://github.com/achintSatsangi',
         'https://theprint.in/author/achint-satsangi/',
       ],
@@ -79,7 +80,7 @@ const proof = [
     <div class="mt-16 hidden md:flex flex-wrap gap-4" data-testid="hero-doors">
       <a href={`${base}/journey/`} class="pill">Journey</a>
       <a href={`${base}/feed/`} class="pill">Feed</a>
-      <a href={`${base}/articles/`} class="pill">Articles</a>
+      <a href={`${base}/writing/`} class="pill">Writing</a>
     </div>
   </section>
 
@@ -138,7 +139,7 @@ const proof = [
     <div class="max-w-3xl space-y-6 body-lg text-muted dark:text-muted-dark" data-testid="hero-ai">
       <p>
         I’ve been building with LLMs since ChatGPT shipped in November 2022: customer-facing features in production, and daily use to lift my own and my team’s throughput.
-        I’m a <span class="text-ink dark:text-ink-dark font-medium">skeptic and an enthusiast</span>. I ship AI features and I question AI plans that don’t name a problem. <a href={`${base}/articles/`} class="text-accent dark:text-accent-dark">A
+        I’m a <span class="text-ink dark:text-ink-dark font-medium">skeptic and an enthusiast</span>. I ship AI features and I question AI plans that don’t name a problem. <a href={`${base}/writing/#theprint`} class="text-accent dark:text-accent-dark">A
         published argument</a> on how to regulate the layer above it.
       </p>
       <p>

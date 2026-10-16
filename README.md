@@ -13,7 +13,9 @@ Astro (static output), Tailwind, one React island for the LinkedIn feed, GitHub 
 - `/` - who I am, what I believe about work, how I think about AI, recommendations, contact
 - `/journey/` - roles from 2007 to now, plus selected GitHub repos
 - `/feed/` - my LinkedIn posts, full text, newest first
-- `/articles/` - pieces published elsewhere
+- `/writing/` - essays and pieces published in ThePrint, behind an Engineering | ThePrint switch
+- `/writing/<slug>/` - one essay
+- `/articles/` - redirect page to `/writing/`
 - `/privacy/` - what the opt-in analytics collect and for how long
 - `/rss.xml` - full-text feed of the LinkedIn posts
 - `/sitemap-index.xml`, `/robots.txt` - generated at build
@@ -27,6 +29,21 @@ npm run build        # runs data:sync first, then astro build into dist/
 npm run test:unit    # node --test; reads dist/, so build first
 npm run test:e2e     # Playwright, light and dark themes, against astro preview
 ```
+
+## Add an essay
+
+Add one Markdown file to `src/content/writing/`; the file name is the URL slug. Frontmatter:
+
+```
+title: ...
+description: ...
+date: 2026-10-15
+updated: 2026-11-01        # optional, with updateNote
+updateNote: ...
+linkedin: https://...      # optional; the discuss link falls back to my LinkedIn profile
+```
+
+Drafts stay out of this repo. No code change is needed: the index, sitemap and RSS pick the file up.
 
 ## Data
 

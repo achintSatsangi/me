@@ -49,3 +49,6 @@ Don't reopen these without Achint asking:
 - No icons on section headings. Icons only where they help someone act (contact links, the GitHub mark).
 - Flags only on the Journey route line. Company logos on the Journey timeline, local assets on a uniform tile.
 - The light/dark toggle stays.
+- Writing lives at `/writing/` with an Engineering | ThePrint switch (Engineering default; both lists in the static HTML, the switch only shows and hides). `/articles/` stays as a redirect page.
+- Essays are Markdown files in `src/content/writing/`. Drafts never enter this repo; an essay arrives in its publish commit.
+- The essay page stays minimal: title, dates, body, "Discuss this on LinkedIn". No tags, reading time, share buttons, related posts or newsletter.

@@ -1,0 +1,46 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import { LINKEDIN_PROFILE_URL } from '../../config';
+import { formatDate as fmt } from '../../lib/format-date.js';
+
+export async function getStaticPaths() {
+  const essays = await getCollection('writing');
+  return essays.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { title, description, date, updated, updateNote, linkedin } = entry.data;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const siteRoot = new URL(`${base}/`, Astro.site).toString();
+const url = new URL(`${base}/writing/${entry.id}/`, Astro.site).toString();
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description,
+  datePublished: date.toISOString(),
+  dateModified: (updated ?? date).toISOString(),
+  author: { '@id': `${siteRoot}#person` },
+  mainEntityOfPage: url,
+  inLanguage: 'en',
+};
+---
+<Layout title={`${title} - Achint Satsangi`} description={description} jsonLd={jsonLd}>
+  <article class="page section">
+    <header class="max-w-3xl mx-auto">
+      <h1 class="display-lg text-4xl md:text-6xl" data-testid="essay-title">{title}</h1>
+      <p class="meta mt-6" data-testid="essay-date"><time datetime={date.toISOString()}>{fmt(date)}</time></p>
+      {updated && (
+        <p class="meta mt-1" data-testid="essay-updated">Updated <time datetime={updated.toISOString()}>{fmt(updated)}</time>{updateNote && `: ${updateNote}`}</p>
+      )}
+    </header>
+    <div class="essay max-w-3xl mx-auto mt-12" data-testid="essay-body">
+      <Content />
+    </div>
+    <p class="max-w-3xl mx-auto mt-16 pt-8 border-t border-rule dark:border-rule-dark body-lg">
+      <a href={linkedin ?? LINKEDIN_PROFILE_URL} target="_blank" rel="noopener noreferrer" data-testid="essay-discuss">{linkedin ? 'Discuss this on LinkedIn →' : 'Find me on LinkedIn →'}</a>
+    </p>
+  </article>
+</Layout>
