@@ -80,5 +80,9 @@
         "alt": "The site's feed page in dark mode showing two LinkedIn post cards, one with a collage of cost charts"
       }
     ]
+  },
+  "https://www.linkedin.com/feed/update/urn:li:share:7517459847114563584/": {
+    "file": "dune-sandworm.jpg",
+    "alt": "Sandworms erupting from the desert as figures run, a still from Dune"
   }
 }
