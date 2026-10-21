@@ -5,7 +5,9 @@ import recommendations from '../data/recommendations.json';
 import github from '../data/github.json';
 import Flag from '../components/Flag.astro';
 import Icon from '../components/Icon.astro';
+import { careerYearsInWords } from '../lib/career.js';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const years = careerYearsInWords();
 
 function formatDate(iso: string | null): string {
   if (!iso) return 'Present';
@@ -28,15 +30,15 @@ const featuredRecs = featuredRecNames
   .map((name) => recommendations.find((r) => r.name === name))
   .filter(Boolean);
 ---
-<Layout title="Journey - Achint Satsangi" description="Nineteen years of shipping. Oslo on and off since 2014, for good since 2019. Backend and platform work on systems that fail loudly if you get them wrong.">
+<Layout title="Journey - Achint Satsangi" description={`${years} years of shipping. Oslo on and off since 2014, for good since 2019. Backend and platform work on systems that fail loudly if you get them wrong.`}>
   <section class="page hero" data-testid="journey-hero-section">
     <p class="meta mb-6">The professional side</p>
     <h1 class="display-lg max-w-5xl" data-testid="journey-hero">
-      Nineteen years of shipping. Oslo on and off since 2014, for good since 2019. Backend and platform work on systems
+      {years} years of shipping. Oslo on and off since 2014, for good since 2019. Backend and platform work on systems
       that fail loudly if you get them wrong.
     </h1>
     <p class="mt-10 body-lg max-w-3xl text-muted dark:text-muted-dark">
-      <span data-testid="journey-route"><span class="whitespace-nowrap"><Flag country="india" />Mumbai</span> → <span class="whitespace-nowrap"><Flag country="south-africa" />Johannesburg</span> → <span class="whitespace-nowrap"><Flag country="india" />Gurgaon</span> → <span class="whitespace-nowrap"><Flag country="norway" />Oslo</span></span>.
+      <span data-testid="journey-route"><span class="whitespace-nowrap"><Flag country="india" />Mumbai</span> → <span class="whitespace-nowrap"><Flag country="south-africa" />Johannesburg</span> → <span class="whitespace-nowrap"><Flag country="india" />Delhi NCR</span> → <span class="whitespace-nowrap"><Flag country="norway" />Oslo</span></span>.
       Currently at Vend Marketplaces - the umbrella parent behind finn.no, blocket.se, tori.fi
       and dba.dk - on the messaging platform that all four brands run on.
     </p>
@@ -179,7 +181,7 @@ const featuredRecs = featuredRecNames
   </section>
 
   <section class="page section border-t border-rule dark:border-rule-dark" data-testid="journey-note-section">
-    <h2 class="meta mb-8">A note on nineteen years.</h2>
+    <h2 class="meta mb-8">A note on {years.toLowerCase()} years.</h2>
     <div class="max-w-3xl space-y-6 body-lg text-muted dark:text-muted-dark border-l border-rule dark:border-rule-dark pl-4 md:pl-8" data-testid="journey-note">
       <p>
         The timeline reads clean. The work rarely was: 3am pages, migrations that ran long, plans

@@ -1,12 +1,12 @@
 [
   {
-    "company": "Vend Marketplaces",
+    "company": "Vend Marketplaces (formerly FINN.no)",
     "role": "Senior Software Engineer",
     "location": "Oslo",
     "start": "2022-10",
     "end": null,
     "restricted": true,
-    "summary": "Backend and platform work on Vend's messaging platform - four Nordic marketplaces (finn.no, blocket.se, tori.fi, dba.dk) on one codebase, ~30 microservices on Kubernetes. The part I keep coming back to: changes that start in one brand and break in four, where no single team owns the fix. Occasional frontend forays when a change needs to land end-to-end.\n\nLately, prototyping LLM features inside the messaging thread.",
+    "summary": "Backend and platform work on Vend's messaging platform - four Nordic marketplaces (finn.no, blocket.se, tori.fi, dba.dk) on one codebase, ~30 microservices on Kubernetes. The part I keep coming back to: changes that start in one brand and break in four, where no single team owns the fix. On FINN.no we redesigned the messaging frontend around the seller, with conversations grouped by ad, so a seller with several ads sees who is asking about what in one place. I built the backend changes behind it, worked through the design decisions with the team, and built parts of the frontend in React, TanStack and Tailwind.\n\nLately, prototyping LLM features inside the messaging thread.",
     "logo": "vend.svg"
   },
   {
@@ -14,7 +14,7 @@
     "role": "Senior Software Engineer",
     "location": "Oslo",
     "start": "2021-06",
-    "end": "2022-09",
+    "end": "2022-10",
     "summary": "Open banking under PSD2. Data-sharing APIs for Skatteetaten and Politi. Small team, end-to-end ownership, the kind of code review where the bar is set by the person asking the sharpest question.",
     "logo": "dnb.png"
   },
@@ -38,7 +38,7 @@
   },
   {
     "company": "Tata Consultancy Services - Posten Norge / Bring",
-    "role": "Senior Java Developer → Scrum Master",
+    "role": "Senior Developer → Technical Lead",
     "location": "Oslo & India",
     "start": "2014-11",
     "end": "2019-05",
@@ -47,25 +47,25 @@
   },
   {
     "company": "TCS Initial Learning Program",
-    "role": "Java / J2EE Faculty",
+    "role": "Java / J2EE Instructor",
     "location": "Hyderabad",
-    "start": "2014-08",
-    "end": "2014-09",
+    "start": "2014-06",
+    "end": "2014-10",
     "summary": "Trained cohorts of 30–35 new joiners on core Java and J2EE. Teacher before I was an engineer.",
     "logo": "tcs.png"
   },
   {
-    "company": "TCS Gurgaon",
+    "company": "TCS Delhi NCR",
     "role": "Technical Lead",
-    "location": "Gurgaon",
-    "start": "2012-12",
-    "end": "2014-07",
+    "location": "Delhi NCR",
+    "start": "2012-11",
+    "end": "2014-05",
     "summary": "Technical lead on a credit-rating platform for a European investment bank - functional analysis, technical design, code review, and deploys through SIT/UAT. Ran the sprint ceremonies alongside the build.",
     "logo": "tcs.png"
   },
   {
     "company": "TCS Johannesburg",
-    "role": "Solutions Developer → Peoplesoft Functional Consultant",
+    "role": "Technical Solutions Architect → Peoplesoft Functional Consultant",
     "location": "Johannesburg",
     "start": "2010-11",
     "end": "2012-10",
@@ -74,19 +74,19 @@
   },
   {
     "company": "TCS Mumbai",
-    "role": "Software Developer → Technical Lead",
+    "role": "Developer → Technical Architect → Technical Lead",
     "location": "Mumbai",
-    "start": "2007-12",
+    "start": "2007-09",
     "end": "2010-11",
-    "summary": "First job. Three years of Java/J2EE financial platforms for two clients - TATA Capital and AXIS Bank. Mutual funds, fixed deposits, vendor reference data, a trading-portal CMS - the origin of the financial-platform work. Started as a developer, grew into technical lead on the back-office and reconciliation systems.",
+    "summary": "First job. Three years of Java/J2EE financial platforms for two clients - TATA Capital and AXIS Bank. Mutual funds, fixed deposits, vendor reference data, a trading-portal CMS - the origin of the financial-platform work. Started as a developer and moved through the ranks quickly, to technical architect and then technical lead, on the back-office and reconciliation systems.",
     "projects": [
       {
         "client": "TATA Capital",
         "items": [
           {
             "name": "Mutual Fund Online Trading & Back Office",
-            "role": "Developer → Technical Lead",
-            "blurb": "One of India’s first online mutual-fund trading platforms: the investor frontend and the back office that ran it."
+            "role": "Developer → Technical Architect → Technical Lead",
+            "blurb": "An early online mutual-fund trading platform in India: the investor frontend and the back office that ran it."
           }
         ]
       },

@@ -79,7 +79,7 @@ test.describe('Icons, flags and logos are decorative', () => {
   test('journey route line has four aria-hidden flags and the h1 is untouched', async ({ page }) => {
     await page.goto(`${BASE}/journey/`);
     const route = page.getByTestId('journey-route');
-    await expect(route).toHaveText('Mumbai → Johannesburg → Gurgaon → Oslo');
+    await expect(route).toHaveText('Mumbai → Johannesburg → Delhi NCR → Oslo');
     await expect(route.locator('svg[aria-hidden="true"]')).toHaveCount(4);
     await expect(page.getByTestId('journey-hero').locator('svg, img')).toHaveCount(0);
     for (const box of await route.locator('svg').all()) {
@@ -101,7 +101,7 @@ test.describe('Icons, flags and logos are decorative', () => {
     }
     await expect(articles.first().locator('img[aria-hidden="true"][alt=""]')).toHaveCount(1);
     await expect(articles).toHaveCount(9);
-    await expect(articles.first().getByTestId('role-company')).toHaveText('Vend Marketplaces');
+    await expect(articles.first().getByTestId('role-company')).toHaveText('Vend Marketplaces (formerly FINN.no)');
     await expect(articles.last().getByTestId('role-company')).toHaveText('TCS Mumbai');
   });
 
@@ -153,7 +153,7 @@ test.describe('Journey page shows all roles + recommendations', () => {
   test('project details are collapsed by default and expand on click', async ({ page }) => {
     await page.goto(`${BASE}/journey/`);
     const mumbai = page.getByTestId('role-projects').last();
-    const blurb = mumbai.getByText('first online mutual-fund');
+    const blurb = mumbai.getByText('early online mutual-fund');
     await expect(blurb).toBeHidden();
     await mumbai.getByText(/^The projects -/).click();
     await expect(blurb).toBeVisible();
