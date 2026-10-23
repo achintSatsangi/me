@@ -81,6 +81,8 @@
   .essay .chart picture { display: block; margin-inline: auto; max-width: 25rem; }
   @media (min-width: 640px) { .essay .chart picture { max-width: 40rem; } }
   .essay .chart img { display: block; width: 100%; height: auto; border: 0; border-radius: 0; }
+  .essay .deck-frame { @apply block w-full border border-rule dark:border-rule-dark rounded-xl bg-paper; height: 40rem; }
+  @media (min-width: 640px) { .essay .deck-frame { height: auto; aspect-ratio: 1.44; max-height: calc(100svh - 4rem); } }
   .chart-dark { display: none !important; }
   .dark .chart-light { display: none !important; }
   .dark .chart-dark { display: block !important; }
