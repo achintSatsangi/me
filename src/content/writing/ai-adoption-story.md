@@ -12,28 +12,28 @@ So I wrote it as a story. A made-up company called Fjordly. Six people building 
 
 It's an AI augmentation journey in four minutes. What it takes to go from one fast person to an AI-augmented team: trust between the one who sends and the one who reads, and who ends up paying for the speed.
 
-[Watch the story](/me/video/ai-adoption-journey.mp4) (4 min, narrated, with music, MP4 8.9 MB).
+[Watch the story](/me/video/ai-adoption-journey.mp4) (4 min, narrated, with music, MP4 9.2 MB).
 
 <details>
 <summary>Transcript</summary>
 
-This is a four-minute story about AI adoption, and who pays when one person gets fast. You shipped it in an hour. Someone else spent the afternoon reading it. Maybe you're the one who shipped. Maybe you're the one who read. Either way, somebody paid. Meet Fjordly. A made-up company. Six people, booking software for small clinics. They just got Claude Code. Pick the one you identify with the most, and follow them.
+This is a four-minute story about AI adoption, and who pays when one person gets fast. You shipped it in an hour. Someone else spent the afternoon reading it. Maybe you're the one who shipped. Maybe you're the one who read. Either way, somebody paid. Meet Fjordly. A made-up company. Six people. They build booking software for small clinics. They just got Claude Code. Pick the person you identify with the most, and follow them.
 
 January, 2026. Everyone has the same tool. Most people use it at the edges. Marit goes all in. She doesn't trust it yet, so she reads every line. She ships very little.
 
-Spring. Marit wires the AI into logs, metrics and tickets. Root cause in ten minutes. An investigation checks itself. Every claim can be held up against the source. A pull request has nothing to hold it up against. The trust Marit built in one leaks into the other. And Amir picks up the habit.
+Spring. Marit wires the AI into logs, metrics and tickets. Root cause in ten minutes. An investigation checks itself. Every claim can be held up against the source. A pull request has nothing to hold it up against. The trust Marit built in investigations leaks into her pull requests. And Amir starts sending unread work too.
 
-Late summer. The bill arrives. Look at the colours. Marit feels fine. Everyone around her is paying. Every line she didn't read, someone else had to. And Marit starts to wonder if they think she's a fanatic. Nobody said it. It's in her head.
+Late summer. The bill arrives. Look at the colours. Marit feels fine. Everyone around her is paying. Every line she didn't read, someone else had to. And Marit starts to wonder if they think she's a fanatic. Nobody's said it. It's in her head.
 
-October. The turn. Not, the AI fooled me. But, I didn't read it. It sounded sure, and Marit let its confidence stand in for her own.
+October. The turn. Marit doesn't say, the AI fooled me. She says, I didn't read it. The AI sounded sure, and Marit let its confidence stand in for her own.
 
-So the order changes. Agents review first. Then Marit checks what they found, and reads the work herself. Nothing reaches the team that Marit doesn't understand. And one rule. The agents' verdicts stay with Marit. You don't paste a model's opinion into someone else's review.
+So the order changes. Agents review first. Then Marit checks what they found, and reads the work herself. Nothing reaches the team until Marit understands it. And one rule. The agents' verdicts stay with Marit. You don't paste a model's opinion into someone else's review.
 
-Early 2027. From here, this is a guess. The rest of the team starts using agents. Marit has already made the mistakes, so she saves them the trouble. Reviewers use AI too, and reviews get fast. Then a seventh teammate joins. Ada, an AI. Nobody left to make room for her.
+Early 2027. From here, this is a guess. The rest of the team starts using agents. Marit has already made the mistakes, so she saves them the trouble. Reviewers use AI too, and reviews get fast. Then a seventh teammate joins. Ada, an AI. Nobody had to leave to make room for her.
 
 After that, honestly, nobody knows. So every guess here wears a label. What does seem clear is this. As roles blur, the job is working out what to build, and why. Letting AI build it. And making sure it's right.
 
-Further out is fog. But in the near term, AI likely becomes part of every job. So, what did the team learn? There will be friction. You will get it wrong. Own it, fix it, try again. Shape the workflow around your people, not the tool. And AI isn't always the answer. They shopped for an AI voice tool, then kept the dictation already built in.
+Further out is fog. But in the near term, AI likely becomes part of every job. So, what did the team learn? There will be friction. You will get it wrong. Own it, fix it, try again. Shape the workflow around your people, not the tool. And AI isn't always the answer. The team shopped for an AI voice tool, then kept the dictation already built in.
 
 So, one question. What did you send last week, without reading?
 
