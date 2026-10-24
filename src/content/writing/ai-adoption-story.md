@@ -10,7 +10,7 @@ Most teams I've seen go through AI adoption feel this before they name it. The p
 
 So I wrote it as a story. A made-up company called Fjordly. Six people building booking software for small clinics. They just got Claude Code, and a senior engineer called Marit goes all in first.
 
-It's an AI augmentation journey in four minutes. What it takes to go from one fast person to an AI-augmented team: trust between the one who sends and the one who reads, and who ends up paying for the speed.
+It's an AI augmentation journey in four minutes. What it takes to go from one fast person to an AI-augmented team: trust between the person who sends and the person who reads, and who ends up paying for the speed.
 
 [Watch the story](/me/video/ai-adoption-journey.mp4) (4 min, narrated, with music, MP4 9.4 MB).
 
