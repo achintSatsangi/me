@@ -10,6 +10,8 @@ const writing = defineCollection({
     date: z.coerce.date(),
     updated: z.coerce.date().optional(),
     updateNote: z.string().optional(),
+    cover: z.string().optional(),
+    coverDark: z.string().optional(),
     linkedin: z.string().url().optional(),
   }),
 });

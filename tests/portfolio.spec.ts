@@ -253,6 +253,58 @@ test.describe('Writing page', () => {
     await expect(page.getByTestId('essay-item').first()).toBeVisible();
   });
 
+  test('list titles use the ink colour, not the link accent, and the description stays muted', async ({ page }) => {
+    await page.goto(`${BASE}/writing/`);
+    const item = page.getByTestId('essay-item').first();
+    const color = (loc: ReturnType<typeof item.locator>) => loc.evaluate((el) => getComputedStyle(el).color);
+    const title = await color(item.locator('h3'));
+    const description = await color(item.locator('p').last());
+    const accent = await color(item.locator('span').first());
+    expect(title).not.toBe(accent);
+    expect(title).not.toBe(description);
+  });
+
+  test('list covers are decorative, sized, and load', async ({ page }) => {
+    await page.goto(`${BASE}/writing/`);
+    const covers = page.locator('[data-testid^="essay-cover"]:visible');
+    expect(await covers.count()).toBeGreaterThan(0);
+    for (const img of await covers.all()) {
+      await expect(img).toHaveAttribute('alt', '');
+      await expect(img).toHaveAttribute('width', '960');
+      await expect(img).toHaveAttribute('height', '640');
+      await img.scrollIntoViewIfNeeded();
+      await expect.poll(() => img.evaluate((el: HTMLImageElement) => el.naturalWidth)).toBe(960);
+      expect(await img.evaluate((el: HTMLImageElement) => el.currentSrc)).toContain(`${BASE}/images/writing/`);
+    }
+  });
+
+  test('list covers follow the theme, and only the visible one takes space', async ({ page }) => {
+    await page.goto(`${BASE}/writing/`);
+    const item = page.getByTestId('essay-item').first();
+    const dark = await page.evaluate(() => document.documentElement.classList.contains('dark'));
+    const shown = item.getByTestId(dark ? 'essay-cover-dark' : 'essay-cover');
+    const hidden = item.getByTestId(dark ? 'essay-cover' : 'essay-cover-dark');
+    await expect(shown).toBeVisible();
+    await expect(hidden).toBeHidden();
+    const { height } = (await item.boundingBox())!;
+    await page.getByTestId('theme-toggle').click();
+    await expect(hidden).toBeVisible();
+    await expect(shown).toBeHidden();
+    expect(Math.abs((await item.boundingBox())!.height - height)).toBeLessThan(4);
+  });
+
+  for (const width of [320, 375]) {
+    test(`writing list has no horizontal scroll at ${width}px with covers stacked above the title`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 800 });
+      await page.goto(`${BASE}/writing/`);
+      await page.waitForLoadState('networkidle');
+      const cover = page.locator('[data-testid^="essay-cover"]:visible').first();
+      const title = page.getByTestId('essay-item').first().locator('h3');
+      expect((await cover.boundingBox())!.y).toBeLessThan((await title.boundingBox())!.y);
+      expect(await page.evaluate(() => document.scrollingElement!.scrollWidth)).toBeLessThanOrEqual(width);
+    });
+  }
+
   test('#theprint opens the ThePrint list', async ({ page }) => {
     await page.goto(`${BASE}/writing/#theprint`);
     await expect(page.getByTestId('switch-theprint')).toHaveAttribute('aria-pressed', 'true');
