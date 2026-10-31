@@ -73,7 +73,7 @@ test('sitemap lists every page and robots.txt points at it', () => {
   assert.ok(existsSync(join(root, 'sitemap-index.xml')));
   const sitemap = read('sitemap-0.xml');
   assert.equal((sitemap.match(/<loc>/g) ?? []).length, pages.length);
-  assert.equal((sitemap.match(/<lastmod>\d{4}-\d{2}-\d{2}/g) ?? []).length, pages.length);
+  assert.doesNotMatch(sitemap, /<lastmod>/);
   assert.match(read('robots.txt'), /^Sitemap: https?:\/\/\S+\/sitemap-index\.xml$/m);
 });
 
@@ -119,7 +119,11 @@ test('every essay has BlogPosting JSON-LD authored by the Person, and is in the 
     const html = read(`writing/${slug}/index.html`);
     const ld = JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)[1]);
     assert.equal(ld['@type'], 'BlogPosting');
+    assert.equal(ld.author['@type'], 'Person');
+    assert.equal(ld.author.name, 'Achint Satsangi');
     assert.equal(ld.author['@id'], personId);
+    assert.equal(ld.publisher.name, 'Achint Satsangi');
+    assert.ok(ld.image.startsWith(config.site) && ld.image.endsWith('-og.png'));
     assert.ok(ld.headline && ld.description && ld.datePublished && ld.dateModified && ld.mainEntityOfPage);
     const url = `${config.site}${config.base}/writing/${slug}/`;
     assert.ok(read('sitemap-0.xml').includes(`<loc>${url}</loc>`), url);
@@ -188,3 +192,34 @@ for (const slug of essaySlugs) {
     assert.match(html, /data-testid="essay-reading-time"[^>]*>[1-9]\d* min read</);
   });
 }
+
+test('essay pages are og:type article with their own image, alt and published time', () => {
+  for (const slug of essaySlugs) {
+    const html = read(`writing/${slug}/index.html`);
+    const title = frontmatter(slug).title.replace(/^"|"$/g, '');
+    assert.equal(metaContent(html, 'property', 'og:type'), 'article', slug);
+    const image = metaContent(html, 'property', 'og:image');
+    assert.ok(image.startsWith(`${config.site}${config.base}/`) && image.endsWith('-og.png'), image);
+    assert.equal(metaContent(html, 'name', 'twitter:image'), image, slug);
+    assert.ok(existsSync(join(root, image.slice(config.site.length + config.base.length))), image);
+    assert.equal(metaContent(html, 'property', 'og:image:alt'), title, slug);
+    assert.match(metaContent(html, 'property', 'article:published_time'), /^\d{4}-\d{2}-\d{2}T/, slug);
+    assert.ok(metaContent(html, 'property', 'article:author')?.startsWith(config.site), slug);
+  }
+});
+
+test('non-essay pages keep the default share card and website type', () => {
+  for (const page of staticPages) {
+    const html = read(page);
+    assert.equal(metaContent(html, 'property', 'og:image'), `${config.site}${config.base}/og-default.png`, page);
+    assert.equal(metaContent(html, 'property', 'og:type'), 'website', page);
+    assert.doesNotMatch(html, /article:published_time/, page);
+  }
+});
+
+test('essay descriptions are full sentences that fit a search snippet', () => {
+  for (const slug of essaySlugs) {
+    const description = metaContent(read(`writing/${slug}/index.html`), 'name', 'description');
+    assert.ok(description.length <= 200 && /[.]$/.test(description), `${slug}: ${description}`);
+  }
+});

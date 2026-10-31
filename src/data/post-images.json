@@ -84,5 +84,55 @@
   "https://www.linkedin.com/feed/update/urn:li:share:7517459847114563584/": {
     "file": "dune-sandworm.jpg",
     "alt": "Sandworms erupting from the desert as figures run, a still from Dune"
+  },
+  "https://www.linkedin.com/feed/update/urn:li:activity:7520743033672384512/": {
+    "file": "ai-adoption-story-cover.webp",
+    "alt": "Title slide of the AI adoption story: one six-person team at the made-up company Fjordly in its first year with AI",
+    "article": "https://achintsatsangi.github.io/me/writing/ai-adoption-story/"
+  },
+  "https://www.linkedin.com/feed/update/urn:li:ugcPost:7518162749663739904/": {
+    "file": "voice-dictation-claude-code.webp",
+    "alt": "Video still: Claude Code in a terminal, waiting for a dictated prompt"
+  },
+  "https://www.linkedin.com/feed/update/urn:li:ugcPost:7516723306952155136/": {
+    "images": [
+      {
+        "file": "bill-daily-spend.webp",
+        "alt": "Line chart of daily billed spend, indexed so the Opus 4.7 average is 100. It averaged 100 on Opus 4.7, 16 on the capped newer models, then doubled to 33 after Claude Code 2.1.287 on 2 October"
+      },
+      {
+        "file": "bill-context-per-day.webp",
+        "alt": "Bar chart of the largest context per day: close to 1M tokens on Opus 4.7, capped near 167k after the model switch, back up to about 950k after Claude Code 2.1.287"
+      }
+    ],
+    "article": "https://achintsatsangi.github.io/me/writing/ai-coding-bill-wrong-reason/"
+  },
+  "https://www.linkedin.com/feed/update/urn:li:share:7515987132147220480/": {
+    "file": "voice-to-text-comparison.webp",
+    "alt": "Table of voice-to-text tools tried: Wispr Flow works in the terminal and any app but is not free for work or local; Google AI Edge Foresight and Eloquent are free and local but work in neither. Last row asks: your setup?"
+  },
+  "https://www.linkedin.com/feed/update/urn%3Ali%3Aactivity%3A7512408132409720832": {
+    "file": "claude-meetup-mesh-oslo.webp",
+    "alt": "Group photo of about forty people at the Claude Code meetup at Mesh Oslo, many waving or giving a thumbs up"
+  },
+  "https://www.linkedin.com/feed/update/urn%3Ali%3Aactivity%3A7509824437077082112": {
+    "file": "dhurandhar-poster.webp",
+    "alt": "Dhurandhar: The Revenge film poster, a bearded man walking out of flames with a blade in each hand, release date 19.03.26"
+  },
+  "https://www.linkedin.com/feed/update/urn%3Ali%3Aactivity%3A7505497608090583040": {
+    "file": "terminal-colour-per-codebase.webp",
+    "alt": "Four iTerm2 panes, each with a different background colour for the codebase it is in"
+  },
+  "https://www.linkedin.com/feed/update/urn%3Ali%3Ashare%3A7502954385866510337": {
+    "file": "claude-session-sprawl.webp",
+    "alt": "Three terminal panes running separate Claude Code sessions side by side on different tasks"
+  },
+  "https://www.linkedin.com/feed/update/urn%3Ali%3Ashare%3A7500565739796422656": {
+    "file": "javazone-vend-booth.webp",
+    "alt": "Achint and a colleague at the Vend booth at JavaZone, in front of a wall with the finn, Blocket, Tori and Bilbasen logos"
+  },
+  "https://www.linkedin.com/feed/update/urn%3Ali%3AugcPost%3A7480635887530278912": {
+    "file": "worldcup-replay-mode.webp",
+    "alt": "Phone screenshot of the World Cup site: radial bracket with flags in concentric rings, Replay tab next to Radial and Interactive"
   }
 }

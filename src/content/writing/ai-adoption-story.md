@@ -1,10 +1,12 @@
 ---
 title: "An AI adoption journey: somebody still has to read it"
-description: A short fictional AI adoption journey. A six-person team on its way to becoming an AI-augmented team, and the gap between the person who ships fast and the person who has to read it. Four-minute video, or click through at your own pace.
+description: "When one person gets fast with AI, the reading lands on their reviewers. A four-minute fictional story of a six-person team's first year."
 tldr: "Fiction. In AI adoption, when one person gets fast, the reading lands on their reviewers. Follow Fjordly's team from first tool to AI-augmented team, then answer the question at the end."
 date: 2026-10-23
 cover: images/writing/ai-adoption-story-cover-light.webp
 coverDark: images/writing/ai-adoption-story-cover-dark.webp
+ogImage: images/writing/ai-adoption-story-og.png
+linkedin: https://www.linkedin.com/feed/update/urn:li:activity:7520743033672384512/
 ---
 An AI-assisted pull request can take an hour to write. Reading it properly can take someone else the afternoon.
 

@@ -12,6 +12,7 @@ const writing = defineCollection({
     updateNote: z.string().optional(),
     cover: z.string().optional(),
     coverDark: z.string().optional(),
+    ogImage: z.string().optional(),
     linkedin: z.string().url().optional(),
   }),
 });

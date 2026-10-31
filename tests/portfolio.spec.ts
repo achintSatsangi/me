@@ -454,3 +454,34 @@ test.describe('Responsive — 375px phone', () => {
     expect(box!.width).toBeLessThan(60);
   });
 });
+
+test.describe('Landing hero portrait', () => {
+  test.use({ viewport: { width: 1280, height: 800 } });
+
+  test('desktop: the one portrait sits beside the name inside the first viewport', async ({ page }) => {
+    await page.goto(`${BASE}/`);
+    await expect(page.locator('img[src*="portrait"]')).toHaveCount(1);
+    const photo = (await page.getByTestId('hero-photo').boundingBox())!;
+    const name = (await page.getByTestId('hero-name').boundingBox())!;
+    expect(photo.y + photo.height).toBeLessThanOrEqual(800);
+    expect(photo.x).toBeGreaterThan(name.x + name.width - 1);
+    await expect(page.getByTestId('hero-content').getByTestId('hero-photo')).toBeVisible();
+  });
+
+  test('phone: name, line, photo, intro in that order with no sideways scroll', async ({ page }) => {
+    for (const width of [320, 375]) {
+      await page.setViewportSize({ width, height: 812 });
+      await page.goto(`${BASE}/`);
+      const top = async (id: string) => (await page.getByTestId(id).boundingBox())!.y;
+      const order = [await top('hero-name'), await top('hero-masthead'), await top('hero-photo'), await top('hero-intro')];
+      expect(order).toEqual([...order].sort((a, b) => a - b));
+      expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
+    }
+  });
+});
+
+test('writing page: h1 names the essays and the old line is the subtitle', async ({ page }) => {
+  await page.goto(`${BASE}/writing/`);
+  await expect(page.getByTestId('writing-hero')).toHaveText('Essays on engineering and AI in practice.');
+  await expect(page.getByTestId('writing-subtitle')).toHaveText('The long version, with the data and the corrections.');
+});

@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DB = process.env.LINKEDIN_DB;
 const OUT = join(__dirname, '..', 'src', 'data', 'linkedin-posts.json');
-const LIMIT = 20;
+const LIMIT = 26;
 const EXCLUDED_LINKS = new Set(JSON.parse(readFileSync(join(__dirname, 'excluded-posts.json'), 'utf8')));
 
 const sql = `SELECT date, share_commentary, share_link FROM li_shares

@@ -13,8 +13,9 @@ const switchButton = 'rounded-full px-5 py-2 text-sm font-medium text-accent dar
 <Layout title="Writing - Achint Satsangi" description="Essays by Achint Satsangi on engineering and AI in practice, and his pieces in ThePrint on policy, geopolitics and AI.">
   <section class="page hero-inner">
     <h1 class="display-lg max-w-5xl" data-testid="writing-hero">
-      The long version, with the data and the corrections.
+      Essays on engineering and AI in practice.
     </h1>
+    <p class="mt-6 body-lg text-muted dark:text-muted-dark max-w-3xl" data-testid="writing-subtitle">The long version, with the data and the corrections.</p>
     {essays.length > 0 && (
       <div id="writing-switch" class="mt-10 hidden gap-1 p-1 rounded-full border border-rule dark:border-rule-dark w-fit" role="group" aria-label="Choose a list" data-testid="writing-switch">
         <button type="button" class={switchButton} data-target="engineering" aria-pressed="true" data-testid="switch-engineering">Engineering</button>
